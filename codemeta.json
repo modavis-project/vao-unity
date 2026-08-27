@@ -1,0 +1,38 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "MODAVIS VAO Importer for Unity",
+  "description": "Unity Package Manager plugin for secure VAO 0.4.0 import, deterministic execution, linked animation, MIDI/XR integration, runtime materialization, and position-aware RIR/SOFA rendering.",
+  "version": "0.6.0-rc.1",
+  "identifier": "https://doi.org/10.5281/zenodo.22134391",
+  "url": "https://doi.org/10.5281/zenodo.22134391",
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-28",
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "programmingLanguage": "C#",
+  "runtimePlatform": "Unity 6000.0 or later",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "codeRepository": "https://github.com/modavis-project/vao-unity",
+  "issueTracker": "https://github.com/modavis-project/vao-unity/issues",
+  "isBasedOn": {
+    "@type": "CreativeWork",
+    "name": "Virtual Acoustic Object (VAO) Standard 0.4.0",
+    "identifier": "https://doi.org/10.5281/zenodo.22122774",
+    "url": "https://github.com/modavis-project/vao-standard"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0000-0002-7904-3892",
+      "givenName": "Dominik",
+      "familyName": "Ukolov"
+    }
+  ],
+  "keywords": [
+    "Virtual Acoustic Object",
+    "Unity",
+    "MIDI",
+    "XR",
+    "spatial acoustics"
+  ]
+}

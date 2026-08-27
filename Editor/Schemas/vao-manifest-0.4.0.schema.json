@@ -1,0 +1,8074 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/modavis/vao/0.4.0/schema/manifest.json",
+  "title": "Virtual Acoustic Object 0.4.0 manifest",
+  "description": "Immutable multimodal scientific virtual-musical-instrument release with exact byte identity, typed provenance, deterministic interaction semantics, physical-system topology, and a linked-data semantic projection.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "@context",
+    "type",
+    "formatVersion",
+    "id",
+    "release",
+    "createdAt",
+    "modifiedAt",
+    "title",
+    "conformsTo",
+    "profiles",
+    "materializableProfiles",
+    "modavisBinding",
+    "primaryEntityId",
+    "focusEntityIds",
+    "entities",
+    "relations",
+    "scientific",
+    "multimodal",
+    "physicalSystem",
+    "runtime",
+    "discovery",
+    "logicalAssets",
+    "realizations",
+    "distributions",
+    "repositoryBindings",
+    "assetGroups",
+    "rights",
+    "integrity"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://w3id.org/modavis/vao/0.4.0/schema/manifest.json"
+    },
+    "@context": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "prefixItems": [
+        {
+          "const": "https://w3id.org/modavis/vao/0.4.0/context.jsonld"
+        }
+      ],
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "type": {
+      "const": "VirtualAcousticObject"
+    },
+    "formatVersion": {
+      "const": "0.4.0"
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "release": {
+      "$ref": "#/$defs/releaseIdentity"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "modifiedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "title": {
+      "$ref": "#/$defs/localizedText"
+    },
+    "description": {
+      "$ref": "#/$defs/localizedText"
+    },
+    "conformsTo": {
+      "$ref": "#/$defs/uniqueIRIs"
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/profile"
+      }
+    },
+    "materializableProfiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/materializableProfile"
+      }
+    },
+    "modavisBinding": {
+      "$ref": "#/$defs/modavisBinding"
+    },
+    "primaryEntityId": {
+      "$ref": "#/$defs/identifier"
+    },
+    "focusEntityIds": {
+      "$ref": "#/$defs/uniqueIdentifiers"
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "acoustics": {
+      "$ref": "#/$defs/acoustics"
+    },
+    "playable": {
+      "$ref": "#/$defs/playable"
+    },
+    "interactionModel": {
+      "$ref": "#/$defs/interactionModel"
+    },
+    "captureDocumentation": {
+      "$ref": "#/$defs/captureDocumentation"
+    },
+    "logicalAssets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/logicalAsset"
+      }
+    },
+    "realizations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/realization"
+      }
+    },
+    "distributions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/distribution"
+      }
+    },
+    "repositoryBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/repositoryBinding"
+      }
+    },
+    "assetGroups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/assetGroup"
+      }
+    },
+    "rights": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/rights"
+      }
+    },
+    "integrity": {
+      "$ref": "#/$defs/integrity"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    },
+    "scientific": {
+      "$ref": "#/$defs/scientific"
+    },
+    "multimodal": {
+      "$ref": "#/$defs/multimodal"
+    },
+    "physicalSystem": {
+      "$ref": "#/$defs/physicalSystem"
+    },
+    "runtime": {
+      "$ref": "#/$defs/runtime"
+    },
+    "discovery": {
+      "$ref": "#/$defs/discovery"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 2048,
+      "format": "uri",
+      "pattern": "^(urn:|https?:)[^\\s]+$"
+    },
+    "iri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "representationStatus": {
+      "enum": [
+        "https://w3id.org/modavis/vao/vocab/representation-status/captured",
+        "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+        "https://w3id.org/modavis/vao/vocab/representation-status/converted",
+        "https://w3id.org/modavis/vao/vocab/representation-status/derived",
+        "https://w3id.org/modavis/vao/vocab/representation-status/simulated",
+        "https://w3id.org/modavis/vao/vocab/representation-status/inferred",
+        "https://w3id.org/modavis/vao/vocab/representation-status/reconstructed",
+        "https://w3id.org/modavis/vao/vocab/representation-status/redacted",
+        "https://w3id.org/modavis/vao/vocab/representation-status/hybrid",
+        "https://w3id.org/modavis/vao/vocab/representation-status/undetermined"
+      ]
+    },
+    "orcid": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://orcid\\.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$"
+    },
+    "ror": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://ror\\.org/0[a-hj-km-np-tv-z0-9]{6}[0-9]{2}$"
+    },
+    "dateTime": {
+      "description": "RFC 3339 instant in the VAO exact-comparison subset: known offset, seconds 00-59, and at most 18 fractional digits.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-5][0-9](?:\\.[0-9]{1,18})?(?:[Zz]|[+-][0-9]{2}:[0-9]{2})$",
+      "not": {
+        "pattern": "-00:00$"
+      }
+    },
+    "numericValue": {
+      "description": "A finite JSON number, numeric vector, or rectangular numeric matrix.",
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "nonNegativeNumericValue": {
+      "description": "A non-negative scalar, vector, or rectangular matrix.",
+      "oneOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "numericMatrix": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "positiveRate": {
+      "description": "A positive clock rate, optionally represented as an exact rational for rates such as 30000/1001.",
+      "oneOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "object",
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "properties": {
+            "numerator": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "denominator": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "safeMemberPath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\x00-\\x1F\\x7F]+$"
+    },
+    "localizedText": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^(und|[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "uniqueIRIs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/iri"
+      }
+    },
+    "uniqueIdentifiers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "identifierList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "format": "uri"
+      },
+      "additionalProperties": true
+    },
+    "classification": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "code"
+      ],
+      "properties": {
+        "scheme": {
+          "$ref": "#/$defs/iri"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "externalIdentifier": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "value"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\S+$"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolverIRI": {
+          "$ref": "#/$defs/iri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataciteRelationType": {
+      "description": "DataCite Metadata Schema 4.7 relationType.",
+      "enum": [
+        "IsCitedBy",
+        "Cites",
+        "IsSupplementTo",
+        "IsSupplementedBy",
+        "IsContinuedBy",
+        "Continues",
+        "IsNewVersionOf",
+        "IsPreviousVersionOf",
+        "IsPartOf",
+        "HasPart",
+        "IsPublishedIn",
+        "IsReferencedBy",
+        "References",
+        "IsDocumentedBy",
+        "Documents",
+        "IsCompiledBy",
+        "Compiles",
+        "IsVariantFormOf",
+        "IsOriginalFormOf",
+        "IsIdenticalTo",
+        "HasMetadata",
+        "IsMetadataFor",
+        "Reviews",
+        "IsReviewedBy",
+        "IsDerivedFrom",
+        "IsSourceOf",
+        "Describes",
+        "IsDescribedBy",
+        "HasVersion",
+        "IsVersionOf",
+        "Requires",
+        "IsRequiredBy",
+        "Obsoletes",
+        "IsObsoletedBy",
+        "Collects",
+        "IsCollectedBy",
+        "HasTranslation",
+        "IsTranslationOf",
+        "Other"
+      ]
+    },
+    "dataciteResourceType": {
+      "description": "DataCite Metadata Schema 4.7 resourceTypeGeneral.",
+      "enum": [
+        "Audiovisual",
+        "Award",
+        "Book",
+        "BookChapter",
+        "Collection",
+        "ComputationalNotebook",
+        "ConferencePaper",
+        "ConferenceProceeding",
+        "DataPaper",
+        "Dataset",
+        "Dissertation",
+        "Event",
+        "Image",
+        "Instrument",
+        "InteractiveResource",
+        "Journal",
+        "JournalArticle",
+        "Model",
+        "OutputManagementPlan",
+        "PeerReview",
+        "PhysicalObject",
+        "Poster",
+        "Preprint",
+        "Presentation",
+        "Project",
+        "Report",
+        "Service",
+        "Software",
+        "Sound",
+        "Standard",
+        "StudyRegistration",
+        "Text",
+        "Workflow",
+        "Other"
+      ]
+    },
+    "dataciteRelatedIdentifierType": {
+      "description": "DataCite Metadata Schema 4.7 relatedIdentifierType.",
+      "enum": [
+        "ARK",
+        "arXiv",
+        "bibcode",
+        "CSTR",
+        "DOI",
+        "EAN13",
+        "EISSN",
+        "Handle",
+        "IGSN",
+        "ISBN",
+        "ISSN",
+        "ISTC",
+        "LISSN",
+        "LSID",
+        "PMID",
+        "PURL",
+        "RAiD",
+        "RRID",
+        "SWHID",
+        "UPC",
+        "URL",
+        "URN",
+        "w3id"
+      ]
+    },
+    "dataciteFunderIdentifierType": {
+      "description": "DataCite Metadata Schema 4.7 funderIdentifierType.",
+      "enum": [
+        "ISNI",
+        "GRID",
+        "ROR",
+        "Crossref Funder ID",
+        "Other"
+      ]
+    },
+    "dataciteRelatedIdentifier": {
+      "type": "object",
+      "required": [
+        "identifier",
+        "identifierType",
+        "relationType"
+      ],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identifierType": {
+          "$ref": "#/$defs/dataciteRelatedIdentifierType"
+        },
+        "relationType": {
+          "$ref": "#/$defs/dataciteRelationType"
+        },
+        "resourceType": {
+          "$ref": "#/$defs/dataciteResourceType"
+        },
+        "relationTypeInformation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schemeUri": {
+          "$ref": "#/$defs/iri"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "relationType": {
+                "const": "Other"
+              }
+            },
+            "required": [
+              "relationType"
+            ]
+          },
+          "then": {
+            "required": [
+              "relationTypeInformation"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "relationTypeInformation"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "relationScope": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "appliesToIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "validFrom": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "validUntil": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "timebaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "start": {
+          "type": "number"
+        },
+        "endExclusive": {
+          "type": "number"
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "selector": {
+          "$ref": "#/$defs/geometrySelector"
+        },
+        "properties": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "releaseIdentity": {
+      "type": "object",
+      "required": [
+        "id",
+        "revision",
+        "contentVersion"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "contentVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supersedesReleaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "migratedFromManifestSHA256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "requiredCapabilities"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/iri"
+        },
+        "version": {
+          "const": "0.4.0"
+        },
+        "requiredCapabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "materializableProfile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "requiredCapabilities",
+        "groupIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/iri"
+        },
+        "version": {
+          "const": "0.4.0"
+        },
+        "requiredCapabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "groupIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        }
+      },
+      "additionalProperties": false
+    },
+    "modavisBinding": {
+      "type": "object",
+      "required": [
+        "ontologyIRI",
+        "ontologyVersion",
+        "ontologyStatus",
+        "mappingVersion"
+      ],
+      "properties": {
+        "ontologyIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "ontologyVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ontologyStatus": {
+          "enum": [
+            "development",
+            "released",
+            "embedded-snapshot"
+          ]
+        },
+        "ontologyVersionIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "mappingVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mappingIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "vocabularyReleaseIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "vocabularyManifestSHA256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ontologyStatus": {
+                "const": "released"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ontologyVersionIRI",
+              "mappingIRI"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "vocabularyReleaseIRI"
+            ]
+          },
+          "then": {
+            "required": [
+              "vocabularyManifestSHA256"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "vocabularyManifestSHA256"
+            ]
+          },
+          "then": {
+            "required": [
+              "vocabularyReleaseIRI"
+            ]
+          }
+        }
+      ]
+    },
+    "entity": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "types",
+        "labels"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "types": {
+          "$ref": "#/$defs/uniqueIRIs"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/classification"
+          }
+        },
+        "externalIdentifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalIdentifier"
+          }
+        },
+        "properties": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "literal": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "datatype": {
+          "$ref": "#/$defs/iri"
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "language"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "datatype"
+                  ]
+                },
+                {
+                  "required": [
+                    "unit"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "unit"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "relation": {
+      "type": "object",
+      "required": [
+        "id",
+        "subjectId",
+        "predicate",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subjectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "predicate": {
+          "$ref": "#/$defs/iri"
+        },
+        "objectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "literal": {
+          "$ref": "#/$defs/literal"
+        },
+        "status": {
+          "enum": [
+            "asserted",
+            "accepted",
+            "rejected",
+            "superseded",
+            "inferred"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scope": {
+          "$ref": "#/$defs/relationScope"
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "generatedByIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "properties": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "objectId"
+          ],
+          "not": {
+            "required": [
+              "literal"
+            ]
+          }
+        },
+        {
+          "required": [
+            "literal"
+          ],
+          "not": {
+            "required": [
+              "objectId"
+            ]
+          }
+        }
+      ]
+    },
+    "logicalAsset": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "roles",
+        "aboutEntityIds",
+        "realizationIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "type": {
+          "const": "LogicalAsset"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "roles": {
+          "$ref": "#/$defs/uniqueIRIs"
+        },
+        "aboutEntityIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "realizationIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "properties": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "realization": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "assetId",
+        "variantSetId",
+        "qualityTier",
+        "mediaType",
+        "byteSize",
+        "sha256",
+        "representationStatus",
+        "rightsIds",
+        "provenanceIds",
+        "technicalMetadata",
+        "distributionIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "type": {
+          "const": "Realization"
+        },
+        "assetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "variantSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualityTier": {
+          "enum": [
+            "bootstrap",
+            "mobile",
+            "production",
+            "production-spatial",
+            "preservation",
+            "custom"
+          ]
+        },
+        "mediaType": {
+          "type": "string",
+          "pattern": "^[^/\\s]+/[^\\s]+$"
+        },
+        "byteSize": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "representationStatus": {
+          "$ref": "#/$defs/representationStatus"
+        },
+        "rightsIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "provenanceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "technicalMetadata": {
+          "$ref": "#/$defs/technicalMetadata"
+        },
+        "distributionIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "contentDigests": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/contentDigest"
+          }
+        },
+        "chunking": {
+          "$ref": "#/$defs/chunking"
+        },
+        "streamingIndexRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "authenticityEnvelopeRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "extensions": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "technicalMetadata": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "audio",
+            "video",
+            "geometry",
+            "image",
+            "depth",
+            "volumetric",
+            "motion-capture",
+            "trajectory",
+            "event-stream",
+            "sensor-data",
+            "score",
+            "document",
+            "data",
+            "software",
+            "other"
+          ]
+        },
+        "sampleRate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "sampleFormat": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bitDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "channelCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "frameCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "channelLabels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "audioContainer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ambisonicsOrder": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "ambisonicsDimensionality": {
+          "enum": [
+            "2D",
+            "3D"
+          ]
+        },
+        "ambisonicsChannelOrder": {
+          "enum": [
+            "ACN"
+          ]
+        },
+        "ambisonicsNormalization": {
+          "enum": [
+            "SN3D",
+            "N3D"
+          ]
+        },
+        "impulseResponse": {
+          "$ref": "#/$defs/impulseResponseTechnicalMetadata"
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "coordinateUnit": {
+          "$ref": "#/$defs/iri"
+        },
+        "handedness": {
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "upAxis": {
+          "enum": [
+            "X",
+            "Y",
+            "Z"
+          ]
+        },
+        "lod": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "triangleCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "vertexCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "textureMaxDimension": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "purposeLimitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "extensions": {
+          "$ref": "#/$defs/extensions"
+        },
+        "durationSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "timebaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "frameRate": {
+          "$ref": "#/$defs/positiveRate"
+        },
+        "codec": {
+          "type": "string",
+          "minLength": 1
+        },
+        "colorSpace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eventEncoding": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sensorEncoding": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scoreFormat": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trajectoryTrackId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "audio"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "sampleRate",
+              "channelCount"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "ambisonicsOrder"
+            ]
+          },
+          "then": {
+            "required": [
+              "ambisonicsDimensionality",
+              "ambisonicsChannelOrder",
+              "ambisonicsNormalization"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "impulseResponse"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "audio"
+              }
+            },
+            "required": [
+              "sampleRate",
+              "channelCount"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "geometry"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coordinateFrameId",
+              "coordinateUnit",
+              "handedness",
+              "upAxis",
+              "lod"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "video"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "width",
+              "height",
+              "frameRate",
+              "durationSeconds",
+              "timebaseId"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "event-stream",
+                  "sensor-data",
+                  "motion-capture",
+                  "trajectory"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "timebaseId"
+            ]
+          }
+        }
+      ]
+    },
+    "vector2": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number"
+      }
+    },
+    "vector3": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "quaternionXYZW": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number",
+        "minimum": -1,
+        "maximum": 1
+      }
+    },
+    "matrix4x4": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "number"
+      }
+    },
+    "uncertainty": {
+      "description": "Measurement uncertainty. unit or axisUnits states component units; covariance entries use the products of the corresponding component units. Scalar/vector magnitudes are non-negative; covariance is square, symmetric, and positive-semidefinite as checked semantically.",
+      "type": "object",
+      "required": [
+        "kind",
+        "value"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "standard",
+            "expanded",
+            "bound",
+            "covariance",
+            "registration-rms"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/numericValue"
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        },
+        "axisUnits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "coverageFactor": {
+          "type": "number",
+          "exclusiveMinimum": 1
+        },
+        "confidenceLevel": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "unit"
+        ],
+          "not": {
+            "required": [
+              "axisUnits"
+            ]
+          }
+        },
+        {
+          "required": [
+            "axisUnits"
+          ],
+          "not": {
+            "required": [
+              "unit"
+            ]
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "expanded"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "coverageFactor"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "coverageFactor"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "covariance"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/numericMatrix"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/nonNegativeNumericValue"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "registration-rms"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+          "required": [
+            "unit",
+            "method"
+          ],
+            "not": {
+              "required": [
+                "axisUnits"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "coordinateFrame": {
+      "type": "object",
+      "required": [
+        "id",
+        "dimension",
+        "coordinateType",
+        "handedness",
+        "upAxis",
+        "forwardAxis"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "dimension": {
+          "enum": [
+            2,
+            3
+          ]
+        },
+        "coordinateType": {
+          "enum": [
+            "cartesian",
+            "geodetic",
+            "projected",
+            "screen",
+            "parametric"
+          ]
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        },
+        "axisUnits": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "handedness": {
+          "enum": [
+            "right",
+            "left",
+            "not-applicable"
+          ]
+        },
+        "upAxis": {
+          "enum": [
+            "+X",
+            "-X",
+            "+Y",
+            "-Y",
+            "+Z",
+            "-Z",
+            "not-applicable"
+          ]
+        },
+        "forwardAxis": {
+          "enum": [
+            "+X",
+            "-X",
+            "+Y",
+            "-Y",
+            "+Z",
+            "-Z",
+            "not-applicable"
+          ]
+        },
+        "crs": {
+          "$ref": "#/$defs/iri"
+        },
+        "parentFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "transformToParent": {
+          "$ref": "#/$defs/matrix4x4"
+        },
+        "registrationUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coordinateType": {
+                "const": "geodetic"
+              }
+            },
+            "required": [
+              "coordinateType"
+            ]
+          },
+          "then": {
+            "required": [
+              "axisUnits",
+              "crs"
+            ],
+            "properties": {
+              "handedness": {
+                "const": "not-applicable"
+              },
+              "upAxis": {
+                "const": "not-applicable"
+              },
+              "forwardAxis": {
+                "const": "not-applicable"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "unit"
+                  ]
+                },
+                {
+                  "required": [
+                    "parentFrameId"
+                  ]
+                },
+                {
+                  "required": [
+                    "transformToParent"
+                  ]
+                }
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "unit"
+            ],
+            "not": {
+              "required": [
+                "axisUnits"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "parentFrameId"
+            ]
+          },
+          "then": {
+            "required": [
+              "transformToParent"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "transformToParent"
+            ]
+          },
+          "then": {
+            "required": [
+              "parentFrameId"
+            ]
+          }
+        }
+      ]
+    },
+    "pose": {
+      "description": "A position in a target frame and, when orientation is present, an explicit local-to-target frame rotation.",
+      "type": "object",
+      "required": [
+        "id",
+        "subjectId",
+        "frameId",
+        "position",
+        "interpolation"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subjectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "frameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "localFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "position": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/vector2"
+            },
+            {
+              "$ref": "#/$defs/vector3"
+            }
+          ]
+        },
+        "orientationXYZW": {
+          "$ref": "#/$defs/quaternionXYZW"
+        },
+        "orientationRadians": {
+          "type": "number",
+          "minimum": -3.141592653589793,
+          "maximum": 3.141592653589793
+        },
+        "extent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/vector2"
+            },
+            {
+              "$ref": "#/$defs/vector3"
+            }
+          ]
+        },
+        "positionUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "orientationUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "configurationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "stateId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "validFrom": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "validUntil": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "trajectoryRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "interpolation": {
+          "enum": [
+            "none",
+            "step",
+            "linear",
+            "spherical-linear",
+            "cubic"
+          ]
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "required": [
+                  "orientationXYZW"
+                ]
+              },
+              {
+                "required": [
+                  "orientationRadians"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "localFrameId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "localFrameId"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "interpolation": {
+                "not": {
+                  "const": "none"
+                }
+              }
+            },
+            "required": [
+              "interpolation"
+            ]
+          },
+          "then": {
+            "required": [
+              "trajectoryRealizationId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "trajectoryRealizationId"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "interpolation": {
+                "const": "spherical-linear"
+              }
+            },
+            "required": [
+              "interpolation"
+            ]
+          },
+          "then": {
+            "required": [
+              "orientationXYZW"
+            ]
+          }
+        }
+      ]
+    },
+    "geometrySelector": {
+      "type": "object",
+      "required": [
+        "selectorType",
+        "value"
+      ],
+      "properties": {
+        "selectorType": {
+          "enum": [
+            "ifc-global-id",
+            "citygml-id",
+            "gltf-node-index",
+            "usd-prim-path",
+            "mesh-primitive",
+            "feature-id",
+            "wkt"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "subSelector": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "selectorType": {
+                "enum": [
+                  "gltf-node-index",
+                  "mesh-primitive"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "selectorType": {
+                "enum": [
+                  "ifc-global-id",
+                  "citygml-id",
+                  "usd-prim-path",
+                  "wkt"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "geometryBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "subjectId",
+        "logicalAssetId",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subjectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "logicalAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "role": {
+          "enum": [
+            "authoritative-semantic",
+            "acoustic-simulation",
+            "runtime-visual",
+            "collision",
+            "occlusion",
+            "navigation"
+          ]
+        },
+        "selector": {
+          "$ref": "#/$defs/geometrySelector"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "bandAxis": {
+      "type": "object",
+      "required": [
+        "scale",
+        "centerFrequenciesHz"
+      ],
+      "properties": {
+        "scale": {
+          "enum": [
+            "linear",
+            "logarithmic",
+            "octave",
+            "third-octave",
+            "erb",
+            "bark",
+            "custom"
+          ]
+        },
+        "centerFrequenciesHz": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "lowerEdgesHz": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "upperEdgesHz": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "weighting": {
+          "enum": [
+            "none",
+            "A",
+            "C",
+            "Z",
+            "other"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "materialModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "materialEntityId",
+        "bandAxis",
+        "absorption",
+        "representationStatus",
+        "generatedById"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "materialEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "bandAxis": {
+          "$ref": "#/$defs/bandAxis"
+        },
+        "absorption": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "scattering": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "transmissionLossDB": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "surfaceImpedanceAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "incidence": {
+          "enum": [
+            "random",
+            "normal",
+            "angle-dependent",
+            "unspecified"
+          ]
+        },
+        "sidedness": {
+          "enum": [
+            "one-sided",
+            "two-sided",
+            "layered"
+          ]
+        },
+        "thicknessMeters": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "environmentStateId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "representationStatus": {
+          "enum": [
+            "measured",
+            "simulated",
+            "inferred",
+            "learned",
+            "authored",
+            "hybrid"
+          ]
+        },
+        "absorptionUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "scatteringUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "transmissionLossUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "responseMeasurement": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceId",
+        "receiverId",
+        "sourcePoseId",
+        "receiverPoseId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "receiverId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourcePoseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "receiverPoseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "spaceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceSpaceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "receivingSpaceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "separatingElementId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "transmissionPathIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "configurationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "stateId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "validFrom": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "validUntil": {
+          "$ref": "#/$defs/dateTime"
+        }
+      },
+      "additionalProperties": false
+    },
+    "measurementMapping": {
+      "type": "object",
+      "required": [
+        "measurementId",
+        "channelIndices"
+      ],
+      "properties": {
+        "measurementId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "dataIRIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "channelIndices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "delaySamples": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "impulseResponseTechnicalMetadata": {
+      "type": "object",
+      "required": [
+        "responseSetId",
+        "encoding",
+        "sampleCount",
+        "timeZeroPolicy",
+        "normalization",
+        "measurementMappings"
+      ],
+      "properties": {
+        "responseSetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "encoding": {
+          "enum": [
+            "AES69-SOFA",
+            "WAV",
+            "FLAC",
+            "HDF5",
+            "netCDF",
+            "Zarr",
+            "custom"
+          ]
+        },
+        "convention": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sampleCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "timeZeroPolicy": {
+          "enum": [
+            "excitation-origin",
+            "direct-arrival",
+            "recording-start",
+            "per-measurement-delay",
+            "unspecified"
+          ]
+        },
+        "normalization": {
+          "enum": [
+            "physical-pressure",
+            "calibrated-relative",
+            "peak",
+            "energy",
+            "none",
+            "unspecified"
+          ]
+        },
+        "channelTopology": {
+          "$ref": "#/$defs/iri"
+        },
+        "measurementMappings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/measurementMapping"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "encoding": {
+                "const": "AES69-SOFA"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "convention"
+            ]
+          }
+        }
+      ]
+    },
+    "interpolationContract": {
+      "type": "object",
+      "required": [
+        "method",
+        "domain",
+        "outsideDomainPolicy"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "none",
+            "nearest",
+            "linear",
+            "barycentric",
+            "spherical-harmonic",
+            "radial-basis",
+            "physics-based",
+            "neural-field",
+            "hybrid"
+          ]
+        },
+        "domain": {
+          "$ref": "#/$defs/identifier"
+        },
+        "outsideDomainPolicy": {
+          "enum": [
+            "reject",
+            "nearest",
+            "clamp",
+            "fade-to-dry",
+            "fallback"
+          ]
+        },
+        "fallbackResponseSetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "modelAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "trainingInputIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "validationInputIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "qualityMetricSetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "determinism": {
+          "enum": [
+            "deterministic",
+            "seeded",
+            "non-deterministic"
+          ]
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outsideDomainPolicy": {
+                "const": "fallback"
+              }
+            },
+            "required": [
+              "outsideDomainPolicy"
+            ]
+          },
+          "then": {
+            "required": [
+              "fallbackResponseSetId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "fallbackResponseSetId"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "determinism": {
+                "const": "seeded"
+              }
+            },
+            "required": [
+              "determinism"
+            ]
+          },
+          "then": {
+            "required": [
+              "seed"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "seed"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "neural-field"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "modelAssetId",
+              "trainingInputIds",
+              "validationInputIds",
+              "qualityMetricSetId",
+              "determinism"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "none"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "properties": {
+              "outsideDomainPolicy": {
+                "const": "reject"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "responseSet": {
+      "type": "object",
+      "required": [
+        "id",
+        "responseEntityId",
+        "responseKind",
+        "logicalAssetId",
+        "representationStatus",
+        "measurementIds",
+        "generatedById"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "responseEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "responseKind": {
+          "enum": [
+            "rir",
+            "brir",
+            "srir",
+            "hrir",
+            "hrtf",
+            "binaural-room-transfer-function",
+            "transfer-function",
+            "directivity",
+            "sound-field",
+            "building-transfer"
+          ]
+        },
+        "logicalAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "representationStatus": {
+          "enum": [
+            "measured",
+            "simulated",
+            "inferred",
+            "learned",
+            "authored",
+            "hybrid"
+          ]
+        },
+        "measurementIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "delayAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "calibrationIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "interpolation": {
+          "$ref": "#/$defs/interpolationContract"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "qualityFlags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "metricValue": {
+      "type": "object",
+      "required": [
+        "property",
+        "values",
+        "unit",
+        "status"
+      ],
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/iri"
+        },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number"
+          }
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "calculated",
+            "simulated",
+            "inferred",
+            "reviewed",
+            "accepted"
+          ]
+        },
+        "sourceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "receiverId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceSpaceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "receivingSpaceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "separatingElementId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metricSet": {
+      "type": "object",
+      "required": [
+        "id",
+        "standard",
+        "standardEdition",
+        "method",
+        "subjectIds",
+        "inputIds",
+        "bandAxis",
+        "metrics",
+        "generatedById"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "standard": {
+          "$ref": "#/$defs/iri"
+        },
+        "standardEdition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subjectIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "inputIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "bandAxis": {
+          "$ref": "#/$defs/bandAxis"
+        },
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/metricValue"
+          }
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "qualityFlags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "audioBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "entityId",
+        "mediaAssetId",
+        "bindingType"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "entityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "mediaAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "bindingType": {
+          "enum": [
+            "channel",
+            "object",
+            "higher-order-ambisonics",
+            "binaural",
+            "response",
+            "bed"
+          ]
+        },
+        "channelIndices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "poseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "gainDB": {
+          "type": "number"
+        },
+        "directivityResponseSetId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "bindingType": {
+                "const": "channel"
+              }
+            },
+            "required": [
+              "bindingType"
+            ]
+          },
+          "then": {
+            "required": [
+              "channelIndices"
+            ]
+          }
+        }
+      ]
+    },
+    "audioScene": {
+      "type": "object",
+      "required": [
+        "id",
+        "sceneEntityId",
+        "representationType",
+        "coordinateFrameId",
+        "mediaAssetIds",
+        "bindings"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sceneEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "representationType": {
+          "enum": [
+            "ITU-ADM-BW64",
+            "MPEG-I-immersive-audio",
+            "MPEG-H-3D-audio",
+            "channel-bed",
+            "object-audio",
+            "higher-order-ambisonics",
+            "binaural",
+            "hybrid"
+          ]
+        },
+        "standard": {
+          "$ref": "#/$defs/iri"
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "mediaAssetIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "metadataAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "bindings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/audioBinding"
+          }
+        },
+        "contentTimebase": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "listenerBinding": {
+      "type": "object",
+      "required": [
+        "mode",
+        "receiverId",
+        "coordinateFrameId"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "fixed",
+            "tracked-3dof",
+            "tracked-6dof",
+            "trajectory"
+          ]
+        },
+        "receiverId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "poseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "trajectoryRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "personalizationAssetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "headphoneCompensationAssetId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "fixed"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "poseId"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "trajectory"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "trajectoryRealizationId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "trajectoryRealizationId"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "runtimeFeature": {
+      "type": "object",
+      "required": [
+        "feature",
+        "mode"
+      ],
+      "properties": {
+        "feature": {
+          "enum": [
+            "distance",
+            "directivity",
+            "occlusion",
+            "diffraction",
+            "early-reflections",
+            "late-reverberation",
+            "doppler",
+            "portals",
+            "listener-room-adaptation",
+            "source-tracking"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "disabled",
+            "metadata",
+            "response-field",
+            "geometry",
+            "renderer-defined"
+          ]
+        },
+        "inputIds": {
+          "$ref": "#/$defs/identifierList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "renderConfiguration": {
+      "type": "object",
+      "required": [
+        "id",
+        "sceneId",
+        "strategy",
+        "coordinateFrameId",
+        "inputIds",
+        "listener",
+        "features",
+        "outsideDomainPolicy",
+        "fallbackIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sceneId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "strategy": {
+          "enum": [
+            "static-playback",
+            "tracked-convolution",
+            "response-interpolation",
+            "geometry-acoustics",
+            "MPEG-I-6DoF",
+            "learned-field",
+            "hybrid"
+          ]
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "inputIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "listener": {
+          "$ref": "#/$defs/listenerBinding"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/runtimeFeature"
+          }
+        },
+        "validDomainId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "outsideDomainPolicy": {
+          "enum": [
+            "reject",
+            "nearest",
+            "clamp",
+            "fade-to-dry",
+            "fallback"
+          ]
+        },
+        "fallbackIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "transitionSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "latencyBudgetMilliseconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "levelsOfDetail": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "level",
+              "inputIds"
+            ],
+            "properties": {
+              "level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "inputIds": {
+                "$ref": "#/$defs/uniqueIdentifiers"
+              },
+              "maximumDistanceMeters": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maximumCPUPercent": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rendererRequirements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "acoustics": {
+      "type": "object",
+      "required": [
+        "coordinateFrames",
+        "poses",
+        "geometryBindings",
+        "materialModels",
+        "measurements",
+        "responseSets",
+        "metricSets",
+        "audioScenes",
+        "renderConfigurations"
+      ],
+      "properties": {
+        "coordinateFrames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coordinateFrame"
+          }
+        },
+        "poses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pose"
+          }
+        },
+        "geometryBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/geometryBinding"
+          }
+        },
+        "materialModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/materialModel"
+          }
+        },
+        "measurements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/responseMeasurement"
+          }
+        },
+        "responseSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/responseSet"
+          }
+        },
+        "metricSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/metricSet"
+          }
+        },
+        "audioScenes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/audioScene"
+          }
+        },
+        "renderConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/renderConfiguration"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidenceStatus": {
+      "enum": [
+        "asserted",
+        "inferred",
+        "reviewed",
+        "accepted",
+        "rejected",
+        "superseded"
+      ]
+    },
+    "playbackMetadataSource": {
+      "enum": [
+        "documented",
+        "native-definition",
+        "embedded-metadata",
+        "measured",
+        "algorithmic",
+        "authored"
+      ]
+    },
+    "frameRange": {
+      "type": "object",
+      "required": [
+        "startFrameInclusive",
+        "endFrameExclusive"
+      ],
+      "properties": {
+        "startFrameInclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endFrameExclusive": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false
+    },
+    "signalRegion": {
+      "type": "object",
+      "required": [
+        "id",
+        "realizationId",
+        "role",
+        "startFrameInclusive",
+        "endFrameExclusive",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "realizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "role": {
+          "enum": [
+            "attack",
+            "sustain",
+            "sustain-loop",
+            "release",
+            "noise",
+            "tremulant",
+            "silence-control",
+            "whole-signal",
+            "other"
+          ]
+        },
+        "startFrameInclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endFrameExclusive": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "loopPointSet": {
+      "type": "object",
+      "required": [
+        "id",
+        "regionIds",
+        "mode",
+        "selectionPolicy",
+        "exitPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "regionIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "mode": {
+          "enum": [
+            "forward",
+            "alternating",
+            "backward"
+          ]
+        },
+        "selectionPolicy": {
+          "enum": [
+            "ordered",
+            "random",
+            "round-robin",
+            "best",
+            "host-defined"
+          ]
+        },
+        "exitPolicy": {
+          "enum": [
+            "immediate",
+            "finish-cycle",
+            "crossfade",
+            "envelope",
+            "recorded-release"
+          ]
+        },
+        "crossfadeFrames": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tuningEntry": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "targetFrequencyHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "sourceFrequencyHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "correctionCents": {
+          "type": "number"
+        },
+        "harmonicNumber": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "originalPitch": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "targetFrequencyHz"
+          ]
+        },
+        {
+          "required": [
+            "correctionCents"
+          ]
+        },
+        {
+          "required": [
+            "harmonicNumber"
+          ]
+        },
+        {
+          "required": [
+            "originalPitch"
+          ]
+        }
+      ]
+    },
+    "tuningMap": {
+      "type": "object",
+      "required": [
+        "id",
+        "referencePitchHz",
+        "referenceMIDINote",
+        "entries",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "referencePitchHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "referenceMIDINote": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "temperamentLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/tuningEntry"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "perspectiveGroup": {
+      "type": "object",
+      "required": [
+        "id",
+        "labels",
+        "perspectiveType",
+        "realizationIds",
+        "geometryStatus",
+        "selectionPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "perspectiveType": {
+          "enum": [
+            "direct",
+            "near",
+            "front",
+            "mid",
+            "far",
+            "rear",
+            "diffuse",
+            "surround",
+            "dry",
+            "wet",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "realizationIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "channelIndices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "poseIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "geometryStatus": {
+          "enum": [
+            "position-registered",
+            "label-only",
+            "unknown"
+          ]
+        },
+        "selectionPolicy": {
+          "enum": [
+            "exclusive",
+            "combinable",
+            "reference",
+            "host-defined"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sampleVariant": {
+      "type": "object",
+      "required": [
+        "id",
+        "realizationId",
+        "trigger",
+        "signalRole",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "realizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "trigger": {
+          "enum": [
+            "note-on",
+            "note-off",
+            "continuous",
+            "control"
+          ]
+        },
+        "signalRole": {
+          "enum": [
+            "attack",
+            "sustain",
+            "attack-sustain",
+            "release",
+            "noise",
+            "tremulant",
+            "other"
+          ]
+        },
+        "signalRegionIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "loopPointSetIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "perspectiveGroupId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "roundRobinGroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "roundRobinIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "selectionWeight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "roundRobinGroup"
+            ]
+          },
+          "then": {
+            "required": [
+              "roundRobinIndex"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "roundRobinIndex"
+            ]
+          },
+          "then": {
+            "required": [
+              "roundRobinGroup"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "trigger": {
+                "const": "note-off"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "signalRole": {
+                "const": "release"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "midiRange": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "maximum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        }
+      },
+      "additionalProperties": false
+    },
+    "velocityRange": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 127
+        },
+        "maximum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 127
+        }
+      },
+      "additionalProperties": false
+    },
+    "sampleMapping": {
+      "type": "object",
+      "required": [
+        "id",
+        "instrumentEntityId",
+        "keyRange",
+        "variantIds",
+        "selectionPolicy",
+        "noteOffPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "instrumentEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "rankEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "keyRange": {
+          "$ref": "#/$defs/midiRange"
+        },
+        "velocityRange": {
+          "$ref": "#/$defs/velocityRange"
+        },
+        "velocitySensitivity": {
+          "enum": [
+            "none",
+            "range",
+            "transfer-function",
+            "host-defined"
+          ]
+        },
+        "controlKeyMeaning": {
+          "enum": [
+            "midi-control-key",
+            "played-key",
+            "sounding-key",
+            "source-definition-key"
+          ]
+        },
+        "soundingKeyOffset": {
+          "type": "integer",
+          "minimum": -127,
+          "maximum": 127
+        },
+        "sampleRootKey": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "variantIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "selectionPolicy": {
+          "enum": [
+            "single",
+            "ordered-fallback",
+            "round-robin",
+            "random-weighted",
+            "velocity-layer",
+            "simultaneous",
+            "host-defined"
+          ]
+        },
+        "tuningMapId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "gainDB": {
+          "type": "number"
+        },
+        "pitchTuningCents": {
+          "type": "number"
+        },
+        "noteOffPolicy": {
+          "enum": [
+            "stop",
+            "envelope",
+            "finish-cycle",
+            "recorded-release",
+            "host-defined"
+          ]
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "velocityRange"
+              ]
+            },
+            {
+              "required": [
+                "velocitySensitivity"
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "velocitySensitivity": {
+                "const": "none"
+              }
+            },
+            "required": [
+              "velocitySensitivity"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "velocityRange"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "velocitySensitivity": {
+                "const": "range"
+              }
+            },
+            "required": [
+              "velocitySensitivity"
+            ]
+          },
+          "then": {
+            "required": [
+              "velocityRange"
+            ]
+          }
+        }
+      ]
+    },
+    "playable": {
+      "type": "object",
+      "required": [
+        "signalRegions",
+        "loopPointSets",
+        "tuningMaps",
+        "perspectiveGroups",
+        "sampleVariants",
+        "sampleMappings"
+      ],
+      "properties": {
+        "signalRegions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/signalRegion"
+          }
+        },
+        "loopPointSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/loopPointSet"
+          }
+        },
+        "tuningMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tuningMap"
+          }
+        },
+        "perspectiveGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/perspectiveGroup"
+          }
+        },
+        "sampleVariants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sampleVariant"
+          }
+        },
+        "sampleMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sampleMapping"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "primitiveValue": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "stateCondition": {
+      "type": "object",
+      "required": [
+        "stateVariableId",
+        "operator",
+        "value"
+      ],
+      "properties": {
+        "stateVariableId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "operator": {
+          "enum": [
+            "equals",
+            "not-equals",
+            "less-than",
+            "less-than-or-equal",
+            "greater-than",
+            "greater-than-or-equal"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/primitiveValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    "interactionControl": {
+      "type": "object",
+      "required": [
+        "id",
+        "labels",
+        "controlBehavior",
+        "valueType",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "entityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "controlBehavior": {
+          "enum": [
+            "momentary",
+            "gate",
+            "latched",
+            "toggle",
+            "stepped",
+            "continuous",
+            "snapshot"
+          ]
+        },
+        "valueType": {
+          "enum": [
+            "event",
+            "boolean",
+            "integer",
+            "number",
+            "enumerated"
+          ]
+        },
+        "minimumValue": {
+          "type": "number"
+        },
+        "maximumValue": {
+          "type": "number"
+        },
+        "stepCount": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9007199254740991
+        },
+        "allowedValues": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        },
+        "defaultValue": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "interactionEventType": {
+      "type": "object",
+      "required": [
+        "id",
+        "labels",
+        "eventKind",
+        "valueDomain",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "eventKind": {
+          "enum": [
+            "note-on",
+            "note-off",
+            "control-on",
+            "control-off",
+            "control-change",
+            "trigger",
+            "clock",
+            "custom"
+          ]
+        },
+        "valueDomain": {
+          "enum": [
+            "none",
+            "boolean",
+            "integer",
+            "number",
+            "midi-key",
+            "midi-value",
+            "enumerated"
+          ]
+        },
+        "allowedValues": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "valueDomain": {
+                "const": "enumerated"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "allowedValues"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "allowedValues"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "protocolBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "controlId",
+        "eventTypeId",
+        "protocol",
+        "direction",
+        "messageType",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "controlId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "eventTypeId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "protocol": {
+          "enum": [
+            "MIDI-1.0",
+            "MIDI-2.0",
+            "OSC",
+            "host",
+            "electrical",
+            "custom"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "input",
+            "output",
+            "bidirectional"
+          ]
+        },
+        "messageType": {
+          "enum": [
+            "note",
+            "control-change",
+            "program-change",
+            "channel-pressure",
+            "pitch-bend",
+            "system-exclusive",
+            "addressed-value",
+            "custom"
+          ]
+        },
+        "channel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 128
+        },
+        "channelNumberingBase": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "dataNumberingBase": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1
+        },
+        "activationValue": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "deactivationValue": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "umpGroup": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "functionBlock": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 31
+        },
+        "umpMessageType": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "dataResolutionBits": {
+          "enum": [
+            7,
+            14,
+            16,
+            32
+          ]
+        },
+        "perNoteControllerIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "jrTimestamp": {
+          "type": "boolean"
+        },
+        "midiCIProfileIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "propertyExchangeResourceIRI": {
+          "$ref": "#/$defs/iri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stateVariable": {
+      "type": "object",
+      "required": [
+        "id",
+        "labels",
+        "valueType",
+        "persistence",
+        "defaultValue",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "subjectEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "valueType": {
+          "enum": [
+            "boolean",
+            "integer",
+            "number",
+            "enumerated"
+          ]
+        },
+        "persistence": {
+          "enum": [
+            "momentary",
+            "latched",
+            "until-release",
+            "session",
+            "snapshot"
+          ]
+        },
+        "defaultValue": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "minimumValue": {
+          "type": "number"
+        },
+        "maximumValue": {
+          "type": "number"
+        },
+        "stepCount": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9007199254740991
+        },
+        "allowedValues": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "declarativeAction": {
+      "type": "object",
+      "required": [
+        "operation",
+        "targetId"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "set-state",
+            "toggle-state",
+            "increment-state",
+            "emit-event",
+            "start-process",
+            "stop-process",
+            "route-event",
+            "select-render-binding"
+          ]
+        },
+        "targetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "value": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "keyOffset": {
+          "type": "integer",
+          "minimum": -127,
+          "maximum": 127
+        },
+        "delayConstraintId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "executionGroup": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "enum": [
+                  "set-state",
+                  "increment-state"
+                ]
+              }
+            },
+            "required": [
+              "operation"
+            ]
+          },
+          "then": {
+            "required": [
+              "value"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "value"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "route-event"
+              }
+            },
+            "required": [
+              "operation"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "keyOffset"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "interactionTransition": {
+      "type": "object",
+      "required": [
+        "id",
+        "eventTypeId",
+        "actions",
+        "atomic",
+        "conflictPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "eventTypeId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "controlId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateCondition"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/declarativeAction"
+          }
+        },
+        "atomic": {
+          "type": "boolean"
+        },
+        "conflictPolicy": {
+          "enum": [
+            "reject",
+            "priority",
+            "last-event-wins",
+            "merge-disjoint"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "keyTransformEntry": {
+      "type": "object",
+      "required": [
+        "inputKey",
+        "outputKeys"
+      ],
+      "properties": {
+        "inputKey": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "outputKeys": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 127
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "keyTransform": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "identity",
+            "transpose",
+            "fixed",
+            "table"
+          ]
+        },
+        "semitoneOffset": {
+          "type": "integer",
+          "minimum": -127,
+          "maximum": 127
+        },
+        "fixedOutputKeys": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 127
+          }
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/keyTransformEntry"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "routingRule": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceEntityId",
+        "targetEntityId",
+        "routingBehavior",
+        "inputKeyMeaning",
+        "outputKeyMeaning",
+        "inputRange",
+        "keyTransform",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceControlId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "targetEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "routingBehavior": {
+          "enum": [
+            "activates",
+            "selects",
+            "modulates",
+            "copies",
+            "transposes"
+          ]
+        },
+        "inputKeyMeaning": {
+          "enum": [
+            "midi-control-key",
+            "played-key",
+            "sounding-key",
+            "source-definition-key"
+          ]
+        },
+        "outputKeyMeaning": {
+          "enum": [
+            "played-key",
+            "sounding-key",
+            "sample-root-key",
+            "actuator-key"
+          ]
+        },
+        "inputRange": {
+          "$ref": "#/$defs/midiRange"
+        },
+        "keyTransform": {
+          "$ref": "#/$defs/keyTransform"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateCondition"
+          }
+        },
+        "footageLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "harmonicRelation": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        },
+        "delayConstraintId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "timingConstraint": {
+      "type": "object",
+      "required": [
+        "id",
+        "timingKind",
+        "unit",
+        "minimum",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "timingKind": {
+          "enum": [
+            "latency",
+            "minimum-gate",
+            "recovery",
+            "debounce",
+            "repeat-interval",
+            "duration",
+            "attack",
+            "release"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "seconds",
+            "milliseconds",
+            "audio-frames",
+            "samples"
+          ]
+        },
+        "minimum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "typical": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "appliesToIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "processModel": {
+      "description": "A declarative Process. For stochastic Processes, candidates are direct actions in array order followed by direct childProcessIds in array order; exactly one candidate is selected before a selected child expands.",
+      "type": "object",
+      "required": [
+        "id",
+        "processKind",
+        "ordering",
+        "actions",
+        "terminationPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "processKind": {
+          "enum": [
+            "one-shot",
+            "sustained",
+            "repeating",
+            "sequenced",
+            "compound",
+            "stochastic"
+          ]
+        },
+        "ordering": {
+          "enum": [
+            "single",
+            "simultaneous",
+            "sequential",
+            "stochastic"
+          ]
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/declarativeAction"
+          }
+        },
+        "childProcessIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "timingConstraintIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "terminationPolicy": {
+          "enum": [
+            "completed",
+            "on-control-release",
+            "maximum-iterations",
+            "duration-bound",
+            "external-cancel"
+          ]
+        },
+        "maximumIterations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "durationConstraintId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "cancellationControlId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "randomSourceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "probabilityDistribution": {
+          "description": "Uniform or categorical weights over the zero-based direct candidate sequence, not over recursively flattened descendant actions.",
+          "type": "object",
+          "required": [
+            "kind",
+            "parameters"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "uniform",
+                "categorical"
+              ]
+            },
+            "parameters": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "properties": {
+                "kind": {
+                  "const": "uniform"
+                },
+                "parameters": {
+                  "maxProperties": 0,
+                  "additionalProperties": false
+                }
+              }
+            },
+            {
+              "properties": {
+                "kind": {
+                  "const": "categorical"
+                },
+                "parameters": {
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^(0|[1-9][0-9]*)$"
+                  },
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "actions": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "childProcessIds"
+          ],
+          "properties": {
+            "childProcessIds": {
+              "minItems": 1
+            }
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "processKind": {
+                "const": "stochastic"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "randomSourceId",
+              "probabilityDistribution"
+            ],
+            "properties": {
+              "ordering": {
+                "const": "stochastic"
+              }
+            }
+          },
+          "else": {
+            "allOf": [
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "randomSourceId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "probabilityDistribution"
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "properties": {
+                  "ordering": {
+                    "not": {
+                      "const": "stochastic"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "terminationPolicy": {
+                "const": "maximum-iterations"
+              }
+            },
+            "required": [
+              "terminationPolicy"
+            ]
+          },
+          "then": {
+            "required": [
+              "maximumIterations"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "maximumIterations"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "terminationPolicy": {
+                "const": "duration-bound"
+              }
+            },
+            "required": [
+              "terminationPolicy"
+            ]
+          },
+          "then": {
+            "required": [
+              "durationConstraintId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "durationConstraintId"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "terminationPolicy": {
+                "enum": [
+                  "on-control-release",
+                  "external-cancel"
+                ]
+              }
+            },
+            "required": [
+              "terminationPolicy"
+            ]
+          },
+          "then": {
+            "required": [
+              "cancellationControlId"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "cancellationControlId"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "transferPoint": {
+      "type": "object",
+      "required": [
+        "output"
+      ],
+      "properties": {
+        "input": {
+          "type": "number"
+        },
+        "output": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number"
+          }
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "input"
+          ],
+          "not": {
+            "required": [
+              "inputs"
+            ]
+          }
+        },
+        {
+          "required": [
+            "inputs"
+          ],
+          "not": {
+            "required": [
+              "input"
+            ]
+          }
+        }
+      ]
+    },
+    "transferFunction": {
+      "type": "object",
+      "required": [
+        "id",
+        "inputKind",
+        "outputKind",
+        "interpolation",
+        "points",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "inputKind": {
+          "enum": [
+            "gate-duration",
+            "expression-step",
+            "velocity",
+            "control-value",
+            "actuator-selection"
+          ]
+        },
+        "outputKind": {
+          "enum": [
+            "force",
+            "gain-db",
+            "spectrum-state",
+            "shutter-configuration",
+            "sample-selection",
+            "control-value"
+          ]
+        },
+        "inputUnit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outputUnit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interpolation": {
+          "enum": [
+            "step",
+            "linear",
+            "piecewise-linear",
+            "lookup"
+          ]
+        },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/transferPoint"
+          }
+        },
+        "monotonic": {
+          "type": "boolean"
+        },
+        "appliesToIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        },
+        "inputKinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validDomain": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/vector2"
+          }
+        },
+        "extrapolationPolicy": {
+          "enum": [
+            "reject",
+            "clamp",
+            "nearest",
+            "linear"
+          ]
+        },
+        "hysteresis": {
+          "type": "boolean"
+        },
+        "dynamicModel": {
+          "enum": [
+            "static",
+            "first-order",
+            "state-space",
+            "lookup-sequence"
+          ]
+        },
+        "fitResidual": {
+          "$ref": "#/$defs/quantityValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    "renderBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "selectionPolicy",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "eventTypeId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "processModelId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateCondition"
+          }
+        },
+        "sampleMappingIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "sampleVariantIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "selectionPolicy": {
+          "enum": [
+            "single",
+            "simultaneous",
+            "ordered",
+            "state-dependent",
+            "host-defined"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "sampleMappingIds"
+          ]
+        },
+        {
+          "required": [
+            "sampleVariantIds"
+          ]
+        }
+      ]
+    },
+    "interactionModel": {
+      "type": "object",
+      "required": [
+        "executionSemantics",
+        "controls",
+        "eventTypes",
+        "protocolBindings",
+        "stateVariables",
+        "transitions",
+        "routingRules",
+        "processModels",
+        "timingConstraints",
+        "transferFunctions",
+        "renderBindings"
+      ],
+      "properties": {
+        "controls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interactionControl"
+          }
+        },
+        "eventTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interactionEventType"
+          }
+        },
+        "protocolBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/protocolBinding"
+          }
+        },
+        "stateVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateVariable"
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interactionTransition"
+          }
+        },
+        "routingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/routingRule"
+          }
+        },
+        "processModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/processModel"
+          }
+        },
+        "timingConstraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timingConstraint"
+          }
+        },
+        "transferFunctions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/transferFunction"
+          }
+        },
+        "renderBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/renderBinding"
+          }
+        },
+        "executionSemantics": {
+          "$ref": "#/$defs/executionSemantics"
+        },
+        "randomSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/randomSource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "stateAssignment": {
+      "type": "object",
+      "required": [
+        "stateVariableId",
+        "value"
+      ],
+      "properties": {
+        "stateVariableId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "value": {
+          "$ref": "#/$defs/primitiveValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    "captureState": {
+      "type": "object",
+      "required": [
+        "id",
+        "instrumentEntityId",
+        "stateAssignments",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "instrumentEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "stateAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateAssignment"
+          }
+        },
+        "capturedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "eventFrameMapping": {
+      "type": "object",
+      "required": [
+        "eventLocator",
+        "startFrame"
+      ],
+      "properties": {
+        "eventLocator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eventTypeId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "startFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endFrameExclusive": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false
+    },
+    "eventAlignment": {
+      "type": "object",
+      "required": [
+        "id",
+        "audioRealizationId",
+        "eventLogRealizationId",
+        "clockBasis",
+        "offset",
+        "eventMappings",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "audioRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "eventLogRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "clockBasis": {
+          "enum": [
+            "audio-frames",
+            "seconds",
+            "midi-ticks",
+            "external-timecode"
+          ]
+        },
+        "offset": {
+          "type": "number"
+        },
+        "driftPPM": {
+          "type": "number"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "eventMappings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/eventFrameMapping"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "takeSet": {
+      "type": "object",
+      "required": [
+        "id",
+        "captureStateId",
+        "realizationIds",
+        "setRole",
+        "selectionStatus",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "captureStateId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "realizationIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "setRole": {
+          "enum": [
+            "source-takes",
+            "segmentation-hypotheses",
+            "playback-alternatives",
+            "round-robin",
+            "preservation-variants"
+          ]
+        },
+        "selectionStatus": {
+          "enum": [
+            "candidate",
+            "accepted",
+            "rejected",
+            "superseded",
+            "not-applicable"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "derivationOperation": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "segment",
+            "resample",
+            "bit-depth-conversion",
+            "dither",
+            "denoise",
+            "backtrack",
+            "channel-map",
+            "loop-extraction",
+            "normalize",
+            "other"
+          ]
+        },
+        "activityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "softwareName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "softwareVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "derivationMap": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceRealizationId",
+        "derivedRealizationId",
+        "operations",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "derivedRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceFrameRange": {
+          "$ref": "#/$defs/frameRange"
+        },
+        "channelMap": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/derivationOperation"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "source": {
+          "$ref": "#/$defs/playbackMetadataSource"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "captureDocumentation": {
+      "type": "object",
+      "required": [
+        "captureStates",
+        "eventAlignments",
+        "takeSets",
+        "derivationMaps"
+      ],
+      "properties": {
+        "captureStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/captureState"
+          }
+        },
+        "eventAlignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/eventAlignment"
+          }
+        },
+        "takeSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/takeSet"
+          }
+        },
+        "derivationMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/derivationMap"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "distribution": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/repositoryDistribution"
+        },
+        {
+          "$ref": "#/$defs/packMemberDistribution"
+        }
+      ]
+    },
+    "repositoryDistribution": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "repositoryBindingId",
+        "persistentIdentifier",
+        "recordIdentifier",
+        "fileIdentifier",
+        "access"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "const": "repository"
+        },
+        "repositoryBindingId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "persistentIdentifier": {
+          "$ref": "#/$defs/iri"
+        },
+        "conceptIdentifier": {
+          "$ref": "#/$defs/iri"
+        },
+        "recordIdentifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fileIdentifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "access": {
+          "enum": [
+            "public",
+            "restricted",
+            "embargoed",
+            "metadata-only"
+          ]
+        },
+        "transportChecksums": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "packMemberDistribution": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "packRealizationId",
+        "memberPath",
+        "packManifestSHA256"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "const": "pack-member"
+        },
+        "packRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "memberPath": {
+          "$ref": "#/$defs/safeMemberPath"
+        },
+        "packManifestSHA256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "repositoryBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "repositoryType",
+        "instance",
+        "apiProfile",
+        "resolutionPolicy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "repositoryType": {
+          "$ref": "#/$defs/iri"
+        },
+        "instance": {
+          "$ref": "#/$defs/iri"
+        },
+        "apiProfile": {
+          "$ref": "#/$defs/iri"
+        },
+        "resolutionPolicy": {
+          "const": "version-pid-record-file"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assetGroup": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "labels",
+        "selectionSetId",
+        "qualityTier",
+        "availability",
+        "selectionPolicy",
+        "realizationIds",
+        "dependsOnGroupIds",
+        "totalByteSize",
+        "requiredCapabilities",
+        "materializesProfileIds",
+        "cachePolicy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "type": {
+          "const": "AssetGroup"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "selectionSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualityTier": {
+          "enum": [
+            "bootstrap",
+            "mobile",
+            "production",
+            "production-spatial",
+            "preservation",
+            "custom"
+          ]
+        },
+        "availability": {
+          "enum": [
+            "offline-required",
+            "remote-optional",
+            "remote-required",
+            "remote-restricted"
+          ]
+        },
+        "selectionPolicy": {
+          "enum": [
+            "independent",
+            "exactly-one",
+            "at-most-one"
+          ]
+        },
+        "realizationIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "dependsOnGroupIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "fallbackGroupId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "totalByteSize": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "requiredCapabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "materializesProfileIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "cachePolicy": {
+          "type": "object",
+          "required": [
+            "evictable",
+            "priority"
+          ],
+          "properties": {
+            "evictable": {
+              "type": "boolean"
+            },
+            "priority": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "id",
+        "appliesToIds",
+        "statement",
+        "access"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "appliesToIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "license": {
+          "$ref": "#/$defs/iri"
+        },
+        "statement": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "access": {
+          "enum": [
+            "open",
+            "restricted",
+            "embargoed",
+            "unknown"
+          ]
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "performerAgentIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "consentIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "communityAuthorityIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "traditionalKnowledgeLabelIRIs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "privacyClassification": {
+          "enum": [
+            "public",
+            "restricted",
+            "sensitive-personal",
+            "community-governed"
+          ]
+        },
+        "embargoUntil": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "embargoRationale": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "redactionOfRealizationIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "carePrinciples": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "collective-benefit",
+              "authority-to-control",
+              "responsibility",
+              "ethics"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "integrity": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "manifestDigestLocation",
+        "carrierDescriptor"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "manifestDigestLocation": {
+          "const": "external-release-and-carrier-descriptors"
+        },
+        "carrierDescriptor": {
+          "const": "META-INF/vao-carrier.json"
+        },
+        "schemaBundleDigest": {
+          "$ref": "#/$defs/contentDigest"
+        },
+        "signatureEnvelopeRealizationId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "contentDigest": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "enum": [
+            "sha256",
+            "sha512"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]+$"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "algorithm": {
+                "const": "sha256"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "algorithm": {
+                "const": "sha512"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "pattern": "^[0-9a-f]{128}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "sha256ContentDigest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/contentDigest"
+        },
+        {
+          "properties": {
+            "algorithm": {
+              "const": "sha256"
+            }
+          }
+        }
+      ]
+    },
+    "chunk": {
+      "type": "object",
+      "required": [
+        "index",
+        "offset",
+        "length",
+        "digest"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "digest": {
+          "$ref": "#/$defs/contentDigest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "chunking": {
+      "type": "object",
+      "required": [
+        "strategy",
+        "chunks"
+      ],
+      "properties": {
+        "strategy": {
+          "enum": [
+            "fixed-size",
+            "content-defined",
+            "external-index",
+            "zarr",
+            "pack-shard"
+          ]
+        },
+        "chunkSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "merkleRoot": {
+          "$ref": "#/$defs/contentDigest"
+        },
+        "chunks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/chunk"
+          }
+        },
+        "indexRealizationId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agent": {
+      "type": "object",
+      "required": [
+        "id",
+        "agentKind",
+        "labels"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "agentKind": {
+          "enum": [
+            "person",
+            "organization",
+            "community",
+            "software-agent"
+          ]
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "orcid": {
+          "$ref": "#/$defs/orcid"
+        },
+        "ror": {
+          "$ref": "#/$defs/ror"
+        },
+        "affiliationAgentIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "roles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "orcid"
+            ]
+          },
+          "then": {
+            "properties": {
+              "agentKind": {
+                "const": "person"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "ror"
+            ]
+          },
+          "then": {
+            "properties": {
+              "agentKind": {
+                "const": "organization"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "softwareEnvironment": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "identity",
+        "identityScope",
+        "identityDescription"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identity": {
+          "$ref": "#/$defs/contentDigest"
+        },
+        "identityScope": {
+          "enum": [
+            "executable",
+            "source-file",
+            "source-bundle",
+            "environment-lock",
+            "declaration",
+            "other"
+          ]
+        },
+        "identityDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCodeIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "softwareHeritageId": {
+          "type": "string",
+          "pattern": "^swh:1:"
+        },
+        "containerDigest": {
+          "$ref": "#/$defs/contentDigest"
+        },
+        "modelWeightDigest": {
+          "$ref": "#/$defs/contentDigest"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "dependencyRole",
+              "identity",
+              "identityScope",
+              "identityDescription"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependencyRole": {
+                "enum": [
+                  "source",
+                  "normative-artifact",
+                  "environment-lock",
+                  "library",
+                  "runtime",
+                  "model",
+                  "other"
+                ]
+              },
+              "identity": {
+                "$ref": "#/$defs/contentDigest"
+              },
+              "identityScope": {
+                "enum": [
+                  "executable",
+                  "source-file",
+                  "source-bundle",
+                  "environment-lock",
+                  "declaration",
+                  "other"
+                ]
+              },
+              "identityDescription": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceCodeIRI": {
+                "$ref": "#/$defs/iri"
+              },
+              "softwareHeritageId": {
+                "type": "string",
+                "pattern": "^swh:1:"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "runtimeDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extensions": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "id",
+        "labels",
+        "procedure",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "labels": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "procedure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "standardIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "parameters": {
+          "$ref": "#/$defs/extensions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "calibration": {
+      "type": "object",
+      "required": [
+        "id",
+        "instrumentEntityId",
+        "protocolId",
+        "performedByAgentIds",
+        "performedAt",
+        "resultStatus"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "instrumentEntityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "protocolId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "performedByAgentIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "performedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "certificateRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "resultStatus": {
+          "enum": [
+            "pass",
+            "fail",
+            "limited",
+            "unknown"
+          ]
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "validUntil": {
+          "$ref": "#/$defs/dateTime"
+        }
+      },
+      "additionalProperties": false
+    },
+    "activity": {
+      "type": "object",
+      "required": [
+        "id",
+        "activityKind",
+        "startedAt",
+        "endedAt",
+        "agentIds",
+        "protocolId",
+        "inputIds",
+        "outputIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "activityKind": {
+          "enum": [
+            "capture",
+            "authoring",
+            "measurement",
+            "digitization",
+            "processing",
+            "simulation",
+            "inference",
+            "annotation",
+            "review",
+            "migration",
+            "render"
+          ]
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "agentIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "protocolId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "softwareEnvironmentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "inputIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "outputIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "parameterValues": {
+          "$ref": "#/$defs/extensions"
+        },
+        "randomSourceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "environmentObservationIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "quantityValue": {
+      "description": "A scalar, vector, or rectangular matrix numerical quantity with an explicit unit.",
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/numericValue"
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        },
+        "quantityKind": {
+          "$ref": "#/$defs/iri"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "sampleCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "censoring": {
+          "enum": [
+            "none",
+            "left",
+            "right",
+            "interval"
+          ]
+        },
+        "outlierPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "observation": {
+      "type": "object",
+      "required": [
+        "id",
+        "observedProperty",
+        "featureOfInterestId",
+        "result",
+        "resultTime",
+        "activityId",
+        "protocolId",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "observedProperty": {
+          "$ref": "#/$defs/iri"
+        },
+        "featureOfInterestId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "result": {
+          "$ref": "#/$defs/quantityValue"
+        },
+        "resultTime": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "activityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "protocolId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sensorId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "calibrationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "rawResultRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "processedResultRealizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "qualityFlags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "analysis": {
+      "type": "object",
+      "required": [
+        "id",
+        "analysisKind",
+        "activityId",
+        "inputIds",
+        "outputIds",
+        "softwareEnvironmentId",
+        "parameters",
+        "reproducibility"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "analysisKind": {
+          "$ref": "#/$defs/iri"
+        },
+        "activityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "inputIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "outputIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "softwareEnvironmentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "parameters": {
+          "$ref": "#/$defs/extensions"
+        },
+        "randomSourceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reproducibility": {
+          "enum": [
+            "deterministic",
+            "seeded",
+            "non-reproducible"
+          ]
+        },
+        "fitResidual": {
+          "$ref": "#/$defs/quantityValue"
+        },
+        "validationIds": {
+          "$ref": "#/$defs/identifierList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "required": [
+        "id",
+        "subjectId",
+        "predicate",
+        "status",
+        "evidenceIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subjectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "predicate": {
+          "$ref": "#/$defs/iri"
+        },
+        "objectId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "literal": {
+          "$ref": "#/$defs/literal"
+        },
+        "status": {
+          "$ref": "#/$defs/evidenceStatus"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "generatedById": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewIds": {
+          "$ref": "#/$defs/identifierList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "id",
+        "reviewedId",
+        "reviewerAgentId",
+        "reviewedAt",
+        "decision"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewerAgentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "decision": {
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs-revision",
+            "not-assessed"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "enum": [
+                  "rejected",
+                  "needs-revision"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          },
+          "then": {
+            "required": [
+              "rationale"
+            ]
+          }
+        }
+      ]
+    },
+    "consent": {
+      "type": "object",
+      "required": [
+        "id",
+        "grantedByAgentId",
+        "appliesToIds",
+        "decision",
+        "recordedAt"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "grantedByAgentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "appliesToIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "decision": {
+          "enum": [
+            "granted",
+            "denied",
+            "withdrawn",
+            "conditional"
+          ]
+        },
+        "recordedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "conditions": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "evidenceRealizationId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "conditional"
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          },
+          "then": {
+            "required": [
+              "conditions"
+            ]
+          }
+        }
+      ]
+    },
+    "scientific": {
+      "type": "object",
+      "required": [
+        "agents",
+        "activities",
+        "observations",
+        "analyses",
+        "calibrations",
+        "protocols",
+        "softwareEnvironments",
+        "claims",
+        "reviews",
+        "consents"
+      ],
+      "properties": {
+        "agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agent"
+          }
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/activity"
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/observation"
+          }
+        },
+        "analyses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/analysis"
+          }
+        },
+        "calibrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/calibration"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/protocol"
+          }
+        },
+        "softwareEnvironments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/softwareEnvironment"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/review"
+          }
+        },
+        "consents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/consent"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "timebase": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "unit",
+        "rate",
+        "rateUnit",
+        "origin"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "enum": [
+            "monotonic",
+            "wall-clock",
+            "media",
+            "musical",
+            "external-timecode"
+          ]
+        },
+        "unit": {
+          "$ref": "#/$defs/iri"
+        },
+        "rate": {
+          "$ref": "#/$defs/positiveRate"
+        },
+        "rateUnit": {
+          "$ref": "#/$defs/iri"
+        },
+        "timeScale": {
+          "description": "Absolute IRI identifying the clock's time scale or timecode system.",
+          "$ref": "#/$defs/iri"
+        },
+        "origin": {
+          "type": "number"
+        },
+        "epoch": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "wrapPeriod": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "wall-clock"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "epoch",
+              "timeScale"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "external-timecode"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "timeScale"
+            ]
+          }
+        }
+      ]
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "id",
+        "modality",
+        "timebaseId",
+        "realizationId",
+        "continuity"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "modality": {
+          "enum": [
+            "audio",
+            "video",
+            "image-sequence",
+            "depth",
+            "volumetric",
+            "motion-capture",
+            "sensor",
+            "event",
+            "score",
+            "annotation",
+            "trajectory"
+          ]
+        },
+        "timebaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "realizationId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "coordinateFrameId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "channelSelector": {
+          "type": "string"
+        },
+        "continuity": {
+          "enum": [
+            "continuous",
+            "segmented",
+            "sparse"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "clockSegment": {
+      "type": "object",
+      "required": [
+        "sourceStart",
+        "sourceEndExclusive",
+        "scale",
+        "offset",
+        "residualUncertainty",
+        "discontinuityAfter"
+      ],
+      "properties": {
+        "sourceStart": {
+          "type": "number"
+        },
+        "sourceEndExclusive": {
+          "type": "number"
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "offset": {
+          "type": "number"
+        },
+        "residualUncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "discontinuityAfter": {
+          "enum": [
+            "none",
+            "dropout",
+            "clock-reset",
+            "pause",
+            "unknown"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "synchronizationMapping": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceTimebaseId",
+        "targetTimebaseId",
+        "method",
+        "segments",
+        "activityId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourceTimebaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "targetTimebaseId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "method": {
+          "enum": [
+            "shared-clock",
+            "timecode",
+            "event-matching",
+            "cross-correlation",
+            "manual",
+            "device-timestamp"
+          ]
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clockSegment"
+          },
+          "minItems": 1
+        },
+        "activityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "jitter": {
+          "$ref": "#/$defs/uncertainty"
+        }
+      },
+      "additionalProperties": false
+    },
+    "annotationSelector": {
+      "type": "object",
+      "required": [
+        "trackId"
+      ],
+      "properties": {
+        "trackId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "start": {
+          "type": "number"
+        },
+        "endExclusive": {
+          "type": "number"
+        },
+        "spatialFragment": {
+          "type": "string"
+        },
+        "svgSelector": {
+          "type": "string"
+        },
+        "eventLocator": {
+          "type": "string"
+        },
+        "scoreElementId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "start"
+            ]
+          },
+          "then": {
+            "required": [
+              "endExclusive"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "endExclusive"
+            ]
+          },
+          "then": {
+            "required": [
+              "start"
+            ]
+          }
+        }
+      ]
+    },
+    "annotation": {
+      "type": "object",
+      "required": [
+        "id",
+        "motivation",
+        "target",
+        "body",
+        "createdByAgentId",
+        "createdAt",
+        "activityId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "motivation": {
+          "$ref": "#/$defs/iri"
+        },
+        "target": {
+          "$ref": "#/$defs/annotationSelector"
+        },
+        "body": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/literal"
+            },
+            {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/identifier"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "createdByAgentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "createdAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "activityId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "multimodal": {
+      "type": "object",
+      "required": [
+        "timebases",
+        "tracks",
+        "synchronizationMappings",
+        "annotations"
+      ],
+      "properties": {
+        "timebases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timebase"
+          }
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/track"
+          }
+        },
+        "synchronizationMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/synchronizationMapping"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "physicalComponent": {
+      "type": "object",
+      "required": [
+        "id",
+        "entityId",
+        "componentKind",
+        "portIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "entityId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentKind": {
+          "$ref": "#/$defs/iri"
+        },
+        "parentComponentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "portIds": {
+          "$ref": "#/$defs/identifierList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "physicalPort": {
+      "type": "object",
+      "required": [
+        "id",
+        "componentId",
+        "direction",
+        "signalKind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "direction": {
+          "enum": [
+            "input",
+            "output",
+            "bidirectional"
+          ]
+        },
+        "signalKind": {
+          "enum": [
+            "mechanical",
+            "pneumatic",
+            "electrical",
+            "optical",
+            "acoustic",
+            "digital",
+            "control",
+            "energy"
+          ]
+        },
+        "quantityKind": {
+          "$ref": "#/$defs/iri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "physicalConnection": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourcePortId",
+        "targetPortId",
+        "connectionKind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sourcePortId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "targetPortId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "connectionKind": {
+          "enum": [
+            "signal",
+            "energy",
+            "material",
+            "mechanical-coupling"
+          ]
+        },
+        "delayConstraintId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "bidirectional": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sensor": {
+      "type": "object",
+      "required": [
+        "id",
+        "componentId",
+        "observedProperty",
+        "outputPortId",
+        "protocolId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "observedProperty": {
+          "$ref": "#/$defs/iri"
+        },
+        "outputPortId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "protocolId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "calibrationId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "actuator": {
+      "type": "object",
+      "required": [
+        "id",
+        "componentId",
+        "actedOnProperty",
+        "inputPortId",
+        "protocolId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "actedOnProperty": {
+          "$ref": "#/$defs/iri"
+        },
+        "inputPortId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "protocolId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "transferFunctionId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stateBinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "stateVariableId",
+        "componentId",
+        "stateRole"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "stateVariableId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "componentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "stateRole": {
+          "enum": [
+            "commanded",
+            "observed",
+            "estimated",
+            "simulated"
+          ]
+        },
+        "observationId": {
+          "$ref": "#/$defs/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "stateRole": {
+                "const": "observed"
+              }
+            },
+            "required": [
+              "stateRole"
+            ]
+          },
+          "then": {
+            "required": [
+              "observationId"
+            ]
+          }
+        }
+      ]
+    },
+    "physicalSystem": {
+      "type": "object",
+      "required": [
+        "components",
+        "ports",
+        "connections",
+        "sensors",
+        "actuators",
+        "stateBindings"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/physicalComponent"
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/physicalPort"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/physicalConnection"
+          }
+        },
+        "sensors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sensor"
+          }
+        },
+        "actuators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actuator"
+          }
+        },
+        "stateBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateBinding"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "executionSemantics": {
+      "type": "object",
+      "required": [
+        "timestampOrder",
+        "simultaneousEventOrder",
+        "transitionEvaluation",
+        "actionExecution",
+        "runToCompletion",
+        "reentrancyPolicy",
+        "lateEventPolicy",
+        "timeResolution",
+        "maximumMicrosteps",
+        "voiceAllocation",
+        "maximumVoices"
+      ],
+      "properties": {
+        "timestampOrder": {
+          "const": "ascending"
+        },
+        "simultaneousEventOrder": {
+          "const": "priority-then-event-id"
+        },
+        "transitionEvaluation": {
+          "const": "snapshot"
+        },
+        "actionExecution": {
+          "const": "execution-group-then-array-order"
+        },
+        "runToCompletion": {
+          "const": true
+        },
+        "reentrancyPolicy": {
+          "enum": [
+            "queue",
+            "reject"
+          ]
+        },
+        "lateEventPolicy": {
+          "enum": [
+            "reject",
+            "clamp",
+            "queue-next-cycle"
+          ]
+        },
+        "timeResolution": {
+          "$ref": "#/$defs/quantityValue"
+        },
+        "maximumMicrosteps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "voiceAllocation": {
+          "enum": [
+            "lowest-free-then-oldest",
+            "round-robin",
+            "monophonic-priority"
+          ]
+        },
+        "maximumVoices": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false
+    },
+    "randomSource": {
+      "type": "object",
+      "required": [
+        "id",
+        "algorithm",
+        "seed"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "algorithm": {
+          "enum": [
+            "pcg32",
+            "xoshiro256-star-star"
+          ]
+        },
+        "seed": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16,64}$"
+        },
+        "stream": {
+          "description": "PCG stream selector 0..2^63-1 as fixed-width lowercase hexadecimal.",
+          "type": "string",
+          "pattern": "^[0-7][0-9a-f]{15}$"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "algorithm": {
+                "const": "pcg32"
+              }
+            },
+            "required": [
+              "algorithm"
+            ]
+          },
+          "then": {
+            "required": [
+              "stream"
+            ],
+            "properties": {
+              "seed": {
+                "pattern": "^[0-9a-f]{16}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "algorithm": {
+                "const": "xoshiro256-star-star"
+              }
+            },
+            "required": [
+              "algorithm"
+            ]
+          },
+          "then": {
+            "properties": {
+              "seed": {
+                "pattern": "^(?!0{64}$)[0-9a-f]{64}$"
+              }
+            },
+            "not": {
+              "required": [
+                "stream"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "renderer": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "capabilities",
+        "softwareEnvironmentId",
+        "sandboxPolicy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "softwareEnvironmentId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sandboxPolicy": {
+          "enum": [
+            "declarative-only",
+            "isolated-external-renderer"
+          ]
+        },
+        "deterministic": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "traceEvent": {
+      "type": "object",
+      "required": [
+        "timestamp",
+        "eventTypeId",
+        "sequence"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "number"
+        },
+        "eventTypeId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "controlId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "value": {
+          "$ref": "#/$defs/primitiveValue"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false
+    },
+    "traceEmittedEvent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "eventTypeId",
+            "timestamp",
+            "sourceTransitionId"
+          ],
+          "properties": {
+            "eventTypeId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "timestamp": {
+              "type": "number"
+            },
+            "sourceTransitionId": {
+              "$ref": "#/$defs/identifier"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "routeId",
+            "timestamp",
+            "sourceTransitionId"
+          ],
+          "properties": {
+            "routeId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "timestamp": {
+              "type": "number"
+            },
+            "sourceTransitionId": {
+              "$ref": "#/$defs/identifier"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "processId",
+            "operation",
+            "targetId",
+            "timestamp",
+            "sourceTransitionId"
+          ],
+          "properties": {
+            "processId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "operation": {
+              "enum": [
+                "set-state",
+                "toggle-state",
+                "increment-state",
+                "emit-event",
+                "start-process",
+                "stop-process",
+                "route-event",
+                "select-render-binding"
+              ]
+            },
+            "targetId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "timestamp": {
+              "type": "number"
+            },
+            "sourceTransitionId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "value": {
+              "$ref": "#/$defs/primitiveValue"
+            },
+            "keyOffset": {
+              "type": "integer",
+              "minimum": -127,
+              "maximum": 127
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "operation": {
+                    "enum": [
+                      "set-state",
+                      "increment-state"
+                    ]
+                  }
+                },
+                "required": [
+                  "operation"
+                ]
+              },
+              "then": {
+                "required": [
+                  "value"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "value"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "operation": {
+                    "const": "route-event"
+                  }
+                },
+                "required": [
+                  "operation"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "keyOffset"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "processId",
+            "operation",
+            "timestamp",
+            "sourceTransitionId"
+          ],
+          "properties": {
+            "processId": {
+              "$ref": "#/$defs/identifier"
+            },
+            "operation": {
+              "const": "stop-process"
+            },
+            "timestamp": {
+              "type": "number"
+            },
+            "sourceTransitionId": {
+              "$ref": "#/$defs/identifier"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "traceExpectation": {
+      "type": "object",
+      "required": [
+        "state",
+        "emittedEvents",
+        "renderBindingIds"
+      ],
+      "properties": {
+        "state": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(urn:|https?:)"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        },
+        "emittedEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/traceEmittedEvent"
+          }
+        },
+        "renderBindingIds": {
+          "$ref": "#/$defs/identifierList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "conformanceTrace": {
+      "type": "object",
+      "required": [
+        "id",
+        "inputEvents",
+        "expected",
+        "digest"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "initialState": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(urn:|https?:)"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/primitiveValue"
+          }
+        },
+        "inputEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/traceEvent"
+          }
+        },
+        "expected": {
+          "$ref": "#/$defs/traceExpectation"
+        },
+        "digest": {
+          "$ref": "#/$defs/sha256ContentDigest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "executionSemantics",
+        "randomSources",
+        "renderers",
+        "conformanceTraces"
+      ],
+      "properties": {
+        "executionSemantics": {
+          "$ref": "#/$defs/executionSemantics"
+        },
+        "randomSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/randomSource"
+          }
+        },
+        "renderers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/renderer"
+          }
+        },
+        "conformanceTraces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conformanceTrace"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "fundingReference": {
+      "type": "object",
+      "required": [
+        "funderName"
+      ],
+      "properties": {
+        "funderName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "funderIdentifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "funderIdentifierType": {
+          "$ref": "#/$defs/dataciteFunderIdentifierType"
+        },
+        "schemeUri": {
+          "$ref": "#/$defs/iri"
+        },
+        "awardNumber": {
+          "type": "string"
+        },
+        "awardIRI": {
+          "$ref": "#/$defs/iri"
+        },
+        "awardTitle": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "funderIdentifier"
+            ]
+          },
+          "then": {
+            "required": [
+              "funderIdentifierType"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "required": [
+                  "funderIdentifierType"
+                ]
+              },
+              {
+                "required": [
+                  "schemeUri"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "funderIdentifier"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "funderIdentifierType": {
+                "const": "Other"
+              }
+            },
+            "required": [
+              "funderIdentifierType"
+            ]
+          },
+          "then": {
+            "required": [
+              "schemeUri"
+            ]
+          }
+        }
+      ]
+    },
+    "discovery": {
+      "type": "object",
+      "required": [
+        "resourceType",
+        "creatorAgentIds",
+        "contributorAgentIds",
+        "relatedIdentifiers",
+        "fundingReferences",
+        "subjects"
+      ],
+      "properties": {
+        "resourceType": {
+          "const": "Dataset"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publicationYear": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 9999
+        },
+        "creatorAgentIds": {
+          "$ref": "#/$defs/uniqueIdentifiers"
+        },
+        "contributorAgentIds": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "relatedIdentifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dataciteRelatedIdentifier"
+          }
+        },
+        "fundingReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fundingReference"
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "subject"
+            ],
+            "properties": {
+              "subject": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subjectScheme": {
+                "type": "string"
+              },
+              "valueIRI": {
+                "$ref": "#/$defs/iri"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "instrumentIdentifiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        },
+        "facilityIdentifiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/iri"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

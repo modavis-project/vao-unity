@@ -1,0 +1,11 @@
+<linker>
+  <!-- Optional reflection bridges. Missing assemblies are intentionally ignored. -->
+  <assembly fullname="Minis" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="glTFast" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="Unity.GLTFast" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="Unity.XR.ARFoundation" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="Unity.XR.Interaction.Toolkit" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="Vuforia.Unity.Engine" preserve="all" ignoreIfMissing="1" />
+  <!-- PureHDF uses generic reflection internally while decoding runtime-acquired AES69-SOFA files. -->
+  <assembly fullname="PureHDF" preserve="all" />
+</linker>

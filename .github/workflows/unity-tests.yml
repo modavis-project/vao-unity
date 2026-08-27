@@ -1,0 +1,39 @@
+name: Unity tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  tests:
+    if: ${{ vars.UNITY_TESTS_ENABLED == 'true' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        testMode: [EditMode, PlayMode]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: TestProject~
+          unityVersion: 6000.5.9f1
+          testMode: ${{ matrix.testMode }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          artifactsPath: test-artifacts/${{ matrix.testMode }}
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: unity-${{ matrix.testMode }}
+          path: test-artifacts/${{ matrix.testMode }}

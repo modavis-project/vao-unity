@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/modavis/vao/0.4.0/schema/carrier.json",
+  "title": "VAO 0.4.0 carrier descriptor",
+  "type": "object",
+  "required": [
+    "$schema",
+    "type",
+    "formatVersion",
+    "releaseId",
+    "manifestSHA256",
+    "manifestByteSize",
+    "carrierMode",
+    "embeddedRealizations",
+    "completeGroupIds"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://w3id.org/modavis/vao/0.4.0/schema/carrier.json"
+    },
+    "type": {
+      "const": "VAOCarrier"
+    },
+    "formatVersion": {
+      "const": "0.4.0"
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^(urn:|https?:)[^\\s]+$"
+    },
+    "manifestSHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "manifestByteSize": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "carrierMode": {
+      "enum": [
+        "bootstrap",
+        "preservation-closure",
+        "custom"
+      ]
+    },
+    "embeddedRealizations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "realizationId",
+          "path"
+        ],
+        "properties": {
+          "realizationId": {
+            "type": "string",
+            "pattern": "^(urn:|https?:)[^\\s]+$"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^payload/(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\x00-\\x1F\\x7F]+$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "completeGroupIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(urn:|https?:)[^\\s]+$"
+      }
+    }
+  },
+  "additionalProperties": false
+}
