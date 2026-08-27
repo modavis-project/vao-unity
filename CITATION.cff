@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the version you used."
+title: "MODAVIS VAO Importer for Unity"
+type: software
+authors:
+  - family-names: Ukolov
+    given-names: Dominik
+    orcid: "https://orcid.org/0000-0002-7904-3892"
+    affiliation: "Digital Humanities (Image/Object), Friedrich Schiller University Jena; Research Group DIGITAL ORGANOLOGY, Leipzig University"
+version: "0.6.0-rc.1"
+date-released: "2026-08-28"
+doi: "10.5281/zenodo.22134391"
+license: MIT
+repository-code: "https://github.com/modavis-project/vao-unity"
+url: "https://doi.org/10.5281/zenodo.22134391"
+abstract: >-
+  A Unity Package Manager plugin for offline VAO 0.4.0 validation,
+  transactional and selective import, rights-aware runtime materialization,
+  deterministic execution, Playables animation, optional MIDI and XR bridges,
+  and position-aware RIR/SOFA rendering.
+keywords:
+  - virtual acoustic object
+  - Unity
+  - musical instrument
+  - MIDI
+  - extended reality
+  - spatial acoustics
+references:
+  - type: software
+    title: "Virtual Acoustic Object (VAO) Standard"
+    version: "0.4.0"
+    doi: "10.5281/zenodo.22122774"
+    repository-code: "https://github.com/modavis-project/vao-standard"

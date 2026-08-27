@@ -1,0 +1,20 @@
+{
+  "name": "Modavis.Vao.Editor",
+  "rootNamespace": "Modavis.Vao.Editor",
+  "references": [
+    "Modavis.Vao"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "Newtonsoft.Json.dll"
+  ],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

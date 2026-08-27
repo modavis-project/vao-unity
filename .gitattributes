@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.cs text diff=csharp
+*.json text
+*.md text diff=markdown
+*.meta text whitespace=-trailing-space
+TestProject~/ProjectSettings/*.asset text whitespace=-trailing-space
+*.vao binary
+*.wav binary
+*.mp3 binary
+*.fbx binary
+*.glb binary
+*.png binary

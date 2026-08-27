@@ -1,0 +1,22 @@
+name: Feature request
+description: Propose a focused, portable VAO or Unity capability.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: Describe the application behavior and why it belongs in the reusable package layer.
+    validations:
+      required: true
+  - type: textarea
+    id: declaration
+    attributes:
+      label: VAO declaration
+      description: Identify the VAO records or relations that should drive the behavior without filename inference.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Host-side alternatives
+      description: Explain why an application-specific host script is insufficient.

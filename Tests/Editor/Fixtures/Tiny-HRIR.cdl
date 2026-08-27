@@ -1,0 +1,35 @@
+netcdf Tiny_HRIR {
+dimensions:
+    I = 1 ;
+    C = 3 ;
+    R = 2 ;
+    N = 8 ;
+    M = 3 ;
+variables:
+    double SourcePosition(M, C) ;
+        SourcePosition:Type = "spherical" ;
+        SourcePosition:Units = "degree, degree, meter" ;
+    double Data.IR(M, R, N) ;
+    double Data.SamplingRate(I) ;
+        Data.SamplingRate:Units = "hertz" ;
+    double Data.Delay(I, R) ;
+
+// global attributes:
+        :Conventions = "SOFA" ;
+        :Version = "2.1" ;
+        :SOFAConventions = "SimpleFreeFieldHRIR" ;
+        :SOFAConventionsVersion = "2.1" ;
+        :DataType = "FIR" ;
+        :License = "CC0-1.0 synthetic VAO Unity test fixture" ;
+data:
+    SourcePosition = 0, 0, 1, 90, 0, 1, -90, 0, 1 ;
+    Data.IR =
+        1, 0, 0, 0, 0, 0, 0, 0,
+        0.5, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0,
+        0.2, 0, 0, 0, 0, 0, 0, 0,
+        0.2, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0 ;
+    Data.SamplingRate = 48000 ;
+    Data.Delay = 0, 0 ;
+}

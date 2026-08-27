@@ -1,0 +1,25 @@
+name: Repository quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify metadata and UPM package
+        run: ./Scripts/verify-release.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vao-unity-package
+          path: dist/*

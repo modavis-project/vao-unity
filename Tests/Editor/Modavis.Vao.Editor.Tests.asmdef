@@ -1,0 +1,26 @@
+{
+  "name": "Modavis.Vao.Editor.Tests",
+  "rootNamespace": "Modavis.Vao.Editor.Tests",
+  "references": [
+    "Modavis.Vao",
+    "Modavis.Vao.Editor"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "Newtonsoft.Json.dll"
+  ],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

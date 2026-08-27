@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check tag and package version
+        run: test "${GITHUB_REF_NAME}" = "v$(node -p "require('./package.json').version")"
+      - name: Build verified package artifact
+        run: ./Scripts/verify-release.sh
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: .github/release-notes-0.6.0-rc.1.md
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          make_latest: ${{ !contains(github.ref_name, '-') }}
+          files: |
+            dist/*.tgz
+            dist/*.sha256

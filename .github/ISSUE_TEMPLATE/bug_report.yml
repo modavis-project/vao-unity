@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a reproducible importer or runtime defect.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Package version, Unity version, operating system, and target platform.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Validation or security
+        - Materialization or import
+        - Sample or MIDI playback
+        - Media or linked animation
+        - XR placement
+        - Spatial acoustics
+        - Packaging or documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide minimal steps and a synthetic carrier if possible. Do not attach restricted content.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Paste relevant validation findings or logs with secrets and private paths removed.

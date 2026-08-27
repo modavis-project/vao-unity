@@ -1,0 +1,50 @@
+{
+  "name": "org.modavis.vao-unity",
+  "version": "0.6.0-rc.1",
+  "displayName": "MODAVIS VAO Importer",
+  "description": "Secure VAO 0.4.0 import, deterministic execution, linked animation, MIDI/XR integration, runtime materialization, and position-aware RIR/SOFA acoustics for Unity.",
+  "unity": "6000.0",
+  "license": "MIT",
+  "documentationUrl": "https://github.com/modavis-project/vao-unity#readme",
+  "changelogUrl": "https://github.com/modavis-project/vao-unity/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/modavis-project/vao-unity/blob/main/LICENSE",
+  "author": {
+    "name": "MODAVIS",
+    "url": "https://github.com/modavis-project"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.2",
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.modules.unitywebrequestaudio": "1.0.0"
+  },
+  "keywords": [
+    "VAO",
+    "virtual acoustic object",
+    "musical instrument",
+    "MIDI",
+    "XR",
+    "acoustics"
+  ],
+  "samples": [
+    {
+      "displayName": "Runtime Controls",
+      "description": "Minimal runtime controller for an imported VAO prefab.",
+      "path": "Samples~/RuntimeControls"
+    },
+    {
+      "displayName": "Optional Integrations",
+      "description": "Dependency-neutral bootstrap for MIDI hardware, glTFast, AR Foundation, XR Interaction Toolkit, and Vuforia hosts.",
+      "path": "Samples~/OptionalIntegrations"
+    },
+    {
+      "displayName": "Deterministic Execution and Acoustics",
+      "description": "UnityEvent bridge for VAO process events, routed events, acoustic scenes, and live renderer switching.",
+      "path": "Samples~/DeterministicAcoustics"
+    }
+  ]
+}

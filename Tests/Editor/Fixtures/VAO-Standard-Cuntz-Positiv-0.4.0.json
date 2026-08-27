@@ -1,0 +1,3666 @@
+{
+  "$schema": "https://w3id.org/modavis/vao/0.4.0/schema/manifest.json",
+  "@context": [
+    "https://w3id.org/modavis/vao/0.4.0/context.jsonld"
+  ],
+  "acoustics": {
+    "audioScenes": [
+      {
+        "bindings": [
+          {
+            "bindingType": "response",
+            "channelIndices": [
+              0
+            ],
+            "entityId": "urn:vao:fixture:acousticrooms:source:0",
+            "id": "urn:vao:fixture:acousticrooms:audio-binding:source",
+            "mediaAssetId": "urn:vao:fixture:acousticrooms:asset:rir",
+            "poseId": "urn:vao:fixture:acousticrooms:pose:source:0"
+          }
+        ],
+        "coordinateFrameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:fixture-assembly",
+        "id": "urn:vao:fixture:acousticrooms:audio-scene",
+        "mediaAssetIds": [
+          "urn:vao:fixture:acousticrooms:asset:rir"
+        ],
+        "metadataAssetId": "urn:vao:fixture:acousticrooms:asset:pair-metadata",
+        "representationType": "hybrid",
+        "sceneEntityId": "urn:vao:fixture:acousticrooms:scene"
+      }
+    ],
+    "coordinateFrames": [
+      {
+        "coordinateType": "cartesian",
+        "dimension": 3,
+        "forwardAxis": "not-applicable",
+        "handedness": "right",
+        "id": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "notes": "Source OBJ, simulation configuration, and pair metadata coordinates.",
+        "unit": "http://qudt.org/vocab/unit/M",
+        "upAxis": "+Z"
+      },
+      {
+        "coordinateType": "cartesian",
+        "dimension": 3,
+        "forwardAxis": "not-applicable",
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:gltf-conversion",
+        "handedness": "right",
+        "id": "urn:vao:fixture:acousticrooms:frame:gltf",
+        "notes": "glTF +Y-up frame; matrix maps GLB coordinates into the dataset +Z-up frame.",
+        "parentFrameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "transformToParent": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "unit": "http://qudt.org/vocab/unit/M",
+        "upAxis": "+Y"
+      },
+      {
+        "coordinateType": "cartesian",
+        "dimension": 3,
+        "forwardAxis": "+Z",
+        "handedness": "right",
+        "id": "urn:vao:test:cuntz-positiv:frame:model",
+        "notes": "glTF runtime frame; source model scale is not a verified physical survey.",
+        "unit": "http://qudt.org/vocab/unit/M",
+        "upAxis": "+Y"
+      }
+    ],
+    "geometryBindings": [
+      {
+        "id": "urn:vao:fixture:acousticrooms:geometry-binding:simulation",
+        "logicalAssetId": "urn:vao:fixture:acousticrooms:asset:room-geometry",
+        "role": "acoustic-simulation",
+        "subjectId": "urn:vao:fixture:acousticrooms:space"
+      },
+      {
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:gltf-conversion",
+        "id": "urn:vao:fixture:acousticrooms:geometry-binding:visual",
+        "logicalAssetId": "urn:vao:fixture:acousticrooms:asset:room-geometry",
+        "role": "runtime-visual",
+        "subjectId": "urn:vao:fixture:acousticrooms:space"
+      },
+      {
+        "generatedById": "urn:vao:test:cuntz-positiv:activity:fixture-integration",
+        "id": "urn:vao:test:cuntz-positiv:geometry-binding:model",
+        "logicalAssetId": "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+        "role": "runtime-visual",
+        "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+      }
+    ],
+    "materialModels": [
+      {
+        "absorption": [
+          0.08,
+          0.1,
+          0.13,
+          0.17
+        ],
+        "bandAxis": {
+          "centerFrequenciesHz": [
+            125,
+            250,
+            500,
+            1000
+          ],
+          "lowerEdgesHz": [
+            88.4,
+            176.8,
+            353.6,
+            707.1
+          ],
+          "scale": "octave",
+          "upperEdgesHz": [
+            176.8,
+            353.6,
+            707.1,
+            1414.2
+          ],
+          "weighting": "none"
+        },
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:simulation",
+        "id": "urn:vao:fixture:acousticrooms:material-model:synthetic-wall",
+        "incidence": "random",
+        "materialEntityId": "urn:vao:fixture:acousticrooms:material:synthetic-wall",
+        "representationStatus": "simulated",
+        "scattering": [
+          0.1,
+          0.12,
+          0.15,
+          0.2
+        ],
+        "sidedness": "one-sided"
+      }
+    ],
+    "measurements": [
+      {
+        "id": "urn:vao:fixture:acousticrooms:measurement:S000-R0011",
+        "receiverId": "urn:vao:fixture:acousticrooms:receiver:11",
+        "receiverPoseId": "urn:vao:fixture:acousticrooms:pose:receiver:11",
+        "sourceId": "urn:vao:fixture:acousticrooms:source:0",
+        "sourcePoseId": "urn:vao:fixture:acousticrooms:pose:source:0",
+        "spaceId": "urn:vao:fixture:acousticrooms:space"
+      }
+    ],
+    "metricSets": [
+      {
+        "bandAxis": {
+          "centerFrequenciesHz": [
+            125,
+            250,
+            500,
+            1000
+          ],
+          "lowerEdgesHz": [
+            88.4,
+            176.8,
+            353.6,
+            707.1
+          ],
+          "scale": "octave",
+          "upperEdgesHz": [
+            176.8,
+            353.6,
+            707.1,
+            1414.2
+          ],
+          "weighting": "none"
+        },
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:simulation",
+        "id": "urn:vao:fixture:acousticrooms:metric-set:synthetic-t20",
+        "inputIds": [
+          "urn:vao:fixture:acousticrooms:response-set"
+        ],
+        "method": "Synthetic regression values; not an empirical ISO conformity claim",
+        "metrics": [
+          {
+            "property": "https://w3id.org/modavis/vao/vocab/acoustic-metric/reverberation-time-t20",
+            "receiverId": "urn:vao:fixture:acousticrooms:receiver:11",
+            "sourceId": "urn:vao:fixture:acousticrooms:source:0",
+            "status": "simulated",
+            "uncertainty": {
+              "kind": "standard",
+              "method": "simulation-model uncertainty estimate",
+              "unit": "http://qudt.org/vocab/unit/SEC",
+              "value": [
+                0.05,
+                0.05,
+                0.04,
+                0.04
+              ]
+            },
+            "unit": "http://qudt.org/vocab/unit/SEC",
+            "values": [
+              1.42,
+              1.31,
+              1.18,
+              1.04
+            ]
+          }
+        ],
+        "standard": "urn:iso:std:iso:3382:-2:ed-1",
+        "standardEdition": "ISO 3382-2:2008",
+        "subjectIds": [
+          "urn:vao:fixture:acousticrooms:space"
+        ]
+      }
+    ],
+    "poses": [
+      {
+        "frameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "id": "urn:vao:fixture:acousticrooms:pose:source:0",
+        "interpolation": "none",
+        "position": [
+          2.3496,
+          0.7269,
+          1.353
+        ],
+        "subjectId": "urn:vao:fixture:acousticrooms:source:0"
+      },
+      {
+        "frameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "id": "urn:vao:fixture:acousticrooms:pose:receiver:11",
+        "interpolation": "none",
+        "position": [
+          2.8176,
+          0.9871,
+          1.4665
+        ],
+        "subjectId": "urn:vao:fixture:acousticrooms:receiver:11"
+      },
+      {
+        "frameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "generatedById": "urn:vao:test:cuntz-positiv:activity:fixture-integration",
+        "id": "urn:vao:test:cuntz-positiv:pose:instrument",
+        "interpolation": "none",
+        "localFrameId": "urn:vao:test:cuntz-positiv:frame:model",
+        "orientationXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "position": [
+          2.3496,
+          0.7269,
+          0.0
+        ],
+        "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+      }
+    ],
+    "renderConfigurations": [
+      {
+        "coordinateFrameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "fallbackIds": [],
+        "features": [
+          {
+            "feature": "early-reflections",
+            "inputIds": [
+              "urn:vao:fixture:acousticrooms:response-set"
+            ],
+            "mode": "response-field"
+          },
+          {
+            "feature": "late-reverberation",
+            "inputIds": [
+              "urn:vao:fixture:acousticrooms:response-set"
+            ],
+            "mode": "response-field"
+          }
+        ],
+        "id": "urn:vao:fixture:acousticrooms:renderer:fixed-convolution",
+        "inputIds": [
+          "urn:vao:fixture:acousticrooms:response-set"
+        ],
+        "listener": {
+          "coordinateFrameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+          "mode": "fixed",
+          "poseId": "urn:vao:fixture:acousticrooms:pose:receiver:11",
+          "receiverId": "urn:vao:fixture:acousticrooms:receiver:11"
+        },
+        "outsideDomainPolicy": "reject",
+        "sceneId": "urn:vao:fixture:acousticrooms:audio-scene",
+        "strategy": "static-playback",
+        "validDomainId": "urn:vao:fixture:acousticrooms:space"
+      }
+    ],
+    "responseSets": [
+      {
+        "generatedById": "urn:vao:fixture:acousticrooms:activity:simulation",
+        "id": "urn:vao:fixture:acousticrooms:response-set",
+        "logicalAssetId": "urn:vao:fixture:acousticrooms:asset:rir",
+        "measurementIds": [
+          "urn:vao:fixture:acousticrooms:measurement:S000-R0011"
+        ],
+        "qualityFlags": [
+          "source dataset states that distributed RIRs are normalized; the exact normalization convention is not stated"
+        ],
+        "representationStatus": "hybrid",
+        "responseEntityId": "urn:vao:fixture:acousticrooms:response",
+        "responseKind": "rir"
+      }
+    ]
+  },
+  "assetGroups": [
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": false,
+        "priority": 100
+      },
+      "dependsOnGroupIds": [],
+      "id": "urn:vao:fixture:acousticrooms:group:complete-scene",
+      "labels": {
+        "en": "Complete embedded visual-acoustic fixture"
+      },
+      "materializesProfileIds": [],
+      "qualityTier": "bootstrap",
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:geometry:obj",
+        "urn:vao:fixture:acousticrooms:realization:geometry:glb",
+        "urn:vao:fixture:acousticrooms:realization:rir:wav",
+        "urn:vao:fixture:acousticrooms:realization:pair-metadata",
+        "urn:vao:fixture:acousticrooms:realization:simulation-config",
+        "urn:vao:fixture:acousticrooms:realization:license",
+        "urn:vao:fixture:acousticrooms:realization:readme",
+        "urn:vao:fixture:acousticrooms:realization:fixture-provenance"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/visual-acoustic-scene"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "visual-acoustic-fixture",
+      "totalByteSize": 1722650,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": false,
+        "priority": 100
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:fixture:acousticrooms:group:complete-scene"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:unity-support",
+      "labels": {
+        "en": "Cuntz Unity model, animation, and evidence"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/multimodal/0.4.0",
+        "https://w3id.org/modavis/vao/profile/physical-instrument/0.4.0",
+        "https://w3id.org/modavis/vao/profile/deterministic-runtime/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+        "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+        "urn:vao:test:cuntz-positiv:realization:model:keyboard",
+        "urn:vao:test:cuntz-positiv:realization:timbre-report"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/multimodal-synchronization",
+        "https://w3id.org/modavis/vao/vocab/capability/physical-system-topology",
+        "https://w3id.org/modavis/vao/vocab/capability/deterministic-render-trace"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-unity-support",
+      "totalByteSize": 67449107,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": true,
+        "priority": 80
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:test:cuntz-positiv:group:unity-support"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:samples:ged",
+      "labels": {
+        "en": "Gedackt 8′ sampled compass"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/playable/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:ged:60"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-stop-samples",
+      "totalByteSize": 12760052,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": true,
+        "priority": 80
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:test:cuntz-positiv:group:unity-support"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:samples:princ4",
+      "labels": {
+        "en": "Principal 4′ sampled compass"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/playable/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:princ4:60"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-stop-samples",
+      "totalByteSize": 15751636,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": true,
+        "priority": 80
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:test:cuntz-positiv:group:unity-support"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:samples:princ2",
+      "labels": {
+        "en": "Principal 2′ sampled compass"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/playable/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:princ2:60"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-stop-samples",
+      "totalByteSize": 13936228,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": true,
+        "priority": 80
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:test:cuntz-positiv:group:unity-support"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:samples:qui223",
+      "labels": {
+        "en": "Quint 2 2/3′ sampled compass"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/playable/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:qui223:60"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-stop-samples",
+      "totalByteSize": 15418628,
+      "type": "AssetGroup"
+    },
+    {
+      "availability": "offline-required",
+      "cachePolicy": {
+        "evictable": true,
+        "priority": 80
+      },
+      "dependsOnGroupIds": [
+        "urn:vao:test:cuntz-positiv:group:unity-support"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:group:samples:reg8",
+      "labels": {
+        "en": "Regal 8′ sampled compass"
+      },
+      "materializesProfileIds": [
+        "https://w3id.org/modavis/vao/profile/playable/0.4.0"
+      ],
+      "qualityTier": "production",
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:reg8:60"
+      ],
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback"
+      ],
+      "selectionPolicy": "independent",
+      "selectionSetId": "cuntz-stop-samples",
+      "totalByteSize": 12559972,
+      "type": "AssetGroup"
+    }
+  ],
+  "captureDocumentation": {
+    "captureStates": [],
+    "derivationMaps": [],
+    "eventAlignments": [],
+    "takeSets": []
+  },
+  "conformsTo": [
+    "https://w3id.org/modavis/vao/profile/core/0.4.0",
+    "https://w3id.org/modavis/vao/profile/dynamic-delivery/0.4.0",
+    "https://w3id.org/modavis/vao/profile/spatial/0.4.0",
+    "https://w3id.org/modavis/vao/profile/acoustics/0.4.0",
+    "https://w3id.org/modavis/vao/profile/scientific/0.4.0",
+    "https://w3id.org/modavis/vao/profile/playable/0.4.0",
+    "https://w3id.org/modavis/vao/profile/multimodal/0.4.0",
+    "https://w3id.org/modavis/vao/profile/physical-instrument/0.4.0",
+    "https://w3id.org/modavis/vao/profile/deterministic-runtime/0.4.0"
+  ],
+  "createdAt": "2026-08-25T22:00:00Z",
+  "description": {
+    "en": "Rights-restricted local VAO 0.4.0 compact integration fixture: five representative Cuntz samples, a key-addressable Unity model, linked MIDI and animation evidence, the current OrgRec timbre report, and the AcousticRooms S000/R0011 hybrid virtual acoustic environment."
+  },
+  "discovery": {
+    "contributorAgentIds": [
+      "urn:vao:test:cuntz-positiv:agent:builder"
+    ],
+    "creatorAgentIds": [
+      "urn:vao:agent:vao04-migrator"
+    ],
+    "fundingReferences": [],
+    "instrumentIdentifiers": [
+      "SOURCE:musixplora:4010243"
+    ],
+    "relatedIdentifiers": [],
+    "resourceType": "Dataset",
+    "subjects": [
+      {
+        "subject": "Cuntz Positiv"
+      },
+      {
+        "subject": "Unity VAO interoperability"
+      }
+    ]
+  },
+  "distributions": [],
+  "entities": [
+    {
+      "id": "urn:vao:fixture:acousticrooms:space",
+      "kind": "space",
+      "labels": {
+        "en": "AcousticRooms Bathrooms_idx_0"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/vocab/sourceDataset": "https://github.com/facebookresearch/AcousticRooms/tree/3c87318a0188e1b441fc75846d54b487ca215fbb"
+      },
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#Space"
+      ]
+    },
+    {
+      "id": "urn:vao:fixture:acousticrooms:material:synthetic-wall",
+      "kind": "material",
+      "labels": {
+        "en": "Synthetic wall material for schema regression"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/vocab/evidenceLimitation": "Authored test values only; not a measured material characterization"
+      },
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#AcousticMaterial"
+      ]
+    },
+    {
+      "id": "urn:vao:fixture:acousticrooms:source:0",
+      "kind": "acousticEmitter",
+      "labels": {
+        "en": "AcousticRooms Source_0"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/vocab/directivity": "omnidirectional",
+        "https://w3id.org/modavis/vao/vocab/sourceIdentifier": "417ba642-8ad8-47b5-916e-163f6680645a"
+      },
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#AcousticEmitter"
+      ]
+    },
+    {
+      "id": "urn:vao:fixture:acousticrooms:receiver:11",
+      "kind": "acousticReceiver",
+      "labels": {
+        "en": "AcousticRooms rec_11"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/vocab/directivity": "omnidirectional",
+        "https://w3id.org/modavis/vao/vocab/sourceIdentifier": "58b07d52-3e5d-445e-9b76-07ea6882c899"
+      },
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#AcousticReceiver"
+      ]
+    },
+    {
+      "id": "urn:vao:fixture:acousticrooms:response",
+      "kind": "acousticResponse",
+      "labels": {
+        "en": "Hybrid simulated S000_R0011 room impulse response"
+      },
+      "properties": {},
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#AcousticResponseSet"
+      ]
+    },
+    {
+      "id": "urn:vao:fixture:acousticrooms:scene",
+      "kind": "audioScene",
+      "labels": {
+        "en": "Fixed-pair visual-acoustic scene"
+      },
+      "properties": {},
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#SpatialAudioScene"
+      ]
+    },
+    {
+      "externalIdentifiers": [
+        {
+          "scheme": "SOURCE:musixplora",
+          "value": "4010243"
+        }
+      ],
+      "id": "urn:vao:test:cuntz-positiv:instrument",
+      "kind": "instrument",
+      "labels": {
+        "en": "Cuntz Positiv (source record 4010243)"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#identityStatus": "source-bound; canonical MODAVIS identity unresolved"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#PipeOrgan"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:manual",
+      "kind": "component",
+      "labels": {
+        "en": "Observed 45-key manual"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#observedMidiKeys": [
+          36,
+          38,
+          40,
+          41,
+          43,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84
+        ]
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganKeyboard"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:interaction",
+      "kind": "interaction",
+      "labels": {
+        "en": "Cuntz sampled-organ controls"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#controlDomain": "45 observed keys and five independent stop toggles",
+        "https://w3id.org/modavis/vao/ontology#controlProtocol": "MIDI 1.0 and MIDI 2.0",
+        "https://w3id.org/modavis/vao/ontology#interactionType": "https://w3id.org/modavis/vao/vocab/interaction/stateful-control",
+        "https://w3id.org/modavis/vao/ontology#timingPolicy": "event-triggered sampled playback with a 0.3-second note-off envelope prior"
+      },
+      "types": [
+        "https://w3id.org/modavis/vao/ontology#Interaction"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:stop:ged",
+      "kind": "component",
+      "labels": {
+        "en": "Gedackt 8′"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#soundingSemitoneOffsetPrior": 0,
+        "https://w3id.org/modavis/vao/ontology#sourceToken": "ged"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganStop"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:stop:princ4",
+      "kind": "component",
+      "labels": {
+        "en": "Principal 4′"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#soundingSemitoneOffsetPrior": 12,
+        "https://w3id.org/modavis/vao/ontology#sourceToken": "princ4"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganStop"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:stop:princ2",
+      "kind": "component",
+      "labels": {
+        "en": "Principal 2′"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#soundingSemitoneOffsetPrior": 24,
+        "https://w3id.org/modavis/vao/ontology#sourceToken": "princ2"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganStop"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:stop:qui223",
+      "kind": "component",
+      "labels": {
+        "en": "Quint 2 2/3′"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#soundingSemitoneOffsetPrior": 19,
+        "https://w3id.org/modavis/vao/ontology#sourceToken": "qui223"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganStop"
+      ]
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:stop:reg8",
+      "kind": "component",
+      "labels": {
+        "en": "Regal 8′"
+      },
+      "properties": {
+        "https://w3id.org/modavis/vao/ontology#soundingSemitoneOffsetPrior": 0,
+        "https://w3id.org/modavis/vao/ontology#sourceToken": "reg8"
+      },
+      "types": [
+        "https://w3id.org/modavis/ontology/organ#OrganStop"
+      ]
+    }
+  ],
+  "focusEntityIds": [
+    "urn:vao:test:cuntz-positiv:instrument",
+    "urn:vao:fixture:acousticrooms:space"
+  ],
+  "formatVersion": "0.4.0",
+  "id": "urn:vao:test:cuntz-positiv",
+  "integrity": {
+    "algorithm": "sha256",
+    "carrierDescriptor": "META-INF/vao-carrier.json",
+    "manifestDigestLocation": "external-release-and-carrier-descriptors"
+  },
+  "interactionModel": {
+    "controls": [
+      {
+        "controlBehavior": "gate",
+        "entityId": "urn:vao:test:cuntz-positiv:manual",
+        "id": "urn:vao:test:cuntz-positiv:control:key",
+        "labels": {
+          "en": "Manual key"
+        },
+        "maximumValue": 84,
+        "minimumValue": 36,
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "integer"
+      },
+      {
+        "controlBehavior": "toggle",
+        "defaultValue": false,
+        "entityId": "urn:vao:test:cuntz-positiv:stop:ged",
+        "id": "urn:vao:test:cuntz-positiv:control:stop:ged",
+        "labels": {
+          "en": "Gedackt 8′"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "boolean"
+      },
+      {
+        "controlBehavior": "toggle",
+        "defaultValue": false,
+        "entityId": "urn:vao:test:cuntz-positiv:stop:princ4",
+        "id": "urn:vao:test:cuntz-positiv:control:stop:princ4",
+        "labels": {
+          "en": "Principal 4′"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "boolean"
+      },
+      {
+        "controlBehavior": "toggle",
+        "defaultValue": false,
+        "entityId": "urn:vao:test:cuntz-positiv:stop:princ2",
+        "id": "urn:vao:test:cuntz-positiv:control:stop:princ2",
+        "labels": {
+          "en": "Principal 2′"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "boolean"
+      },
+      {
+        "controlBehavior": "toggle",
+        "defaultValue": false,
+        "entityId": "urn:vao:test:cuntz-positiv:stop:qui223",
+        "id": "urn:vao:test:cuntz-positiv:control:stop:qui223",
+        "labels": {
+          "en": "Quint 2 2/3′"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "boolean"
+      },
+      {
+        "controlBehavior": "toggle",
+        "defaultValue": false,
+        "entityId": "urn:vao:test:cuntz-positiv:stop:reg8",
+        "id": "urn:vao:test:cuntz-positiv:control:stop:reg8",
+        "labels": {
+          "en": "Regal 8′"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueType": "boolean"
+      }
+    ],
+    "eventTypes": [
+      {
+        "eventKind": "note-on",
+        "id": "urn:vao:test:cuntz-positiv:event:note-on",
+        "labels": {
+          "en": "Note on"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueDomain": "midi-key"
+      },
+      {
+        "eventKind": "note-off",
+        "id": "urn:vao:test:cuntz-positiv:event:note-off",
+        "labels": {
+          "en": "Note off"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueDomain": "midi-key"
+      },
+      {
+        "eventKind": "control-on",
+        "id": "urn:vao:test:cuntz-positiv:event:control-on",
+        "labels": {
+          "en": "Stop toggle"
+        },
+        "source": "documented",
+        "status": "accepted",
+        "valueDomain": "boolean"
+      }
+    ],
+    "executionSemantics": {
+      "actionExecution": "execution-group-then-array-order",
+      "lateEventPolicy": "reject",
+      "maximumMicrosteps": 10000,
+      "maximumVoices": 1024,
+      "reentrancyPolicy": "queue",
+      "runToCompletion": true,
+      "simultaneousEventOrder": "priority-then-event-id",
+      "timeResolution": {
+        "unit": "http://qudt.org/vocab/unit/MilliSEC",
+        "value": 1
+      },
+      "timestampOrder": "ascending",
+      "transitionEvaluation": "snapshot",
+      "voiceAllocation": "lowest-free-then-oldest"
+    },
+    "processModels": [],
+    "protocolBindings": [
+      {
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:key",
+        "dataNumberingBase": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:key-midi1",
+        "messageType": "note",
+        "number": 60,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "channel": 0,
+        "channelNumberingBase": 0,
+        "controlId": "urn:vao:test:cuntz-positiv:control:key",
+        "dataNumberingBase": 0,
+        "dataResolutionBits": 32,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "functionBlock": 0,
+        "id": "urn:vao:test:cuntz-positiv:binding:key-midi2",
+        "jrTimestamp": true,
+        "messageType": "note",
+        "number": 60,
+        "protocol": "MIDI-2.0",
+        "source": "documented",
+        "status": "accepted",
+        "umpGroup": 0,
+        "umpMessageType": 4
+      },
+      {
+        "activationValue": 1,
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:ged",
+        "dataNumberingBase": 0,
+        "deactivationValue": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:stop:ged",
+        "messageType": "program-change",
+        "number": 1,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "activationValue": 1,
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:princ4",
+        "dataNumberingBase": 0,
+        "deactivationValue": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:stop:princ4",
+        "messageType": "program-change",
+        "number": 2,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "activationValue": 1,
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:princ2",
+        "dataNumberingBase": 0,
+        "deactivationValue": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:stop:princ2",
+        "messageType": "program-change",
+        "number": 3,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "activationValue": 1,
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:qui223",
+        "dataNumberingBase": 0,
+        "deactivationValue": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:stop:qui223",
+        "messageType": "program-change",
+        "number": 4,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "activationValue": 1,
+        "channel": 1,
+        "channelNumberingBase": 1,
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:reg8",
+        "dataNumberingBase": 0,
+        "deactivationValue": 0,
+        "direction": "input",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:binding:stop:reg8",
+        "messageType": "program-change",
+        "number": 5,
+        "protocol": "MIDI-1.0",
+        "source": "documented",
+        "status": "accepted"
+      }
+    ],
+    "randomSources": [],
+    "renderBindings": [
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:ged",
+            "value": true
+          }
+        ],
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:render:ged",
+        "sampleMappingIds": [
+          "urn:vao:test:cuntz-positiv:mapping:ged:60"
+        ],
+        "selectionPolicy": "state-dependent",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ4",
+            "value": true
+          }
+        ],
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:render:princ4",
+        "sampleMappingIds": [
+          "urn:vao:test:cuntz-positiv:mapping:princ4:60"
+        ],
+        "selectionPolicy": "state-dependent",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ2",
+            "value": true
+          }
+        ],
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:render:princ2",
+        "sampleMappingIds": [
+          "urn:vao:test:cuntz-positiv:mapping:princ2:60"
+        ],
+        "selectionPolicy": "state-dependent",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:qui223",
+            "value": true
+          }
+        ],
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:render:qui223",
+        "sampleMappingIds": [
+          "urn:vao:test:cuntz-positiv:mapping:qui223:60"
+        ],
+        "selectionPolicy": "state-dependent",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:reg8",
+            "value": true
+          }
+        ],
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:note-on",
+        "id": "urn:vao:test:cuntz-positiv:render:reg8",
+        "sampleMappingIds": [
+          "urn:vao:test:cuntz-positiv:mapping:reg8:60"
+        ],
+        "selectionPolicy": "state-dependent",
+        "source": "documented",
+        "status": "accepted"
+      }
+    ],
+    "routingRules": [
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:ged",
+            "value": true
+          }
+        ],
+        "id": "urn:vao:test:cuntz-positiv:route:ged",
+        "inputKeyMeaning": "played-key",
+        "inputRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "keyTransform": {
+          "kind": "transpose",
+          "semitoneOffset": 0
+        },
+        "outputKeyMeaning": "sounding-key",
+        "routingBehavior": "activates",
+        "source": "documented",
+        "sourceControlId": "urn:vao:test:cuntz-positiv:control:key",
+        "sourceEntityId": "urn:vao:test:cuntz-positiv:manual",
+        "status": "accepted",
+        "targetEntityId": "urn:vao:test:cuntz-positiv:stop:ged"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ4",
+            "value": true
+          }
+        ],
+        "id": "urn:vao:test:cuntz-positiv:route:princ4",
+        "inputKeyMeaning": "played-key",
+        "inputRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "keyTransform": {
+          "kind": "transpose",
+          "semitoneOffset": 12
+        },
+        "outputKeyMeaning": "sounding-key",
+        "routingBehavior": "activates",
+        "source": "documented",
+        "sourceControlId": "urn:vao:test:cuntz-positiv:control:key",
+        "sourceEntityId": "urn:vao:test:cuntz-positiv:manual",
+        "status": "accepted",
+        "targetEntityId": "urn:vao:test:cuntz-positiv:stop:princ4"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ2",
+            "value": true
+          }
+        ],
+        "id": "urn:vao:test:cuntz-positiv:route:princ2",
+        "inputKeyMeaning": "played-key",
+        "inputRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "keyTransform": {
+          "kind": "transpose",
+          "semitoneOffset": 24
+        },
+        "outputKeyMeaning": "sounding-key",
+        "routingBehavior": "activates",
+        "source": "documented",
+        "sourceControlId": "urn:vao:test:cuntz-positiv:control:key",
+        "sourceEntityId": "urn:vao:test:cuntz-positiv:manual",
+        "status": "accepted",
+        "targetEntityId": "urn:vao:test:cuntz-positiv:stop:princ2"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:qui223",
+            "value": true
+          }
+        ],
+        "id": "urn:vao:test:cuntz-positiv:route:qui223",
+        "inputKeyMeaning": "played-key",
+        "inputRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "keyTransform": {
+          "kind": "transpose",
+          "semitoneOffset": 19
+        },
+        "outputKeyMeaning": "sounding-key",
+        "routingBehavior": "activates",
+        "source": "documented",
+        "sourceControlId": "urn:vao:test:cuntz-positiv:control:key",
+        "sourceEntityId": "urn:vao:test:cuntz-positiv:manual",
+        "status": "accepted",
+        "targetEntityId": "urn:vao:test:cuntz-positiv:stop:qui223"
+      },
+      {
+        "conditions": [
+          {
+            "operator": "equals",
+            "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:reg8",
+            "value": true
+          }
+        ],
+        "id": "urn:vao:test:cuntz-positiv:route:reg8",
+        "inputKeyMeaning": "played-key",
+        "inputRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "keyTransform": {
+          "kind": "transpose",
+          "semitoneOffset": 0
+        },
+        "outputKeyMeaning": "sounding-key",
+        "routingBehavior": "activates",
+        "source": "documented",
+        "sourceControlId": "urn:vao:test:cuntz-positiv:control:key",
+        "sourceEntityId": "urn:vao:test:cuntz-positiv:manual",
+        "status": "accepted",
+        "targetEntityId": "urn:vao:test:cuntz-positiv:stop:reg8"
+      }
+    ],
+    "stateVariables": [
+      {
+        "defaultValue": false,
+        "id": "urn:vao:test:cuntz-positiv:state:stop:ged",
+        "labels": {
+          "en": "Gedackt 8′ enabled"
+        },
+        "persistence": "latched",
+        "source": "documented",
+        "status": "accepted",
+        "subjectEntityId": "urn:vao:test:cuntz-positiv:stop:ged",
+        "valueType": "boolean"
+      },
+      {
+        "defaultValue": false,
+        "id": "urn:vao:test:cuntz-positiv:state:stop:princ4",
+        "labels": {
+          "en": "Principal 4′ enabled"
+        },
+        "persistence": "latched",
+        "source": "documented",
+        "status": "accepted",
+        "subjectEntityId": "urn:vao:test:cuntz-positiv:stop:princ4",
+        "valueType": "boolean"
+      },
+      {
+        "defaultValue": false,
+        "id": "urn:vao:test:cuntz-positiv:state:stop:princ2",
+        "labels": {
+          "en": "Principal 2′ enabled"
+        },
+        "persistence": "latched",
+        "source": "documented",
+        "status": "accepted",
+        "subjectEntityId": "urn:vao:test:cuntz-positiv:stop:princ2",
+        "valueType": "boolean"
+      },
+      {
+        "defaultValue": false,
+        "id": "urn:vao:test:cuntz-positiv:state:stop:qui223",
+        "labels": {
+          "en": "Quint 2 2/3′ enabled"
+        },
+        "persistence": "latched",
+        "source": "documented",
+        "status": "accepted",
+        "subjectEntityId": "urn:vao:test:cuntz-positiv:stop:qui223",
+        "valueType": "boolean"
+      },
+      {
+        "defaultValue": false,
+        "id": "urn:vao:test:cuntz-positiv:state:stop:reg8",
+        "labels": {
+          "en": "Regal 8′ enabled"
+        },
+        "persistence": "latched",
+        "source": "documented",
+        "status": "accepted",
+        "subjectEntityId": "urn:vao:test:cuntz-positiv:stop:reg8",
+        "valueType": "boolean"
+      }
+    ],
+    "timingConstraints": [],
+    "transferFunctions": [],
+    "transitions": [
+      {
+        "actions": [
+          {
+            "operation": "toggle-state",
+            "targetId": "urn:vao:test:cuntz-positiv:state:stop:ged"
+          }
+        ],
+        "atomic": true,
+        "conflictPolicy": "last-event-wins",
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:ged",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:transition:stop:ged",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "actions": [
+          {
+            "operation": "toggle-state",
+            "targetId": "urn:vao:test:cuntz-positiv:state:stop:princ4"
+          }
+        ],
+        "atomic": true,
+        "conflictPolicy": "last-event-wins",
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:princ4",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:transition:stop:princ4",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "actions": [
+          {
+            "operation": "toggle-state",
+            "targetId": "urn:vao:test:cuntz-positiv:state:stop:princ2"
+          }
+        ],
+        "atomic": true,
+        "conflictPolicy": "last-event-wins",
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:princ2",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:transition:stop:princ2",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "actions": [
+          {
+            "operation": "toggle-state",
+            "targetId": "urn:vao:test:cuntz-positiv:state:stop:qui223"
+          }
+        ],
+        "atomic": true,
+        "conflictPolicy": "last-event-wins",
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:qui223",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:transition:stop:qui223",
+        "source": "documented",
+        "status": "accepted"
+      },
+      {
+        "actions": [
+          {
+            "operation": "toggle-state",
+            "targetId": "urn:vao:test:cuntz-positiv:state:stop:reg8"
+          }
+        ],
+        "atomic": true,
+        "conflictPolicy": "last-event-wins",
+        "controlId": "urn:vao:test:cuntz-positiv:control:stop:reg8",
+        "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+        "id": "urn:vao:test:cuntz-positiv:transition:stop:reg8",
+        "source": "documented",
+        "status": "accepted"
+      }
+    ]
+  },
+  "logicalAssets": [
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:room-geometry",
+      "labels": {
+        "en": "Bathrooms_idx_0 room geometry"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:geometry:obj",
+        "urn:vao:fixture:acousticrooms:realization:geometry:glb"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/spatial-model",
+        "https://w3id.org/modavis/vao/vocab/asset-role/three-dimensional-model"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:response",
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:rir",
+      "labels": {
+        "en": "S000_R0011 hybrid room impulse response"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:rir:wav"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/impulse-response",
+        "https://w3id.org/modavis/vao/vocab/asset-role/spatial-listening-audio"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:source:0",
+        "urn:vao:fixture:acousticrooms:receiver:11"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:pair-metadata",
+      "labels": {
+        "en": "Exact source/receiver pair metadata"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:pair-metadata"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/acoustic-scene-metadata",
+        "https://w3id.org/modavis/vao/vocab/asset-role/source-evidence"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:simulation-config",
+      "labels": {
+        "en": "AcousticRooms simulation configuration"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:simulation-config"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/acoustic-scene-metadata",
+        "https://w3id.org/modavis/vao/vocab/asset-role/source-evidence"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:license",
+      "labels": {
+        "en": "AcousticRooms CC BY 4.0 license"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:license"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/source-evidence"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:readme",
+      "labels": {
+        "en": "AcousticRooms source README"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:readme"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/source-evidence"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:fixture:acousticrooms:space"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:asset:fixture-provenance",
+      "labels": {
+        "en": "Fixture selection and conversion provenance"
+      },
+      "realizationIds": [
+        "urn:vao:fixture:acousticrooms:realization:fixture-provenance"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/paradata-record"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:stop:ged"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:sample:ged:60",
+      "labels": {
+        "en": "Gedackt 8′ MIDI 60 sample"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:ged:60"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/instrument-sample",
+        "https://w3id.org/modavis/vao/vocab/asset-role/audio-master"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:stop:princ4"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:sample:princ4:60",
+      "labels": {
+        "en": "Principal 4′ MIDI 60 sample"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:princ4:60"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/instrument-sample",
+        "https://w3id.org/modavis/vao/vocab/asset-role/audio-master"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:stop:princ2"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:sample:princ2:60",
+      "labels": {
+        "en": "Principal 2′ MIDI 60 sample"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:princ2:60"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/instrument-sample",
+        "https://w3id.org/modavis/vao/vocab/asset-role/audio-master"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:stop:qui223"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:sample:qui223:60",
+      "labels": {
+        "en": "Quint 2 2/3′ MIDI 60 sample"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:qui223:60"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/instrument-sample",
+        "https://w3id.org/modavis/vao/vocab/asset-role/audio-master"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:stop:reg8"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:sample:reg8:60",
+      "labels": {
+        "en": "Regal 8′ MIDI 60 sample"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:sample:reg8:60"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/instrument-sample",
+        "https://w3id.org/modavis/vao/vocab/asset-role/audio-master"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:midi:pachelbel",
+      "labels": {
+        "en": "Pachelbel MIDI performance source"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:midi:pachelbel"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/capture-event-log",
+        "https://w3id.org/modavis/vao/vocab/asset-role/animation-source"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:manual"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:animation:pachelbel",
+      "labels": {
+        "en": "Legacy Unity key animation"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:animation:pachelbel"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/animation",
+        "https://w3id.org/modavis/vao/vocab/asset-role/source-evidence"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:manual"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+      "labels": {
+        "en": "Cuntz Positiv key-addressable Unity FBX"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:model:keyboard"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/three-dimensional-model",
+        "https://w3id.org/modavis/vao/vocab/asset-role/spatial-model"
+      ],
+      "type": "LogicalAsset"
+    },
+    {
+      "aboutEntityIds": [
+        "urn:vao:test:cuntz-positiv:instrument"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:asset:timbre-report",
+      "labels": {
+        "en": "OrgRec full-corpus timbre validation"
+      },
+      "properties": {},
+      "realizationIds": [
+        "urn:vao:test:cuntz-positiv:realization:timbre-report"
+      ],
+      "roles": [
+        "https://w3id.org/modavis/vao/vocab/asset-role/analysis-result"
+      ],
+      "type": "LogicalAsset"
+    }
+  ],
+  "materializableProfiles": [],
+  "modavisBinding": {
+    "mappingIRI": "https://w3id.org/modavis/vao/0.4.0/modavis-mapping",
+    "mappingVersion": "0.4.0",
+    "notes": "Final co-release binding to the immutable MODAVIS Ontology Network 0.1.0 contract.",
+    "ontologyIRI": "https://w3id.org/modavis/ontology",
+    "ontologyStatus": "released",
+    "ontologyVersion": "0.1.0",
+    "ontologyVersionIRI": "https://w3id.org/modavis/ontology/0.1.0"
+  },
+  "modifiedAt": "2026-08-25T22:00:00Z",
+  "multimodal": {
+    "annotations": [
+      {
+        "activityId": "urn:vao:test:cuntz-positiv:activity:fixture-integration",
+        "body": {
+          "language": "en",
+          "value": "MIDI note gates drive keyboard-key X rotation."
+        },
+        "createdAt": "2026-08-25T22:00:00Z",
+        "createdByAgentId": "urn:vao:test:cuntz-positiv:agent:builder",
+        "id": "urn:vao:test:cuntz-positiv:annotation:animation-link",
+        "motivation": "http://www.w3.org/ns/oa#linking",
+        "target": {
+          "eventLocator": "Unity transform curves on M1.<MIDI note>",
+          "trackId": "urn:vao:test:cuntz-positiv:track:animation"
+        }
+      }
+    ],
+    "synchronizationMappings": [],
+    "timebases": [
+      {
+        "id": "urn:vao:test:cuntz-positiv:timebase:midi",
+        "kind": "musical",
+        "origin": 0,
+        "rate": 96,
+        "rateUnit": "https://w3id.org/modavis/vao/vocab/unit/midi-tick-per-quarter-note",
+        "unit": "https://w3id.org/modavis/vao/vocab/unit/midi-tick"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:timebase:animation",
+        "kind": "media",
+        "origin": 0,
+        "rate": 60,
+        "rateUnit": "http://qudt.org/vocab/unit/FRAME-PER-SEC",
+        "unit": "http://qudt.org/vocab/unit/FRAME"
+      }
+    ],
+    "tracks": [
+      {
+        "continuity": "sparse",
+        "id": "urn:vao:test:cuntz-positiv:track:midi",
+        "modality": "event",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+        "timebaseId": "urn:vao:test:cuntz-positiv:timebase:midi"
+      },
+      {
+        "continuity": "continuous",
+        "coordinateFrameId": "urn:vao:test:cuntz-positiv:frame:model",
+        "id": "urn:vao:test:cuntz-positiv:track:animation",
+        "modality": "motion-capture",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+        "timebaseId": "urn:vao:test:cuntz-positiv:timebase:animation"
+      }
+    ]
+  },
+  "physicalSystem": {
+    "actuators": [
+      {
+        "actedOnProperty": "https://w3id.org/modavis/vao/vocab/quantity/sample-voice-state",
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:ged",
+        "id": "urn:vao:test:cuntz-positiv:actuator:ged",
+        "inputPortId": "urn:vao:test:cuntz-positiv:port:stop:ged",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      },
+      {
+        "actedOnProperty": "https://w3id.org/modavis/vao/vocab/quantity/sample-voice-state",
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ4",
+        "id": "urn:vao:test:cuntz-positiv:actuator:princ4",
+        "inputPortId": "urn:vao:test:cuntz-positiv:port:stop:princ4",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      },
+      {
+        "actedOnProperty": "https://w3id.org/modavis/vao/vocab/quantity/sample-voice-state",
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ2",
+        "id": "urn:vao:test:cuntz-positiv:actuator:princ2",
+        "inputPortId": "urn:vao:test:cuntz-positiv:port:stop:princ2",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      },
+      {
+        "actedOnProperty": "https://w3id.org/modavis/vao/vocab/quantity/sample-voice-state",
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:qui223",
+        "id": "urn:vao:test:cuntz-positiv:actuator:qui223",
+        "inputPortId": "urn:vao:test:cuntz-positiv:port:stop:qui223",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      },
+      {
+        "actedOnProperty": "https://w3id.org/modavis/vao/vocab/quantity/sample-voice-state",
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:reg8",
+        "id": "urn:vao:test:cuntz-positiv:actuator:reg8",
+        "inputPortId": "urn:vao:test:cuntz-positiv:port:stop:reg8",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      }
+    ],
+    "components": [
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/manual",
+        "entityId": "urn:vao:test:cuntz-positiv:manual",
+        "id": "urn:vao:test:cuntz-positiv:physical:manual",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:key-output"
+        ]
+      },
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/pipe-rank",
+        "entityId": "urn:vao:test:cuntz-positiv:stop:ged",
+        "id": "urn:vao:test:cuntz-positiv:physical:stop:ged",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:stop:ged"
+        ]
+      },
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/pipe-rank",
+        "entityId": "urn:vao:test:cuntz-positiv:stop:princ4",
+        "id": "urn:vao:test:cuntz-positiv:physical:stop:princ4",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:stop:princ4"
+        ]
+      },
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/pipe-rank",
+        "entityId": "urn:vao:test:cuntz-positiv:stop:princ2",
+        "id": "urn:vao:test:cuntz-positiv:physical:stop:princ2",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:stop:princ2"
+        ]
+      },
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/pipe-rank",
+        "entityId": "urn:vao:test:cuntz-positiv:stop:qui223",
+        "id": "urn:vao:test:cuntz-positiv:physical:stop:qui223",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:stop:qui223"
+        ]
+      },
+      {
+        "componentKind": "https://w3id.org/modavis/vao/vocab/component/pipe-rank",
+        "entityId": "urn:vao:test:cuntz-positiv:stop:reg8",
+        "id": "urn:vao:test:cuntz-positiv:physical:stop:reg8",
+        "portIds": [
+          "urn:vao:test:cuntz-positiv:port:stop:reg8"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "bidirectional": false,
+        "connectionKind": "signal",
+        "id": "urn:vao:test:cuntz-positiv:connection:ged",
+        "sourcePortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "targetPortId": "urn:vao:test:cuntz-positiv:port:stop:ged"
+      },
+      {
+        "bidirectional": false,
+        "connectionKind": "signal",
+        "id": "urn:vao:test:cuntz-positiv:connection:princ4",
+        "sourcePortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "targetPortId": "urn:vao:test:cuntz-positiv:port:stop:princ4"
+      },
+      {
+        "bidirectional": false,
+        "connectionKind": "signal",
+        "id": "urn:vao:test:cuntz-positiv:connection:princ2",
+        "sourcePortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "targetPortId": "urn:vao:test:cuntz-positiv:port:stop:princ2"
+      },
+      {
+        "bidirectional": false,
+        "connectionKind": "signal",
+        "id": "urn:vao:test:cuntz-positiv:connection:qui223",
+        "sourcePortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "targetPortId": "urn:vao:test:cuntz-positiv:port:stop:qui223"
+      },
+      {
+        "bidirectional": false,
+        "connectionKind": "signal",
+        "id": "urn:vao:test:cuntz-positiv:connection:reg8",
+        "sourcePortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "targetPortId": "urn:vao:test:cuntz-positiv:port:stop:reg8"
+      }
+    ],
+    "ports": [
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:manual",
+        "direction": "output",
+        "id": "urn:vao:test:cuntz-positiv:port:key-output",
+        "signalKind": "control"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:ged",
+        "direction": "input",
+        "id": "urn:vao:test:cuntz-positiv:port:stop:ged",
+        "signalKind": "digital"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ4",
+        "direction": "input",
+        "id": "urn:vao:test:cuntz-positiv:port:stop:princ4",
+        "signalKind": "digital"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ2",
+        "direction": "input",
+        "id": "urn:vao:test:cuntz-positiv:port:stop:princ2",
+        "signalKind": "digital"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:qui223",
+        "direction": "input",
+        "id": "urn:vao:test:cuntz-positiv:port:stop:qui223",
+        "signalKind": "digital"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:reg8",
+        "direction": "input",
+        "id": "urn:vao:test:cuntz-positiv:port:stop:reg8",
+        "signalKind": "digital"
+      }
+    ],
+    "sensors": [
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:manual",
+        "id": "urn:vao:test:cuntz-positiv:sensor:midi",
+        "observedProperty": "https://w3id.org/modavis/vao/vocab/quantity/key-state",
+        "outputPortId": "urn:vao:test:cuntz-positiv:port:key-output",
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument"
+      }
+    ],
+    "stateBindings": [
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:ged",
+        "id": "urn:vao:test:cuntz-positiv:state-binding:ged",
+        "stateRole": "simulated",
+        "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:ged"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ4",
+        "id": "urn:vao:test:cuntz-positiv:state-binding:princ4",
+        "stateRole": "simulated",
+        "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ4"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:princ2",
+        "id": "urn:vao:test:cuntz-positiv:state-binding:princ2",
+        "stateRole": "simulated",
+        "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:princ2"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:qui223",
+        "id": "urn:vao:test:cuntz-positiv:state-binding:qui223",
+        "stateRole": "simulated",
+        "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:qui223"
+      },
+      {
+        "componentId": "urn:vao:test:cuntz-positiv:physical:stop:reg8",
+        "id": "urn:vao:test:cuntz-positiv:state-binding:reg8",
+        "stateRole": "simulated",
+        "stateVariableId": "urn:vao:test:cuntz-positiv:state:stop:reg8"
+      }
+    ]
+  },
+  "playable": {
+    "loopPointSets": [],
+    "perspectiveGroups": [],
+    "sampleMappings": [
+      {
+        "controlKeyMeaning": "played-key",
+        "id": "urn:vao:test:cuntz-positiv:mapping:ged:60",
+        "instrumentEntityId": "urn:vao:test:cuntz-positiv:instrument",
+        "keyRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "noteOffPolicy": "envelope",
+        "rankEntityId": "urn:vao:test:cuntz-positiv:stop:ged",
+        "sampleRootKey": 60,
+        "selectionPolicy": "single",
+        "soundingKeyOffset": 0,
+        "source": "documented",
+        "sourceLocator": "4010243_ged_60_0.wav",
+        "status": "accepted",
+        "variantIds": [
+          "urn:vao:test:cuntz-positiv:variant:ged:60"
+        ],
+        "velocitySensitivity": "none"
+      },
+      {
+        "controlKeyMeaning": "played-key",
+        "id": "urn:vao:test:cuntz-positiv:mapping:princ4:60",
+        "instrumentEntityId": "urn:vao:test:cuntz-positiv:instrument",
+        "keyRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "noteOffPolicy": "envelope",
+        "rankEntityId": "urn:vao:test:cuntz-positiv:stop:princ4",
+        "sampleRootKey": 60,
+        "selectionPolicy": "single",
+        "soundingKeyOffset": 12,
+        "source": "documented",
+        "sourceLocator": "4010243_princ4_60.wav",
+        "status": "accepted",
+        "variantIds": [
+          "urn:vao:test:cuntz-positiv:variant:princ4:60"
+        ],
+        "velocitySensitivity": "none"
+      },
+      {
+        "controlKeyMeaning": "played-key",
+        "id": "urn:vao:test:cuntz-positiv:mapping:princ2:60",
+        "instrumentEntityId": "urn:vao:test:cuntz-positiv:instrument",
+        "keyRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "noteOffPolicy": "envelope",
+        "rankEntityId": "urn:vao:test:cuntz-positiv:stop:princ2",
+        "sampleRootKey": 60,
+        "selectionPolicy": "single",
+        "soundingKeyOffset": 24,
+        "source": "documented",
+        "sourceLocator": "4010243_princ2_60.wav",
+        "status": "accepted",
+        "variantIds": [
+          "urn:vao:test:cuntz-positiv:variant:princ2:60"
+        ],
+        "velocitySensitivity": "none"
+      },
+      {
+        "controlKeyMeaning": "played-key",
+        "id": "urn:vao:test:cuntz-positiv:mapping:qui223:60",
+        "instrumentEntityId": "urn:vao:test:cuntz-positiv:instrument",
+        "keyRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "noteOffPolicy": "envelope",
+        "rankEntityId": "urn:vao:test:cuntz-positiv:stop:qui223",
+        "sampleRootKey": 60,
+        "selectionPolicy": "single",
+        "soundingKeyOffset": 19,
+        "source": "documented",
+        "sourceLocator": "4010243_qui223_60.wav",
+        "status": "accepted",
+        "variantIds": [
+          "urn:vao:test:cuntz-positiv:variant:qui223:60"
+        ],
+        "velocitySensitivity": "none"
+      },
+      {
+        "controlKeyMeaning": "played-key",
+        "id": "urn:vao:test:cuntz-positiv:mapping:reg8:60",
+        "instrumentEntityId": "urn:vao:test:cuntz-positiv:instrument",
+        "keyRange": {
+          "maximum": 60,
+          "minimum": 60
+        },
+        "noteOffPolicy": "envelope",
+        "rankEntityId": "urn:vao:test:cuntz-positiv:stop:reg8",
+        "sampleRootKey": 60,
+        "selectionPolicy": "single",
+        "soundingKeyOffset": 0,
+        "source": "documented",
+        "sourceLocator": "4010243_reg8_60.wav",
+        "status": "accepted",
+        "variantIds": [
+          "urn:vao:test:cuntz-positiv:variant:reg8:60"
+        ],
+        "velocitySensitivity": "none"
+      }
+    ],
+    "sampleVariants": [
+      {
+        "id": "urn:vao:test:cuntz-positiv:variant:ged:60",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+        "signalRole": "attack-sustain",
+        "source": "documented",
+        "sourceLocator": "4010243_ged_60_0.wav",
+        "status": "accepted",
+        "trigger": "note-on"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:variant:princ4:60",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+        "signalRole": "attack-sustain",
+        "source": "documented",
+        "sourceLocator": "4010243_princ4_60.wav",
+        "status": "accepted",
+        "trigger": "note-on"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:variant:princ2:60",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+        "signalRole": "attack-sustain",
+        "source": "documented",
+        "sourceLocator": "4010243_princ2_60.wav",
+        "status": "accepted",
+        "trigger": "note-on"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:variant:qui223:60",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+        "signalRole": "attack-sustain",
+        "source": "documented",
+        "sourceLocator": "4010243_qui223_60.wav",
+        "status": "accepted",
+        "trigger": "note-on"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:variant:reg8:60",
+        "realizationId": "urn:vao:test:cuntz-positiv:realization:sample:reg8:60",
+        "signalRole": "attack-sustain",
+        "source": "documented",
+        "sourceLocator": "4010243_reg8_60.wav",
+        "status": "accepted",
+        "trigger": "note-on"
+      }
+    ],
+    "signalRegions": [],
+    "tuningMaps": []
+  },
+  "primaryEntityId": "urn:vao:test:cuntz-positiv:instrument",
+  "profiles": [
+    {
+      "id": "https://w3id.org/modavis/vao/profile/core/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/core-graph",
+        "https://w3id.org/modavis/vao/vocab/capability/fixity"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/dynamic-delivery/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/immutable-release",
+        "https://w3id.org/modavis/vao/vocab/capability/carrier-mapping"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/spatial/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/spatial"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/acoustics/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/simulated-impulse-response",
+        "https://w3id.org/modavis/vao/vocab/capability/position-registered-acoustic-scene",
+        "https://w3id.org/modavis/vao/vocab/capability/room-acoustic-metrics",
+        "https://w3id.org/modavis/vao/vocab/capability/visual-acoustic-scene",
+        "https://w3id.org/modavis/vao/vocab/capability/spatial-audio-scene"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/scientific/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/typed-scientific-provenance"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/playable/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/interaction",
+        "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback",
+        "https://w3id.org/modavis/vao/vocab/capability/stateful-interaction",
+        "https://w3id.org/modavis/vao/vocab/capability/conditional-routing"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/multimodal/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/multimodal-synchronization"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/physical-instrument/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/physical-system-topology"
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "id": "https://w3id.org/modavis/vao/profile/deterministic-runtime/0.4.0",
+      "requiredCapabilities": [
+        "https://w3id.org/modavis/vao/vocab/capability/deterministic-render-trace",
+        "https://w3id.org/modavis/vao/vocab/capability/midi-2-ump"
+      ],
+      "version": "0.4.0"
+    }
+  ],
+  "realizations": [
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:room-geometry",
+      "byteSize": 1112265,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "b86f60267314fe314d0ebacd716c1770dd029a8c5ad851a56b1162ac4975b6ff"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:geometry:obj",
+      "mediaType": "model/obj",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:geometry-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/converted",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "b86f60267314fe314d0ebacd716c1770dd029a8c5ad851a56b1162ac4975b6ff",
+      "technicalMetadata": {
+        "coordinateFrameId": "urn:vao:fixture:acousticrooms:frame:dataset",
+        "coordinateUnit": "http://qudt.org/vocab/unit/M",
+        "handedness": "right",
+        "kind": "geometry",
+        "lod": 0,
+        "purposeLimitations": [
+          "No textures are included in the source dataset OBJ",
+          "Acoustic surface-material bindings are not exposed for this selected public subset"
+        ],
+        "triangleCount": 43520,
+        "upAxis": "Z",
+        "vertexCount": 10882
+      },
+      "type": "Realization",
+      "variantSetId": "room-geometry"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:room-geometry",
+      "byteSize": 549736,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "03e1bb41f2db881da22212184baa765a71ae9e3248ef610237f67322b039798a"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:geometry:glb",
+      "mediaType": "model/gltf-binary",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:gltf-conversion"
+      ],
+      "qualityTier": "production-spatial",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/converted",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "03e1bb41f2db881da22212184baa765a71ae9e3248ef610237f67322b039798a",
+      "technicalMetadata": {
+        "coordinateFrameId": "urn:vao:fixture:acousticrooms:frame:gltf",
+        "coordinateUnit": "http://qudt.org/vocab/unit/M",
+        "handedness": "right",
+        "kind": "geometry",
+        "lod": 0,
+        "purposeLimitations": [
+          "Visualization derivative; the source OBJ remains the preservation realization"
+        ],
+        "triangleCount": 21760,
+        "upAxis": "Y",
+        "vertexCount": 17429
+      },
+      "type": "Realization",
+      "variantSetId": "room-geometry"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:rir",
+      "byteSize": 23772,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "acfa34ce1f465e78337da0ac7032b92e2913dfa4203c077acd1e5cbe6dd446b6"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:rir:wav",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:simulation",
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "production-spatial",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/hybrid",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "acfa34ce1f465e78337da0ac7032b92e2913dfa4203c077acd1e5cbe6dd446b6",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 16,
+        "channelCount": 1,
+        "channelLabels": [
+          "monaural RIR"
+        ],
+        "frameCount": 11864,
+        "impulseResponse": {
+          "encoding": "WAV",
+          "measurementMappings": [
+            {
+              "channelIndices": [
+                0
+              ],
+              "measurementId": "urn:vao:fixture:acousticrooms:measurement:S000-R0011"
+            }
+          ],
+          "normalization": "unspecified",
+          "responseSetId": "urn:vao:fixture:acousticrooms:response-set",
+          "sampleCount": 11864,
+          "timeZeroPolicy": "unspecified"
+        },
+        "kind": "audio",
+        "sampleFormat": "signed integer PCM",
+        "sampleRate": 22050
+      },
+      "type": "Realization",
+      "variantSetId": "S000-R0011-rir"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:pair-metadata",
+      "byteSize": 211,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "66b0fcd2990cb9bd2719e01f8f2a3d00aaeb6a0dc01cf5c2d977515468582b36"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:pair-metadata",
+      "mediaType": "application/json",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "bootstrap",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "66b0fcd2990cb9bd2719e01f8f2a3d00aaeb6a0dc01cf5c2d977515468582b36",
+      "technicalMetadata": {
+        "kind": "data"
+      },
+      "type": "Realization",
+      "variantSetId": "pair-metadata"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:simulation-config",
+      "byteSize": 12099,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "d691f91969ed3a640733929eadbc9292a0dfd20639ec00be518911e1f6add3f3"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:simulation-config",
+      "mediaType": "application/json",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "d691f91969ed3a640733929eadbc9292a0dfd20639ec00be518911e1f6add3f3",
+      "technicalMetadata": {
+        "kind": "data"
+      },
+      "type": "Realization",
+      "variantSetId": "simulation-config"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:license",
+      "byteSize": 18103,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "77bb3ec108e522894a2333e6ef0f20007bed136285166b46b852010ee78ec31f"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:license",
+      "mediaType": "text/plain",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "77bb3ec108e522894a2333e6ef0f20007bed136285166b46b852010ee78ec31f",
+      "technicalMetadata": {
+        "kind": "document"
+      },
+      "type": "Realization",
+      "variantSetId": "license"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:readme",
+      "byteSize": 4585,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "986dd099f8276e53a5dc63d86aac03f97a57387dac8a29edab79251eaea0ec79"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:readme",
+      "mediaType": "text/markdown",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "986dd099f8276e53a5dc63d86aac03f97a57387dac8a29edab79251eaea0ec79",
+      "technicalMetadata": {
+        "kind": "document"
+      },
+      "type": "Realization",
+      "variantSetId": "readme"
+    },
+    {
+      "assetId": "urn:vao:fixture:acousticrooms:asset:fixture-provenance",
+      "byteSize": 1879,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "eb1ee01d91c1f44e125cf70090d845a4d09a3f2335784abc1031748936162114"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:fixture:acousticrooms:realization:fixture-provenance",
+      "mediaType": "application/json",
+      "provenanceIds": [
+        "urn:vao:fixture:acousticrooms:activity:fixture-assembly"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/authored",
+      "rightsIds": [
+        "urn:vao:fixture:acousticrooms:rights:cc-by-4.0"
+      ],
+      "sha256": "eb1ee01d91c1f44e125cf70090d845a4d09a3f2335784abc1031748936162114",
+      "technicalMetadata": {
+        "kind": "data"
+      },
+      "type": "Realization",
+      "variantSetId": "fixture-provenance"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:sample:ged:60",
+      "byteSize": 12760052,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "e1ff2694dded94e9aa924fd2a2a64aceeac7621cc59b30b4322fd3083e704d44"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "e1ff2694dded94e9aa924fd2a2a64aceeac7621cc59b30b4322fd3083e704d44",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 32,
+        "channelCount": 2,
+        "frameCount": 1595001,
+        "kind": "audio",
+        "sampleFormat": "floating-point",
+        "sampleRate": 192000
+      },
+      "type": "Realization",
+      "variantSetId": "60"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:sample:princ4:60",
+      "byteSize": 15751636,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "c4c7c5d0b5e9867a710e260c963ee63663dc8b464f8ad426c9952a0d93e0625f"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "c4c7c5d0b5e9867a710e260c963ee63663dc8b464f8ad426c9952a0d93e0625f",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 32,
+        "channelCount": 2,
+        "frameCount": 1968949,
+        "kind": "audio",
+        "sampleFormat": "floating-point",
+        "sampleRate": 192000
+      },
+      "type": "Realization",
+      "variantSetId": "60"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:sample:princ2:60",
+      "byteSize": 13936228,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "184e034582a3566faa1505811fcfb01e475f63995aa4835ef9ddec2cdd779920"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "184e034582a3566faa1505811fcfb01e475f63995aa4835ef9ddec2cdd779920",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 32,
+        "channelCount": 2,
+        "frameCount": 1742023,
+        "kind": "audio",
+        "sampleFormat": "floating-point",
+        "sampleRate": 192000
+      },
+      "type": "Realization",
+      "variantSetId": "60"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:sample:qui223:60",
+      "byteSize": 15418628,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "9c8288f10f16dc71e751c26ed3d05fe5457e847087340e61326fa28e52f4183e"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "9c8288f10f16dc71e751c26ed3d05fe5457e847087340e61326fa28e52f4183e",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 32,
+        "channelCount": 2,
+        "frameCount": 1927323,
+        "kind": "audio",
+        "sampleFormat": "floating-point",
+        "sampleRate": 192000
+      },
+      "type": "Realization",
+      "variantSetId": "60"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:sample:reg8:60",
+      "byteSize": 12559972,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "554bbafa6a9a3a1bd2b06b3ac5cd7bea1e5eb67865665d86f61da27c0fa0d39c"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:sample:reg8:60",
+      "mediaType": "audio/wav",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "554bbafa6a9a3a1bd2b06b3ac5cd7bea1e5eb67865665d86f61da27c0fa0d39c",
+      "technicalMetadata": {
+        "audioContainer": "WAVE",
+        "bitDepth": 32,
+        "channelCount": 2,
+        "frameCount": 1569991,
+        "kind": "audio",
+        "sampleFormat": "floating-point",
+        "sampleRate": 192000
+      },
+      "type": "Realization",
+      "variantSetId": "60"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:midi:pachelbel",
+      "byteSize": 2293,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "1ddc290bab18a8c9bc32209bc8bcff75f8dda2817d376b87bb549cbc2b8d943b"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+      "mediaType": "audio/midi",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "1ddc290bab18a8c9bc32209bc8bcff75f8dda2817d376b87bb549cbc2b8d943b",
+      "technicalMetadata": {
+        "eventEncoding": "Standard MIDI File type 0; 96 PPQN",
+        "kind": "event-stream",
+        "timebaseId": "urn:vao:test:cuntz-positiv:timebase:midi"
+      },
+      "type": "Realization",
+      "variantSetId": "pachelbel"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:animation:pachelbel",
+      "byteSize": 711938,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "c9fbd6b49928c7b4cf2cd876f925b607b13a7780e5642eda7149b8e065b5251f"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+      "mediaType": "application/vnd.unity.animation+yaml",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "c9fbd6b49928c7b4cf2cd876f925b607b13a7780e5642eda7149b8e065b5251f",
+      "technicalMetadata": {
+        "kind": "motion-capture",
+        "timebaseId": "urn:vao:test:cuntz-positiv:timebase:animation"
+      },
+      "type": "Realization",
+      "variantSetId": "pachelbel"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+      "byteSize": 61745100,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "f655dfb36431a6099c3273ffed4ce8de8ae4a257097e3a2c89eced96bbd9b743"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:model:keyboard",
+      "mediaType": "application/vnd.autodesk.fbx",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:source-accession"
+      ],
+      "qualityTier": "production",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/undetermined",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "f655dfb36431a6099c3273ffed4ce8de8ae4a257097e3a2c89eced96bbd9b743",
+      "technicalMetadata": {
+        "coordinateFrameId": "urn:vao:test:cuntz-positiv:frame:model",
+        "coordinateUnit": "http://qudt.org/vocab/unit/M",
+        "handedness": "right",
+        "kind": "geometry",
+        "lod": 0,
+        "purposeLimitations": [
+          "Source scale has not been verified by physical survey.",
+          "The legacy model exposes 45 M1 key transforms; performance notes outside MIDI 36–84 are intentionally not animated."
+        ],
+        "upAxis": "Y"
+      },
+      "type": "Realization",
+      "variantSetId": "keyboard"
+    },
+    {
+      "assetId": "urn:vao:test:cuntz-positiv:asset:timbre-report",
+      "byteSize": 4989776,
+      "contentDigests": [
+        {
+          "algorithm": "sha256",
+          "value": "9a3383a9c51416f851a412c84c14c1b5206c3b39bb178c77314ee04c53b753f4"
+        }
+      ],
+      "distributionIds": [],
+      "id": "urn:vao:test:cuntz-positiv:realization:timbre-report",
+      "mediaType": "application/json",
+      "provenanceIds": [
+        "urn:vao:test:cuntz-positiv:activity:timbre-analysis"
+      ],
+      "qualityTier": "preservation",
+      "representationStatus": "https://w3id.org/modavis/vao/vocab/representation-status/inferred",
+      "rightsIds": [
+        "urn:vao:test:cuntz-positiv:rights:restricted"
+      ],
+      "sha256": "9a3383a9c51416f851a412c84c14c1b5206c3b39bb178c77314ee04c53b753f4",
+      "technicalMetadata": {
+        "kind": "data"
+      },
+      "type": "Realization",
+      "variantSetId": "timbre-report"
+    }
+  ],
+  "relations": [
+    {
+      "evidenceIds": [
+        "urn:vao:fixture:acousticrooms:asset:pair-metadata"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:relation:source-in-space",
+      "objectId": "urn:vao:fixture:acousticrooms:space",
+      "predicate": "https://w3id.org/modavis/vao/ontology#locatedIn",
+      "status": "asserted",
+      "subjectId": "urn:vao:fixture:acousticrooms:source:0"
+    },
+    {
+      "evidenceIds": [
+        "urn:vao:fixture:acousticrooms:asset:pair-metadata"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:relation:receiver-in-space",
+      "objectId": "urn:vao:fixture:acousticrooms:space",
+      "predicate": "https://w3id.org/modavis/vao/ontology#locatedIn",
+      "status": "asserted",
+      "subjectId": "urn:vao:fixture:acousticrooms:receiver:11"
+    },
+    {
+      "generatedByIds": [
+        "urn:vao:fixture:acousticrooms:activity:simulation"
+      ],
+      "id": "urn:vao:fixture:acousticrooms:relation:response",
+      "objectId": "urn:vao:fixture:acousticrooms:response-set",
+      "predicate": "https://w3id.org/modavis/vao/ontology#hasAcousticResponse",
+      "status": "asserted",
+      "subjectId": "urn:vao:fixture:acousticrooms:space"
+    },
+    {
+      "evidenceIds": [
+        "urn:vao:test:cuntz-positiv:asset:timbre-report"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:relation:located-in-test-room",
+      "objectId": "urn:vao:fixture:acousticrooms:space",
+      "predicate": "http://purl.org/dc/terms/spatial",
+      "status": "asserted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-manual",
+      "objectId": "urn:vao:test:cuntz-positiv:manual",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:interaction",
+      "objectId": "urn:vao:test:cuntz-positiv:instrument",
+      "predicate": "https://w3id.org/modavis/vao/ontology#activates",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:interaction"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-stop:ged",
+      "objectId": "urn:vao:test:cuntz-positiv:stop:ged",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-stop:princ4",
+      "objectId": "urn:vao:test:cuntz-positiv:stop:princ4",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-stop:princ2",
+      "objectId": "urn:vao:test:cuntz-positiv:stop:princ2",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-stop:qui223",
+      "objectId": "urn:vao:test:cuntz-positiv:stop:qui223",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:has-stop:reg8",
+      "objectId": "urn:vao:test:cuntz-positiv:stop:reg8",
+      "predicate": "https://w3id.org/modavis/ontology/instrument#hasComponent",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:sample:ged:60",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:sample:ged:60",
+      "predicate": "https://w3id.org/modavis/vao/ontology#usesSample",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:stop:ged"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:sample:princ4:60",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:sample:princ4:60",
+      "predicate": "https://w3id.org/modavis/vao/ontology#usesSample",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:stop:princ4"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:sample:princ2:60",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:sample:princ2:60",
+      "predicate": "https://w3id.org/modavis/vao/ontology#usesSample",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:stop:princ2"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:sample:qui223:60",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:sample:qui223:60",
+      "predicate": "https://w3id.org/modavis/vao/ontology#usesSample",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:stop:qui223"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:sample:reg8:60",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:sample:reg8:60",
+      "predicate": "https://w3id.org/modavis/vao/ontology#usesSample",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:stop:reg8"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:model",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+      "predicate": "https://w3id.org/modavis/vao/ontology#hasRepresentation",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:instrument"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:midi-drives-animation",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:animation:pachelbel",
+      "predicate": "https://w3id.org/modavis/vao/ontology#drivesAnimation",
+      "properties": {
+        "https://w3id.org/modavis/vao/unity#maximumMidiNote": 84,
+        "https://w3id.org/modavis/vao/unity#minimumMidiNote": 36,
+        "https://w3id.org/modavis/vao/unity#outOfRangePolicy": "ignore",
+        "https://w3id.org/modavis/vao/unity#pressedAngleDegrees": -4.0,
+        "https://w3id.org/modavis/vao/unity#rotationAxis": "x",
+        "https://w3id.org/modavis/vao/unity#targetPathPattern": "M1.{midiNote}"
+      },
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:asset:midi:pachelbel"
+    },
+    {
+      "id": "urn:vao:test:cuntz-positiv:relation:animation-target",
+      "objectId": "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+      "predicate": "https://w3id.org/modavis/vao/ontology#targetsAnimation",
+      "status": "accepted",
+      "subjectId": "urn:vao:test:cuntz-positiv:asset:animation:pachelbel"
+    }
+  ],
+  "release": {
+    "contentVersion": "0.4.0-unity-test-1",
+    "id": "urn:vao:test:cuntz-positiv:release:1",
+    "revision": 1
+  },
+  "repositoryBindings": [],
+  "rights": [
+    {
+      "access": "open",
+      "appliesToIds": [
+        "urn:vao:test:cuntz-positiv",
+        "urn:vao:fixture:acousticrooms:asset:room-geometry",
+        "urn:vao:fixture:acousticrooms:asset:rir",
+        "urn:vao:fixture:acousticrooms:asset:pair-metadata",
+        "urn:vao:fixture:acousticrooms:asset:simulation-config",
+        "urn:vao:fixture:acousticrooms:asset:license",
+        "urn:vao:fixture:acousticrooms:asset:readme",
+        "urn:vao:fixture:acousticrooms:asset:fixture-provenance",
+        "urn:vao:fixture:acousticrooms:realization:geometry:obj",
+        "urn:vao:fixture:acousticrooms:realization:geometry:glb",
+        "urn:vao:fixture:acousticrooms:realization:rir:wav",
+        "urn:vao:fixture:acousticrooms:realization:pair-metadata",
+        "urn:vao:fixture:acousticrooms:realization:simulation-config",
+        "urn:vao:fixture:acousticrooms:realization:license",
+        "urn:vao:fixture:acousticrooms:realization:readme",
+        "urn:vao:fixture:acousticrooms:realization:fixture-provenance"
+      ],
+      "attribution": "AcousticRooms by Xiulong Liu, Anurag Kumar, Paul Calamia, Sebastià V. Amengual Garí, Calvin Murdock, Ishwarya Ananthabhotla, Philip Robinson, Eli Shlizerman, Vamsi Krishna Ithapu, and Ruohan Gao; Liu et al., Hearing Anywhere in Any Environment, CVPR 2025.",
+      "id": "urn:vao:fixture:acousticrooms:rights:cc-by-4.0",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "statement": {
+        "en": "AcousticRooms and this attributed test subset are licensed CC BY 4.0. The GLB is a format-conversion derivative of the selected source OBJ."
+      }
+    },
+    {
+      "access": "restricted",
+      "appliesToIds": [
+        "urn:vao:test:cuntz-positiv",
+        "urn:vao:test:cuntz-positiv:instrument",
+        "urn:vao:test:cuntz-positiv:manual",
+        "urn:vao:test:cuntz-positiv:stop:ged",
+        "urn:vao:test:cuntz-positiv:stop:princ4",
+        "urn:vao:test:cuntz-positiv:stop:princ2",
+        "urn:vao:test:cuntz-positiv:stop:qui223",
+        "urn:vao:test:cuntz-positiv:stop:reg8",
+        "urn:vao:test:cuntz-positiv:asset:sample:ged:60",
+        "urn:vao:test:cuntz-positiv:asset:sample:princ4:60",
+        "urn:vao:test:cuntz-positiv:asset:sample:princ2:60",
+        "urn:vao:test:cuntz-positiv:asset:sample:qui223:60",
+        "urn:vao:test:cuntz-positiv:asset:sample:reg8:60",
+        "urn:vao:test:cuntz-positiv:asset:midi:pachelbel",
+        "urn:vao:test:cuntz-positiv:asset:animation:pachelbel",
+        "urn:vao:test:cuntz-positiv:asset:model:keyboard",
+        "urn:vao:test:cuntz-positiv:asset:timbre-report",
+        "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+        "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+        "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+        "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+        "urn:vao:test:cuntz-positiv:realization:sample:reg8:60",
+        "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+        "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+        "urn:vao:test:cuntz-positiv:realization:model:keyboard",
+        "urn:vao:test:cuntz-positiv:realization:timbre-report"
+      ],
+      "id": "urn:vao:test:cuntz-positiv:rights:restricted",
+      "privacyClassification": "restricted",
+      "statement": {
+        "en": "Cuntz source bytes are embedded for local, rights-restricted interoperability testing only. No redistribution license, performer consent, or canonical historical identity is inferred."
+      }
+    }
+  ],
+  "runtime": {
+    "conformanceTraces": [
+      {
+        "digest": {
+          "algorithm": "sha256",
+          "value": "71f5d17145141a6b0ee9d7699b825d900db8378382f7990487341d55428cbb87"
+        },
+        "expected": {
+          "emittedEvents": [],
+          "renderBindingIds": [],
+          "state": {
+            "urn:vao:test:cuntz-positiv:state:stop:ged": true,
+            "urn:vao:test:cuntz-positiv:state:stop:princ2": false,
+            "urn:vao:test:cuntz-positiv:state:stop:princ4": false,
+            "urn:vao:test:cuntz-positiv:state:stop:qui223": false,
+            "urn:vao:test:cuntz-positiv:state:stop:reg8": false
+          }
+        },
+        "id": "urn:vao:test:cuntz-positiv:trace:gedackt-toggle",
+        "initialState": {},
+        "inputEvents": [
+          {
+            "controlId": "urn:vao:test:cuntz-positiv:control:stop:ged",
+            "eventTypeId": "urn:vao:test:cuntz-positiv:event:control-on",
+            "priority": 0,
+            "sequence": 0,
+            "timestamp": 0,
+            "value": true
+          }
+        ]
+      }
+    ],
+    "executionSemantics": {
+      "actionExecution": "execution-group-then-array-order",
+      "lateEventPolicy": "reject",
+      "maximumMicrosteps": 10000,
+      "maximumVoices": 1024,
+      "reentrancyPolicy": "queue",
+      "runToCompletion": true,
+      "simultaneousEventOrder": "priority-then-event-id",
+      "timeResolution": {
+        "unit": "http://qudt.org/vocab/unit/MilliSEC",
+        "value": 1
+      },
+      "timestampOrder": "ascending",
+      "transitionEvaluation": "snapshot",
+      "voiceAllocation": "lowest-free-then-oldest"
+    },
+    "randomSources": [],
+    "renderers": [
+      {
+        "capabilities": [
+          "https://w3id.org/modavis/vao/vocab/capability/sampled-instrument-playback",
+          "https://w3id.org/modavis/vao/vocab/capability/stateful-interaction",
+          "https://w3id.org/modavis/vao/vocab/capability/conditional-routing",
+          "https://w3id.org/modavis/vao/vocab/capability/midi-2-ump",
+          "https://w3id.org/modavis/vao/vocab/capability/visual-acoustic-scene",
+          "https://w3id.org/modavis/vao/vocab/capability/position-registered-acoustic-scene",
+          "https://w3id.org/modavis/vao/vocab/capability/simulated-impulse-response",
+          "https://w3id.org/modavis/vao/vocab/capability/linked-animation"
+        ],
+        "deterministic": false,
+        "id": "urn:vao:test:cuntz-positiv:renderer:unity",
+        "name": "VAO Unity Plugin",
+        "sandboxPolicy": "declarative-only",
+        "softwareEnvironmentId": "urn:vao:test:cuntz-positiv:software:unity-plugin-declaration",
+        "version": "0.2.0"
+      }
+    ]
+  },
+  "scientific": {
+    "activities": [
+      {
+        "activityKind": "migration",
+        "agentIds": [
+          "urn:vao:agent:vao04-migrator"
+        ],
+        "endedAt": "2026-08-24T17:35:00Z",
+        "id": "urn:vao:activity:migrate:a8b8b7e994274f3a63449cf052c3da036b6944b7b2202c2949d3e10d588c08b7",
+        "inputIds": [
+          "urn:vao:test:cuntz-positiv"
+        ],
+        "notes": "Records migration of the legacy source into an intermediate representation. The final enriched release is generated by fixture integration, and the intermediate representation is not retained as a separately identified local record.",
+        "outputIds": [],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#legacyAnalyses": [],
+          "https://w3id.org/modavis/vao/ontology#legacyParadata": [
+            {
+              "activityType": "https://w3id.org/modavis/vao/vocab/activity/RoomImpulseResponseSimulation",
+              "id": "urn:vao:fixture:acousticrooms:activity:simulation",
+              "inputIds": [
+                "urn:vao:fixture:acousticrooms:asset:room-geometry",
+                "urn:vao:fixture:acousticrooms:asset:simulation-config"
+              ],
+              "method": {
+                "methodType": "simulation",
+                "representationStatus": "hybrid"
+              },
+              "outputIds": [
+                "urn:vao:fixture:acousticrooms:response-set",
+                "urn:vao:fixture:acousticrooms:asset:rir"
+              ],
+              "parameters": {
+                "crossoverFrequencyHz": 710,
+                "impulseLengthSeconds": 0.5380072922824315,
+                "simulationType": "Hybrid"
+              },
+              "software": {
+                "name": "Treble",
+                "version": "not stated by source dataset"
+              }
+            },
+            {
+              "activityType": "https://w3id.org/modavis/vao/vocab/activity/GeometryConversion",
+              "id": "urn:vao:fixture:acousticrooms:activity:gltf-conversion",
+              "inputIds": [
+                "urn:vao:fixture:acousticrooms:realization:geometry:obj"
+              ],
+              "method": {
+                "methodType": "encoding",
+                "representationStatus": "converted"
+              },
+              "outputIds": [
+                "urn:vao:fixture:acousticrooms:realization:geometry:glb"
+              ],
+              "parameters": {
+                "exportFormat": "glTF 2.0 GLB",
+                "outputUpAxis": "+Y",
+                "sourceUpAxis": "+Z"
+              },
+              "software": {
+                "name": "Blender",
+                "version": "5.1.1"
+              },
+              "startedAt": "2026-08-24T17:32:00Z"
+            },
+            {
+              "activityType": "https://w3id.org/modavis/vao/vocab/activity/FixtureAssembly",
+              "id": "urn:vao:fixture:acousticrooms:activity:fixture-assembly",
+              "inputIds": [
+                "https://github.com/facebookresearch/AcousticRooms/tree/3c87318a0188e1b441fc75846d54b487ca215fbb"
+              ],
+              "method": {
+                "methodType": "manual-authoring",
+                "representationStatus": "authored"
+              },
+              "outputIds": [
+                "urn:vao:fixture:acousticrooms:realization:fixture-provenance"
+              ],
+              "parameters": {
+                "selection": "Bathrooms_idx_0/S000_R0011"
+              },
+              "software": {
+                "name": "VAO reference implementation",
+                "version": "0.3.3"
+              },
+              "startedAt": "2026-08-24T17:35:00Z"
+            }
+          ]
+        },
+        "protocolId": "urn:vao:protocol:vao033-to-vao040",
+        "softwareEnvironmentId": "urn:vao:software:vao04-reference",
+        "startedAt": "2026-08-24T17:35:00Z"
+      },
+      {
+        "activityKind": "simulation",
+        "agentIds": [
+          "urn:vao:agent:migrated-software:f31aa78084d5352b12f5449e2cc7c97bfcb4c4d3efd6ee257e7cbe8efd646f38"
+        ],
+        "endedAt": "2026-08-24T17:35:00Z",
+        "id": "urn:vao:fixture:acousticrooms:activity:simulation",
+        "inputIds": [
+          "urn:vao:fixture:acousticrooms:asset:room-geometry",
+          "urn:vao:fixture:acousticrooms:asset:simulation-config"
+        ],
+        "notes": "Promoted from a VAO 0.3 open paradata record; omitted input/output references remain preserved in legacyActivity.",
+        "outputIds": [
+          "urn:vao:fixture:acousticrooms:response-set",
+          "urn:vao:fixture:acousticrooms:asset:rir",
+          "urn:vao:fixture:acousticrooms:realization:rir:wav",
+          "urn:vao:fixture:acousticrooms:material-model:synthetic-wall",
+          "urn:vao:fixture:acousticrooms:metric-set:synthetic-t20",
+          "urn:vao:fixture:acousticrooms:relation:response"
+        ],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#legacyActivity": {
+            "activityType": "https://w3id.org/modavis/vao/vocab/activity/RoomImpulseResponseSimulation",
+            "id": "urn:vao:fixture:acousticrooms:activity:simulation",
+            "inputIds": [
+              "urn:vao:fixture:acousticrooms:asset:room-geometry",
+              "urn:vao:fixture:acousticrooms:asset:simulation-config"
+            ],
+            "method": {
+              "methodType": "simulation",
+              "representationStatus": "hybrid"
+            },
+            "outputIds": [
+              "urn:vao:fixture:acousticrooms:response-set",
+              "urn:vao:fixture:acousticrooms:asset:rir"
+            ],
+            "parameters": {
+              "crossoverFrequencyHz": 710,
+              "impulseLengthSeconds": 0.5380072922824315,
+              "simulationType": "Hybrid"
+            },
+            "software": {
+              "name": "Treble",
+              "version": "not stated by source dataset"
+            }
+          }
+        },
+        "protocolId": "urn:vao:protocol:migrated:ebb1a9188fae2448501e9df496821063adfb70b21e41dc05078e698a86396bae",
+        "softwareEnvironmentId": "urn:vao:software:migrated:f31aa78084d5352b12f5449e2cc7c97bfcb4c4d3efd6ee257e7cbe8efd646f38",
+        "startedAt": "2026-08-24T17:35:00Z"
+      },
+      {
+        "activityKind": "processing",
+        "agentIds": [
+          "urn:vao:agent:migrated-software:7170f42c3d3df3dd839f7dc299cbaeb3d25741e05ee44d63772c6c7b7bdc562b"
+        ],
+        "endedAt": "2026-08-24T17:32:00Z",
+        "id": "urn:vao:fixture:acousticrooms:activity:gltf-conversion",
+        "inputIds": [
+          "urn:vao:fixture:acousticrooms:realization:geometry:obj"
+        ],
+        "notes": "Promoted from a VAO 0.3 open paradata record; omitted input/output references remain preserved in legacyActivity.",
+        "outputIds": [
+          "urn:vao:fixture:acousticrooms:realization:geometry:glb",
+          "urn:vao:fixture:acousticrooms:frame:gltf",
+          "urn:vao:fixture:acousticrooms:geometry-binding:visual"
+        ],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#legacyActivity": {
+            "activityType": "https://w3id.org/modavis/vao/vocab/activity/GeometryConversion",
+            "id": "urn:vao:fixture:acousticrooms:activity:gltf-conversion",
+            "inputIds": [
+              "urn:vao:fixture:acousticrooms:realization:geometry:obj"
+            ],
+            "method": {
+              "methodType": "encoding",
+              "representationStatus": "converted"
+            },
+            "outputIds": [
+              "urn:vao:fixture:acousticrooms:realization:geometry:glb"
+            ],
+            "parameters": {
+              "exportFormat": "glTF 2.0 GLB",
+              "outputUpAxis": "+Y",
+              "sourceUpAxis": "+Z"
+            },
+            "software": {
+              "name": "Blender",
+              "version": "5.1.1"
+            },
+            "startedAt": "2026-08-24T17:32:00Z"
+          }
+        },
+        "protocolId": "urn:vao:protocol:migrated:8fdf2c23e26bce86a323b521192cb9e21a9f933ba69e7d99a5443f18076e2c67",
+        "softwareEnvironmentId": "urn:vao:software:migrated:7170f42c3d3df3dd839f7dc299cbaeb3d25741e05ee44d63772c6c7b7bdc562b",
+        "startedAt": "2026-08-24T17:32:00Z"
+      },
+      {
+        "activityKind": "migration",
+        "agentIds": [
+          "urn:vao:agent:vao04-migrator"
+        ],
+        "endedAt": "2026-08-24T17:31:00Z",
+        "id": "urn:vao:fixture:acousticrooms:activity:geometry-accession",
+        "inputIds": [
+          "urn:vao:fixture:acousticrooms:asset:room-geometry"
+        ],
+        "notes": "Accessioned the exact source geometry realization before its documented glTF conversion; this typed record corrects a packaging-time provenance ambiguity in the migrated fixture.",
+        "outputIds": [
+          "urn:vao:fixture:acousticrooms:realization:geometry:obj"
+        ],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#sourceRevision": "3c87318a0188e1b441fc75846d54b487ca215fbb"
+        },
+        "protocolId": "urn:vao:protocol:vao033-to-vao040",
+        "startedAt": "2026-08-24T17:31:00Z"
+      },
+      {
+        "activityKind": "authoring",
+        "agentIds": [
+          "urn:vao:agent:migrated-software:a68848446617d29587b9d2c1d3568191ec94498bf2f48faab2cbfdb5c238a044"
+        ],
+        "endedAt": "2026-08-24T17:35:00Z",
+        "id": "urn:vao:fixture:acousticrooms:activity:fixture-assembly",
+        "inputIds": [],
+        "notes": "Promoted from a VAO 0.3 open paradata record; omitted input/output references remain preserved in legacyActivity.",
+        "outputIds": [
+          "urn:vao:fixture:acousticrooms:realization:pair-metadata",
+          "urn:vao:fixture:acousticrooms:realization:simulation-config",
+          "urn:vao:fixture:acousticrooms:realization:license",
+          "urn:vao:fixture:acousticrooms:realization:readme",
+          "urn:vao:fixture:acousticrooms:realization:fixture-provenance",
+          "urn:vao:fixture:acousticrooms:audio-scene"
+        ],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#legacyActivity": {
+            "activityType": "https://w3id.org/modavis/vao/vocab/activity/FixtureAssembly",
+            "id": "urn:vao:fixture:acousticrooms:activity:fixture-assembly",
+            "inputIds": [
+              "https://github.com/facebookresearch/AcousticRooms/tree/3c87318a0188e1b441fc75846d54b487ca215fbb"
+            ],
+            "method": {
+              "methodType": "manual-authoring",
+              "representationStatus": "authored"
+            },
+            "outputIds": [
+              "urn:vao:fixture:acousticrooms:realization:fixture-provenance"
+            ],
+            "parameters": {
+              "selection": "Bathrooms_idx_0/S000_R0011"
+            },
+            "software": {
+              "name": "VAO reference implementation",
+              "version": "0.3.3"
+            },
+            "startedAt": "2026-08-24T17:35:00Z"
+          }
+        },
+        "protocolId": "urn:vao:protocol:migrated:9ed9b40bbf181c147dd87a698a38c0755882c311d02ed2381f3dfee0a29a4874",
+        "softwareEnvironmentId": "urn:vao:software:migrated:a68848446617d29587b9d2c1d3568191ec94498bf2f48faab2cbfdb5c238a044",
+        "startedAt": "2026-08-24T17:35:00Z"
+      },
+      {
+        "activityKind": "migration",
+        "agentIds": [
+          "urn:vao:test:cuntz-positiv:agent:builder"
+        ],
+        "endedAt": "2026-08-18T17:30:00Z",
+        "id": "urn:vao:test:cuntz-positiv:activity:source-accession",
+        "inputIds": [
+          "urn:vao:test:cuntz-positiv:asset:sample:ged:60",
+          "urn:vao:test:cuntz-positiv:asset:sample:princ4:60",
+          "urn:vao:test:cuntz-positiv:asset:sample:princ2:60",
+          "urn:vao:test:cuntz-positiv:asset:sample:qui223:60",
+          "urn:vao:test:cuntz-positiv:asset:sample:reg8:60",
+          "urn:vao:test:cuntz-positiv:asset:midi:pachelbel",
+          "urn:vao:test:cuntz-positiv:asset:animation:pachelbel",
+          "urn:vao:test:cuntz-positiv:asset:model:keyboard"
+        ],
+        "notes": "Records lossless accession of source bytes into exact VAO realization identities. The source packages did not document the original creation, capture agents, or creation times; representation origin is therefore deliberately undetermined.",
+        "outputIds": [
+          "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:reg8:60",
+          "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+          "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+          "urn:vao:test:cuntz-positiv:realization:model:keyboard"
+        ],
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument",
+        "softwareEnvironmentId": "urn:vao:test:cuntz-positiv:software:builder",
+        "startedAt": "2026-08-18T17:30:00Z"
+      },
+      {
+        "activityKind": "processing",
+        "agentIds": [
+          "urn:vao:test:cuntz-positiv:agent:builder"
+        ],
+        "endedAt": "2026-08-25T22:00:00Z",
+        "id": "urn:vao:test:cuntz-positiv:activity:fixture-integration",
+        "inputIds": [
+          "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:reg8:60",
+          "urn:vao:test:cuntz-positiv:realization:midi:pachelbel",
+          "urn:vao:test:cuntz-positiv:realization:animation:pachelbel",
+          "urn:vao:test:cuntz-positiv:realization:model:keyboard",
+          "urn:vao:test:cuntz-positiv:realization:timbre-report"
+        ],
+        "notes": "Local integration fixture assembly; source packages were read only.",
+        "outputIds": [
+          "urn:vao:test:cuntz-positiv:release:1",
+          "urn:vao:test:cuntz-positiv:annotation:animation-link",
+          "urn:vao:test:cuntz-positiv:geometry-binding:model",
+          "urn:vao:test:cuntz-positiv:pose:instrument"
+        ],
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument",
+        "softwareEnvironmentId": "urn:vao:test:cuntz-positiv:software:builder",
+        "startedAt": "2026-08-25T22:00:00Z"
+      },
+      {
+        "activityKind": "inference",
+        "agentIds": [
+          "urn:vao:test:cuntz-positiv:agent:builder"
+        ],
+        "endedAt": "2026-08-18T17:33:30Z",
+        "id": "urn:vao:test:cuntz-positiv:activity:timbre-analysis",
+        "inputIds": [
+          "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:reg8:60"
+        ],
+        "notes": "The embedded report covers the complete 225-file corpus; this compact carrier embeds five representative inputs only.",
+        "outputIds": [
+          "urn:vao:test:cuntz-positiv:realization:timbre-report"
+        ],
+        "parameterValues": {
+          "https://w3id.org/modavis/vao/ontology#methodology": "orgrec-harmonic-ltas/1",
+          "https://w3id.org/modavis/vao/ontology#parameterSHA256": "a9efc06bb768277124cec9eefdd04894c8642cadb5b89e78549c23fbff8b6343",
+          "https://w3id.org/modavis/vao/ontology#referenceA4Hz": 462.95
+        },
+        "protocolId": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument",
+        "softwareEnvironmentId": "urn:vao:test:cuntz-positiv:software:orgrec-0.2.0-build-2",
+        "startedAt": "2026-08-18T17:33:30Z"
+      }
+    ],
+    "agents": [
+      {
+        "agentKind": "software-agent",
+        "id": "urn:vao:agent:vao04-migrator",
+        "labels": {
+          "en": "VAO 0.4 reference migrator"
+        }
+      },
+      {
+        "agentKind": "software-agent",
+        "id": "urn:vao:agent:migrated-software:f31aa78084d5352b12f5449e2cc7c97bfcb4c4d3efd6ee257e7cbe8efd646f38",
+        "labels": {
+          "en": "Treble (not stated by source dataset; migrated declaration)"
+        }
+      },
+      {
+        "agentKind": "software-agent",
+        "id": "urn:vao:agent:migrated-software:7170f42c3d3df3dd839f7dc299cbaeb3d25741e05ee44d63772c6c7b7bdc562b",
+        "labels": {
+          "en": "Blender (5.1.1; migrated declaration)"
+        }
+      },
+      {
+        "agentKind": "software-agent",
+        "id": "urn:vao:agent:migrated-software:a68848446617d29587b9d2c1d3568191ec94498bf2f48faab2cbfdb5c238a044",
+        "labels": {
+          "en": "VAO reference implementation (0.3.3; migrated declaration)"
+        }
+      },
+      {
+        "agentKind": "software-agent",
+        "id": "urn:vao:test:cuntz-positiv:agent:builder",
+        "labels": {
+          "en": "Cuntz VAO 0.4.0 fixture builder"
+        }
+      }
+    ],
+    "analyses": [
+      {
+        "activityId": "urn:vao:test:cuntz-positiv:activity:timbre-analysis",
+        "analysisKind": "https://w3id.org/modavis/vao/vocab/analysis/timbre-family-validation",
+        "id": "urn:vao:test:cuntz-positiv:analysis:timbre",
+        "inputIds": [
+          "urn:vao:test:cuntz-positiv:realization:sample:ged:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ4:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:princ2:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:qui223:60",
+          "urn:vao:test:cuntz-positiv:realization:sample:reg8:60"
+        ],
+        "outputIds": [
+          "urn:vao:test:cuntz-positiv:realization:timbre-report"
+        ],
+        "parameters": {
+          "https://w3id.org/modavis/vao/ontology#methodology": "orgrec-harmonic-ltas/1",
+          "https://w3id.org/modavis/vao/ontology#parameterSHA256": "a9efc06bb768277124cec9eefdd04894c8642cadb5b89e78549c23fbff8b6343"
+        },
+        "reproducibility": "non-reproducible",
+        "softwareEnvironmentId": "urn:vao:test:cuntz-positiv:software:orgrec-0.2.0-build-2"
+      }
+    ],
+    "calibrations": [],
+    "claims": [],
+    "consents": [],
+    "observations": [],
+    "protocols": [
+      {
+        "id": "urn:vao:protocol:vao033-to-vao040",
+        "labels": {
+          "en": "VAO 0.3.3 to 0.4.0 semantic migration"
+        },
+        "procedure": "Preserve exact realization identities and project closed 0.3 registries into 0.4; retain legacy open records as namespaced migration parameters.",
+        "version": "0.4.0"
+      },
+      {
+        "id": "urn:vao:protocol:migrated:ebb1a9188fae2448501e9df496821063adfb70b21e41dc05078e698a86396bae",
+        "labels": {
+          "en": "Migrated simulation protocol declaration"
+        },
+        "procedure": "VAO 0.3 declared activity type 'https://w3id.org/modavis/vao/vocab/activity/RoomImpulseResponseSimulation', method 'simulation', and representation status 'hybrid'.",
+        "version": "legacy-0.3-declaration"
+      },
+      {
+        "id": "urn:vao:protocol:migrated:8fdf2c23e26bce86a323b521192cb9e21a9f933ba69e7d99a5443f18076e2c67",
+        "labels": {
+          "en": "Migrated encoding protocol declaration"
+        },
+        "procedure": "VAO 0.3 declared activity type 'https://w3id.org/modavis/vao/vocab/activity/GeometryConversion', method 'encoding', and representation status 'converted'.",
+        "version": "legacy-0.3-declaration"
+      },
+      {
+        "id": "urn:vao:protocol:migrated:9ed9b40bbf181c147dd87a698a38c0755882c311d02ed2381f3dfee0a29a4874",
+        "labels": {
+          "en": "Migrated manual-authoring protocol declaration"
+        },
+        "procedure": "VAO 0.3 declared activity type 'https://w3id.org/modavis/vao/vocab/activity/FixtureAssembly', method 'manual-authoring', and representation status 'authored'.",
+        "version": "legacy-0.3-declaration"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:protocol:sampled-instrument",
+        "labels": {
+          "en": "Source-audited sampled-instrument mapping"
+        },
+        "procedure": "Retain one representative MIDI 60 sample per documented Cuntz stop; preserve recorded pitch; bind source MIDI and Unity animation without executing active content.",
+        "version": "1"
+      }
+    ],
+    "reviews": [],
+    "softwareEnvironments": [
+      {
+        "id": "urn:vao:software:vao04-reference",
+        "name": "VAO 0.4 reference validator and migrator",
+        "version": "0.4.0",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "15e4e01c5904579cfa20b6a15b4ee71bece7340e5103c3180597b67d3948d095"
+        },
+        "identityScope": "source-file",
+        "identityDescription": "SHA-256 of the exact Tools/vao04.py entry-point source; imported behavioural sources and the normative artifact-bundle declaration are pinned separately in dependencies, together with the source checkout's Python dependency lock.",
+        "dependencies": [
+          {
+            "name": "Tools/vao03.py",
+            "dependencyRole": "source",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "ff22f72bdf691e87f0101c682238cd2da933643dca86e82d318e3b75f87211ac"
+            },
+            "identityScope": "source-file",
+            "identityDescription": "SHA-256 of the exact distributed file Tools/vao03.py."
+          },
+          {
+            "name": "Tools/vaom.py",
+            "dependencyRole": "source",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "e52d11ccd5c6305345b6aac4f33949e4f1a1074e2c7374d031b6f35a36644eb0"
+            },
+            "identityScope": "source-file",
+            "identityDescription": "SHA-256 of the exact distributed file Tools/vaom.py."
+          },
+          {
+            "name": "Tools/vao04_runtime.py",
+            "dependencyRole": "source",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "546d1b6b207b7359974541d80e00fae53a2aa53695db31ebd4d6e535a9a081dd"
+            },
+            "identityScope": "source-file",
+            "identityDescription": "SHA-256 of the exact distributed file Tools/vao04_runtime.py."
+          },
+          {
+            "name": "Tools/vao_resources.py",
+            "dependencyRole": "source",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "4af739d85c5d31ec6f87cf6074372904a27eec06a3d8543eb7123bcdf34297b1"
+            },
+            "identityScope": "source-file",
+            "identityDescription": "SHA-256 of the exact distributed file Tools/vao_resources.py."
+          },
+          {
+            "name": "Schemas/vao-release-bundle-0.4.0.json",
+            "dependencyRole": "normative-artifact",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "3ad51fac72ee71497bb82dbfb878fbf454c49d81e8a7ef879fdf8d28e9240e36"
+            },
+            "identityScope": "declaration",
+            "identityDescription": "SHA-256 of the exact distributed file Schemas/vao-release-bundle-0.4.0.json."
+          },
+          {
+            "name": "requirements-lock.txt",
+            "dependencyRole": "environment-lock",
+            "identity": {
+              "algorithm": "sha256",
+              "value": "cfc21919a7f6c3eda016e2d2b37c75298bf7760469bb6938833dd60255feb30b"
+            },
+            "identityScope": "environment-lock",
+            "identityDescription": "SHA-256 of the exact distributed file requirements-lock.txt."
+          }
+        ],
+        "runtimeDescription": "CPython >=3.11; release gate exercised on CPython 3.11 and 3.14; OS and architecture are not part of this source identity."
+      },
+      {
+        "id": "urn:vao:software:migrated:f31aa78084d5352b12f5449e2cc7c97bfcb4c4d3efd6ee257e7cbe8efd646f38",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "f31aa78084d5352b12f5449e2cc7c97bfcb4c4d3efd6ee257e7cbe8efd646f38"
+        },
+        "identityDescription": "SHA-256 of the preserved VAO 0.3 software declaration; executable identity was not supplied.",
+        "identityScope": "declaration",
+        "name": "Treble",
+        "version": "not stated by source dataset"
+      },
+      {
+        "id": "urn:vao:software:migrated:7170f42c3d3df3dd839f7dc299cbaeb3d25741e05ee44d63772c6c7b7bdc562b",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "7170f42c3d3df3dd839f7dc299cbaeb3d25741e05ee44d63772c6c7b7bdc562b"
+        },
+        "identityDescription": "SHA-256 of the preserved VAO 0.3 software declaration; executable identity was not supplied.",
+        "identityScope": "declaration",
+        "name": "Blender",
+        "version": "5.1.1"
+      },
+      {
+        "id": "urn:vao:software:migrated:a68848446617d29587b9d2c1d3568191ec94498bf2f48faab2cbfdb5c238a044",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "a68848446617d29587b9d2c1d3568191ec94498bf2f48faab2cbfdb5c238a044"
+        },
+        "identityDescription": "SHA-256 of the preserved VAO 0.3 software declaration; executable identity was not supplied.",
+        "identityScope": "declaration",
+        "name": "VAO reference implementation",
+        "version": "0.3.3"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:software:builder",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "b0a63119431fdea8355cd7cc840a09b7b311307d5f5c2f7b79f88c0a7b9f1a70"
+        },
+        "identityDescription": "SHA-256 of the exact build_cuntz_positiv_vao04.py source in the originating build environment; that source is not asserted to be bundled in this fixture.",
+        "identityScope": "source-file",
+        "name": "build_cuntz_positiv_vao04.py",
+        "version": "0.4.0"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:software:unity-plugin-declaration",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "6c582a52f396def09bafb8ddbfb10ff4b93986a3f66ffe49968db8be4c4c2f68"
+        },
+        "identityDescription": "SHA-256 of RFC 8785-canonical UTF-8 JSON {\"evidence\":\"name/version declaration only; executable not retained\",\"name\":\"VAO Unity Plugin\",\"version\":\"0.2.0\"}; this is not an executable identity.",
+        "identityScope": "declaration",
+        "name": "VAO Unity Plugin",
+        "version": "0.2.0"
+      },
+      {
+        "id": "urn:vao:test:cuntz-positiv:software:orgrec-0.2.0-build-2",
+        "identity": {
+          "algorithm": "sha256",
+          "value": "a9efc06bb768277124cec9eefdd04894c8642cadb5b89e78549c23fbff8b6343"
+        },
+        "identityDescription": "SHA-256 of the frozen timbre-analysis parameter declaration; an executable digest was not recorded in the source report.",
+        "identityScope": "declaration",
+        "name": "OrgRec",
+        "version": "0.2.0 build 2"
+      }
+    ]
+  },
+  "title": {
+    "en": "Cuntz Positiv in an AcousticRooms test environment"
+  },
+  "type": "VirtualAcousticObject"
+}

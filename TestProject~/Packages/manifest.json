@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "org.modavis.vao-unity": "file:../..",
+    "com.unity.test-framework": "1.7.0"
+  },
+  "testables": [
+    "org.modavis.vao-unity"
+  ]
+}
