@@ -1,15 +1,15 @@
-# VAO 0.4.0 support matrix
+# VAO 0.4.0 and 0.5.0 support matrix
 
-This matrix describes support for the final [VAO Standard 0.4.0](https://github.com/modavis-project/vao-standard). “Preserved” means the source data remains available in the imported package but requires a host implementation to execute.
+This matrix describes support for the final [VAO Standard 0.4.0](https://github.com/modavis-project/vao-standard) and the VAO 0.5.0 candidate pinned to standard commit `d17b3f188fdf7fadd01ba025383e4feca8def935`. “Preserved” means the source data remains available in the imported package but requires a host implementation to execute.
 
 | Area | Import result | Runtime behavior |
 | --- | --- | --- |
 | Core graph, profiles, rights, discovery | Typed core records plus lossless JSON section snapshots | Query through `VaoPackageAsset`; no network dereferencing |
-| Schema, carrier, preservation | Offline validation against vendored final schemas; strict JSON/numeric/path/ZIP checks; exact binding, closure, hashes, chunks, and Merkle verification | Source archive identity and final-schema materialization receipt retained |
+| Schema, carrier, preservation | Version-dispatched offline validation against the vendored 0.4.0 or pinned 0.5.0 schemas; strict JSON/numeric/path/ZIP checks; exact binding, closure, hashes, chunks, and Merkle verification | Source archive identity and contract-matching materialization receipt retained |
 | Large carriers | All, runtime-required, selected asset-group, or metadata-only materialization with exact byte preflight | Every realization remains queryable; `IsMaterialized` distinguishes available bytes |
 | Safe updates | Source path/GUID, archive digest, import recipe, managed paths, and verified per-realization change preview | Transactional replacement and rollback preserve stable GUIDs, matching prefab-local IDs, scene overrides, generated controls, and unmanaged host files |
-| Repository distributions | Typed distribution, repository-binding, rights, access, attribution, and cache-policy records | Disabled-by-default host resolution; explicit consent and restricted-rights confirmation; scoped transport, byte/SHA-256 verification, cancellation, quota, pinning, and priority/LRU eviction |
-| Content discovery and controls | Searchable Content Browser tabs for assets, presentations, entities, controls, relations, acoustics, and rights | Optional generated stop, keyboard, media-transport, presentation-companion, and acquisition-approval surface |
+| Repository distributions | Typed distribution, repository-binding, rights, access, attribution, cache-policy, pack-member, and 0.5.0 carrier-member records | Disabled-by-default host resolution; explicit consent and restricted-rights confirmation; scoped transport, byte/SHA-256 verification, cancellation, quota, pinning, and priority/LRU eviction |
+| Content discovery and controls | Searchable Content Browser tabs for assets, presentations, entities, controls, relations, acoustics, science, physical signals, and rights | Optional generated stop, keyboard, media-transport, presentation-companion, and acquisition-approval surface |
 | Playable samples | Mappings, variants, key ranges, pitch/gain, state-dependent render selection | Polyphonic `AudioSource` playback with note-off release |
 | Interaction and deterministic runtime | Controls, events, primitive states, transitions, conflict/atomicity fields, execution semantics, timing constraints, process models, routing rules, render bindings, random sources | Timestamped scheduler; snapshot/run-to-completion execution; delayed actions; process lifecycle; specified PCG32/xoshiro streams; exact uniform/categorical selection; complete key transforms; native sample rendering plus typed host events |
 | MIDI 1.0 | SMF parsing plus live channel voice routing | Notes, program change, control change, pressure, and pitch-bend ingress |
@@ -22,7 +22,7 @@ This matrix describes support for the final [VAO Standard 0.4.0](https://github.
 | Optional host SDKs | Core import has no glTFast, hardware-MIDI, AR, Vuforia, or XRI dependency | Reflection adapters for glTFast, Minis/MidiJack, AR Foundation/Vuforia/custom tracking, and XRI grab state; explicit setup window and sample |
 | XR host placement | No tracker-specific metadata is guessed and no tracker SDK is required | SDK-neutral anchor attach, tracked poses, found/lost content state, persistent uniform scale, reset, and optional AR/Vuforia discovery adapter |
 | Acoustic rendering | Audio scenes, response sets/configurations, runtime features, measurement mappings, channel/delay data, PCM IR clips, and decoded AES69-SOFA FIR assets | Position-aware partitioned multichannel convolution, tracked HRTF/response selection, interpolation, cross-fades, runtime materialization, renderer discovery/priority/switching, and explicit fallback boundary |
-| Scientific, multimodal, physical system | Full profile JSON snapshots plus typed spatial and multimodal runtime records | General media, event, sampled-instrument, linked-animation, and response-field behavior is built in; specialized sensors, physical actuators, geometry/learned acoustics, and application hardware remain host extension points |
+| Scientific, multimodal, physical system | Full profile JSON snapshots plus typed observations, physical components/state bindings, protocol evidence, signal-transfer functions, spatial records, and multimodal runtime records | General media, event, sampled-instrument, linked-animation, and response-field behavior is built in; measurements and interface transformations are inspectable without pretending to operate specialized sensors, physical actuators, or application hardware |
 
 ## Deliberate boundaries
 

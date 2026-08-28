@@ -32,6 +32,10 @@ namespace Modavis.Vao
         [SerializeField] private List<VaoStateVariableRecord> stateVariables = new();
         [SerializeField] private List<VaoTransitionRecord> transitions = new();
         [SerializeField] private List<VaoProtocolBindingRecord> protocolBindings = new();
+        [SerializeField] private List<VaoTransferFunctionRecord> transferFunctions = new();
+        [SerializeField] private List<VaoScientificObservationRecord> scientificObservations = new();
+        [SerializeField] private List<VaoPhysicalComponentRecord> physicalComponents = new();
+        [SerializeField] private List<VaoPhysicalStateBindingRecord> physicalStateBindings = new();
         [SerializeField] private List<VaoEventTypeRecord> eventTypes = new();
         [SerializeField] private List<VaoTimingConstraintRecord> timingConstraints = new();
         [SerializeField] private List<VaoProcessModelRecord> processModels = new();
@@ -76,6 +80,10 @@ namespace Modavis.Vao
         public List<VaoStateVariableRecord> StateVariables => stateVariables;
         public List<VaoTransitionRecord> Transitions => transitions;
         public List<VaoProtocolBindingRecord> ProtocolBindings => protocolBindings;
+        public List<VaoTransferFunctionRecord> TransferFunctions => transferFunctions;
+        public List<VaoScientificObservationRecord> ScientificObservations => scientificObservations;
+        public List<VaoPhysicalComponentRecord> PhysicalComponents => physicalComponents;
+        public List<VaoPhysicalStateBindingRecord> PhysicalStateBindings => physicalStateBindings;
         public List<VaoEventTypeRecord> EventTypes => eventTypes;
         public List<VaoTimingConstraintRecord> TimingConstraints => timingConstraints;
         public List<VaoProcessModelRecord> ProcessModels => processModels;
@@ -208,6 +216,7 @@ namespace Modavis.Vao
         public string FileIdentifier;
         public string Access;
         public string TransportSha256;
+        public string CarrierIdentifier;
         public string PackRealizationIdentifier;
         public string MemberPath;
         public string PackManifestSha256;
@@ -344,6 +353,75 @@ namespace Modavis.Vao
         public int UmpMessageType;
         public int DataResolutionBits;
         public bool JrTimestamp;
+        public int DataNumberingBase;
+        public string Address;
+        public string Status;
+        public string Source;
+        public string SourceLocator;
+        public string GeneratedByIdentifier;
+        public string ReviewedByIdentifier;
+    }
+
+    [Serializable]
+    public sealed class VaoTransferFunctionRecord
+    {
+        public string Identifier;
+        public string[] AppliesToIdentifiers = Array.Empty<string>();
+        public string InputKind;
+        public string InputUnit;
+        public string OutputKind;
+        public string OutputUnit;
+        public string DynamicModel;
+        public string Interpolation;
+        public string ExtrapolationPolicy;
+        public bool Monotonic;
+        public bool Hysteresis;
+        public string Status;
+        public string Source;
+        public string SourceLocator;
+        [TextArea(2, 10)] public string PointsJson;
+        [TextArea] public string Notes;
+    }
+
+    [Serializable]
+    public sealed class VaoScientificObservationRecord
+    {
+        public string Identifier;
+        public string ObservedProperty;
+        public string FeatureOfInterestIdentifier;
+        public string ActivityIdentifier;
+        public string ProtocolIdentifier;
+        public string SensorIdentifier;
+        public string RawResultRealizationIdentifier;
+        public string ProcessedResultRealizationIdentifier;
+        public string ResultTime;
+        public string Status;
+        public string QuantityKind;
+        public string Unit;
+        public double NumericValue;
+        public bool HasNumericValue;
+        public string[] QualityFlags = Array.Empty<string>();
+        [TextArea] public string ResultJson;
+    }
+
+    [Serializable]
+    public sealed class VaoPhysicalComponentRecord
+    {
+        public string Identifier;
+        public string EntityIdentifier;
+        public string ComponentKind;
+        public string ParentComponentIdentifier;
+        public string[] PortIdentifiers = Array.Empty<string>();
+    }
+
+    [Serializable]
+    public sealed class VaoPhysicalStateBindingRecord
+    {
+        public string Identifier;
+        public string StateVariableIdentifier;
+        public string ComponentIdentifier;
+        public string StateRole;
+        public string ObservationIdentifier;
     }
 
     [Serializable]

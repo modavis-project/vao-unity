@@ -183,11 +183,12 @@ namespace Modavis.Vao.Editor
             if (packageInfo == null) throw new InvalidOperationException("Cannot identify the installed VAO package while creating the materialization receipt.");
             var importerSource = Path.Combine(packageInfo.resolvedPath, "Editor", "VaoImporter.cs");
             var implementationIdentity = HashFile(importerSource);
+            var formatVersion = inspection.Manifest.Value<string>("formatVersion");
             var profileRecords = (inspection.Manifest["profiles"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
                 .Concat(inspection.Manifest["materializableProfiles"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>()).ToList();
             var receipt = new JObject
             {
-                ["$schema"] = "https://w3id.org/modavis/vao/0.4.0/schema/materialization-receipt.json", ["type"] = "VAOMaterializationReceipt", ["formatVersion"] = "0.4.0",
+                ["$schema"] = $"https://w3id.org/modavis/vao/{formatVersion}/schema/materialization-receipt.json", ["type"] = "VAOMaterializationReceipt", ["formatVersion"] = formatVersion,
                 ["releaseId"] = inspection.Manifest.SelectToken("release.id")?.Value<string>(), ["manifestSHA256"] = inspection.Carrier.Value<string>("manifestSHA256"), ["instanceId"] = "urn:uuid:" + Guid.NewGuid().ToString(), ["createdAt"] = now,
                 ["implementation"] = new JObject
                 {
@@ -344,7 +345,7 @@ namespace Modavis.Vao.Editor
                     Identifier = distribution.Value<string>("id"), Kind = distribution.Value<string>("kind"), RepositoryBindingIdentifier = distribution.Value<string>("repositoryBindingId"),
                     PersistentIdentifier = distribution.Value<string>("persistentIdentifier"), ConceptIdentifier = distribution.Value<string>("conceptIdentifier"),
                     RecordIdentifier = distribution.Value<string>("recordIdentifier"), FileIdentifier = distribution.Value<string>("fileIdentifier"), Access = distribution.Value<string>("access"),
-                    TransportSha256 = distribution.SelectToken("transportChecksums.sha256")?.Value<string>(), PackRealizationIdentifier = distribution.Value<string>("packRealizationId"),
+                    TransportSha256 = distribution.SelectToken("transportChecksums.sha256")?.Value<string>(), CarrierIdentifier = distribution.Value<string>("carrierId"), PackRealizationIdentifier = distribution.Value<string>("packRealizationId"),
                     MemberPath = distribution.Value<string>("memberPath"), PackManifestSha256 = distribution.Value<string>("packManifestSHA256")
                 });
             foreach (var binding in manifest["repositoryBindings"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
@@ -369,6 +370,7 @@ namespace Modavis.Vao.Editor
 
             var sequencesByLogical = ImportMidiSequences(package, root, logicalByRealization, options, result);
             CompileControls(manifest, package);
+            CompileScientificAndPhysical(manifest, package);
             CompileExecution(manifest, package);
             CompileSamples(manifest, package);
             CompileAnimations(manifest, package, sequencesByLogical, root, options, result);
@@ -463,10 +465,54 @@ namespace Modavis.Vao.Editor
                 package.ProtocolBindings.Add(new VaoProtocolBindingRecord
                 {
                     Identifier = binding.Value<string>("id"), Protocol = binding.Value<string>("protocol"), Direction = binding.Value<string>("direction"), ControlIdentifier = binding.Value<string>("controlId"), EventTypeIdentifier = binding.Value<string>("eventTypeId"), MessageType = binding.Value<string>("messageType"),
-                    Channel = binding.Value<int?>("channel") ?? 0, ChannelNumberingBase = binding.Value<int?>("channelNumberingBase") ?? 0, Number = binding.Value<int?>("number") ?? -1,
+                    Channel = binding.Value<int?>("channel") ?? 0, ChannelNumberingBase = binding.Value<int?>("channelNumberingBase") ?? 0, DataNumberingBase = binding.Value<int?>("dataNumberingBase") ?? 0, Number = binding.Value<int?>("number") ?? -1,
                     HasActivationValue = binding["activationValue"] != null, ActivationValue = Primitive(binding["activationValue"]),
                     HasDeactivationValue = binding["deactivationValue"] != null, DeactivationValue = Primitive(binding["deactivationValue"]),
-                    UmpGroup = binding.Value<int?>("umpGroup") ?? -1, FunctionBlock = binding.Value<int?>("functionBlock") ?? -1, UmpMessageType = binding.Value<int?>("umpMessageType") ?? -1, DataResolutionBits = binding.Value<int?>("dataResolutionBits") ?? 7, JrTimestamp = binding.Value<bool?>("jrTimestamp") ?? false
+                    UmpGroup = binding.Value<int?>("umpGroup") ?? -1, FunctionBlock = binding.Value<int?>("functionBlock") ?? -1, UmpMessageType = binding.Value<int?>("umpMessageType") ?? -1, DataResolutionBits = binding.Value<int?>("dataResolutionBits") ?? 7, JrTimestamp = binding.Value<bool?>("jrTimestamp") ?? false,
+                    Address = binding.Value<string>("address"), Status = binding.Value<string>("status"), Source = binding.Value<string>("source"), SourceLocator = binding.Value<string>("sourceLocator"),
+                    GeneratedByIdentifier = binding.Value<string>("generatedById"), ReviewedByIdentifier = binding.Value<string>("reviewedById")
+                });
+
+            foreach (var transfer in manifest.SelectToken("interactionModel.transferFunctions")?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                package.TransferFunctions.Add(new VaoTransferFunctionRecord
+                {
+                    Identifier = transfer.Value<string>("id"), AppliesToIdentifiers = transfer["appliesToIds"]?.Values<string>().ToArray() ?? Array.Empty<string>(),
+                    InputKind = transfer.Value<string>("inputKind"), InputUnit = transfer.Value<string>("inputUnit"), OutputKind = transfer.Value<string>("outputKind"), OutputUnit = transfer.Value<string>("outputUnit"),
+                    DynamicModel = transfer.Value<string>("dynamicModel"), Interpolation = transfer.Value<string>("interpolation"), ExtrapolationPolicy = transfer.Value<string>("extrapolationPolicy"),
+                    Monotonic = transfer.Value<bool?>("monotonic") ?? false, Hysteresis = transfer.Value<bool?>("hysteresis") ?? false,
+                    Status = transfer.Value<string>("status"), Source = transfer.Value<string>("source"), SourceLocator = transfer.Value<string>("sourceLocator"),
+                    PointsJson = transfer["points"]?.ToString(Formatting.None), Notes = transfer.Value<string>("notes")
+                });
+        }
+
+        internal static void CompileScientificAndPhysical(JObject manifest, VaoPackageAsset package)
+        {
+            foreach (var observation in manifest.SelectToken("scientific.observations")?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                var result = observation["result"] as JObject;
+                package.ScientificObservations.Add(new VaoScientificObservationRecord
+                {
+                    Identifier = observation.Value<string>("id"), ObservedProperty = observation.Value<string>("observedProperty"),
+                    FeatureOfInterestIdentifier = observation.Value<string>("featureOfInterestId"), ActivityIdentifier = observation.Value<string>("activityId"), ProtocolIdentifier = observation.Value<string>("protocolId"),
+                    SensorIdentifier = observation.Value<string>("sensorId"), RawResultRealizationIdentifier = observation.Value<string>("rawResultRealizationId"), ProcessedResultRealizationIdentifier = observation.Value<string>("processedResultRealizationId"),
+                    ResultTime = observation.Value<string>("resultTime"), Status = observation.Value<string>("status"), QuantityKind = result?.Value<string>("quantityKind"), Unit = result?.Value<string>("unit"),
+                    HasNumericValue = result?["value"]?.Type is JTokenType.Integer or JTokenType.Float, NumericValue = result?.Value<double?>("value") ?? 0d,
+                    QualityFlags = observation["qualityFlags"]?.Values<string>().ToArray() ?? Array.Empty<string>(), ResultJson = result?.ToString(Formatting.None)
+                });
+            }
+
+            foreach (var component in manifest.SelectToken("physicalSystem.components")?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                package.PhysicalComponents.Add(new VaoPhysicalComponentRecord
+                {
+                    Identifier = component.Value<string>("id"), EntityIdentifier = component.Value<string>("entityId"), ComponentKind = component.Value<string>("componentKind"),
+                    ParentComponentIdentifier = component.Value<string>("parentComponentId"), PortIdentifiers = component["portIds"]?.Values<string>().ToArray() ?? Array.Empty<string>()
+                });
+
+            foreach (var binding in manifest.SelectToken("physicalSystem.stateBindings")?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                package.PhysicalStateBindings.Add(new VaoPhysicalStateBindingRecord
+                {
+                    Identifier = binding.Value<string>("id"), StateVariableIdentifier = binding.Value<string>("stateVariableId"), ComponentIdentifier = binding.Value<string>("componentId"),
+                    StateRole = binding.Value<string>("stateRole"), ObservationIdentifier = binding.Value<string>("observationId")
                 });
         }
 

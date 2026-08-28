@@ -13,19 +13,19 @@ namespace Modavis.Vao.Editor
         private VaoArchiveInspection inspection;
         private Vector2 scroll;
 
-        [MenuItem("Tools/MODAVIS/Import VAO 0.4.0…")]
-        public static void Open() => GetWindow<VaoImportWindow>(true, "Import VAO 0.4.0").minSize = new Vector2(620, 420);
+        [MenuItem("Tools/MODAVIS/Import VAO 0.4.0 or 0.5.0…")]
+        public static void Open() => GetWindow<VaoImportWindow>(true, "Import VAO").minSize = new Vector2(620, 420);
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("Virtual Acoustic Object 0.4.0", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Virtual Acoustic Object 0.4.0 / 0.5.0", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The archive is parsed as inert data. Nothing package-supplied is executed or fetched, and payload bytes are imported only after carrier and fixity validation.", MessageType.Info);
             using (new EditorGUILayout.HorizontalScope())
             {
                 archivePath = EditorGUILayout.TextField("VAO archive", archivePath);
                 if (GUILayout.Button("Browse…", GUILayout.Width(90)))
                 {
-                    var selected = EditorUtility.OpenFilePanel("Select VAO 0.4.0", string.Empty, "vao");
+                    var selected = EditorUtility.OpenFilePanel("Select VAO carrier", string.Empty, "vao");
                     if (!string.IsNullOrEmpty(selected)) { archivePath = selected; inspection = null; }
                 }
             }

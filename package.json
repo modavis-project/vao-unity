@@ -1,8 +1,8 @@
 {
   "name": "org.modavis.vao-unity",
-  "version": "0.6.0-rc.1",
+  "version": "0.6.0-rc.2",
   "displayName": "MODAVIS VAO Importer",
-  "description": "Secure VAO 0.4.0 import, deterministic execution, linked animation, MIDI/XR integration, runtime materialization, and position-aware RIR/SOFA acoustics for Unity.",
+  "description": "Secure VAO 0.4.0 and pinned 0.5.0 import, scientific and physical signal inspection, deterministic execution, MIDI/XR integration, runtime materialization, and position-aware acoustics for Unity.",
   "unity": "6000.0",
   "license": "MIT",
   "documentationUrl": "https://github.com/modavis-project/vao-unity#readme",

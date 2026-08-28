@@ -1,16 +1,16 @@
 # Conformance roles and limits
 
-This package is an implementation of VAO 0.4.0 for Unity, not the normative standard. The [VAO Standard repository](https://github.com/modavis-project/vao-standard) and its [versioned publication](https://doi.org/10.5281/zenodo.22122774) define conformance.
+This package implements the published VAO 0.4.0 contract and a pinned VAO 0.5.0 candidate for Unity; it is not the normative standard. The [VAO Standard repository](https://github.com/modavis-project/vao-standard) and its [0.4.0 publication](https://doi.org/10.5281/zenodo.22122774) define the published baseline. Candidate 0.5.0 validation is bound to commit `d17b3f188fdf7fadd01ba025383e4feca8def935` and normative-bundle SHA-256 `82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96`.
 
 ## Implemented roles
 
 | Role | Behavior |
 | --- | --- |
-| Carrier validator and reader | Validates the three vendored final schemas used by the plugin, strict JSON/numeric rules, carrier structure, semantic references, profile truth, closure, paths, ZIP metadata, and fixity before extraction |
+| Carrier validator and reader | Dispatches by exact format version and validates the matching manifest, carrier, and receipt schemas, strict JSON/numeric rules, carrier structure, semantic references, profile truth, closure, paths, ZIP metadata, and fixity before extraction |
 | Carrier extractor | Extracts only carrier-mapped, selected realizations into a bounded staging location after successful validation |
 | Materializer/importer | Resolves selected groups, compiles typed Unity records, imports supported media, creates optional prefab assets, and writes a final-schema materialization receipt |
 | Runtime repository materializer | Acquires declared distributions only through a host resolver and approval flow, then checks size and SHA-256 before committing to a bounded cache |
-| Profile processor | Executes the built-in core, dynamic-delivery, playable, deterministic-runtime, multimodal, spatial, and acoustics capabilities described in the support matrix; other content remains inspectable for a host extension |
+| Profile processor | Executes the built-in core, dynamic-delivery, playable, deterministic-runtime, multimodal, spatial, and acoustics capabilities described in the support matrix; scientific observations, physical topology, and signal transformations are typed inspection data, while device-specific execution remains a host extension |
 
 The schema evaluator is intentionally scoped to the keywords used by the vendored VAO manifest, carrier, and receipt schemas. It is not advertised as a general-purpose Draft 2020-12 JSON Schema library. Scientific truth, acoustic adequacy, rights validity, and historical interpretation are outside machine conformance.
 

@@ -75,6 +75,36 @@ namespace Modavis.Vao.Editor.Tests
         }
 
         [Test]
+        public void PinnedVaoStandard05MinimalCarrierImportsWithMatchingReceiptContract()
+        {
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(VaoArchiveReader).Assembly);
+            var archive = Path.Combine(packageInfo.resolvedPath, "Tests", "Editor", "Fixtures", "VAO-Standard-Minimal-0.5.0.vao");
+            var inspection = VaoArchiveReader.Inspect(archive);
+            Assert.That(inspection.IsValid, Is.True, string.Join("; ", inspection.Errors));
+            Assert.That(inspection.FormatVersion, Is.EqualTo("0.5.0"));
+            Assert.That(inspection.CarrierIdentifier, Is.EqualTo("urn:uuid:03000000-0000-4000-8000-000000000040"));
+            Assert.That(inspection.ArchiveSha256, Is.EqualTo("9bc7ff7eb06cd50a66ab5bfeabdecaef68c8b24a15f5b47bc0013811a241403e"));
+
+            var destination = "Assets/QA/Pinned Standard 05 " + Guid.NewGuid().ToString("N");
+            try
+            {
+                var imported = VaoImporter.Import(archive, new VaoImportOptions { DestinationAssetPath = destination, CreatePrefab = false });
+                var receiptAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(imported.MaterializationReceiptPath);
+                Assert.That(receiptAsset, Is.Not.Null);
+                using var receiptReader = new JsonTextReader(new StringReader(receiptAsset.text)) { DateParseHandling = DateParseHandling.None };
+                var receipt = JObject.Load(receiptReader);
+                Assert.That(receipt.Value<string>("formatVersion"), Is.EqualTo("0.5.0"));
+                Assert.That(receipt.Value<string>("$schema"), Is.EqualTo("https://w3id.org/modavis/vao/0.5.0/schema/materialization-receipt.json"));
+                Assert.That(VaoJsonSchemaValidator.ValidateMaterializationReceipt(receipt), Is.Empty);
+            }
+            finally
+            {
+                AssetDatabase.DeleteAsset(destination);
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            }
+        }
+
+        [Test]
         public void Rfc8785CanonicalizationMatchesThePublishedRuntimeTrace()
         {
             var tuple = new JObject

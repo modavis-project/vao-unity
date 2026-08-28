@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0-rc.2 — 2026-08-28
+
+- Adds exact, offline support for the VAO 0.5.0 candidate pinned to standard commit `d17b3f188fdf7fadd01ba025383e4feca8def935` while retaining VAO 0.4.0 support.
+- Preserves carrier-member distributions and exposes scientific observations, physical components and state bindings, protocol evidence, and signal-transfer functions as typed package records.
+- Adds Science and Signals views, contract-matching 0.5.0 materialization receipts, batch validation, and a real Kinoorgel metadata-only import gate.
+
 ## 0.6.0-rc.1 — 2026-08-28
 
 - First public release candidate of the Unity package for VAO 0.4.0.

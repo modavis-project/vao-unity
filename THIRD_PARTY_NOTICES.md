@@ -14,3 +14,17 @@ The following files are copied from version 0.4.0 of the [Virtual Acoustic Objec
 - `Tests/Editor/Fixtures/VAO-Standard-Kinoorgel-0.4.0.json`
 
 Those standard artifacts are licensed under [Creative Commons Attribution 4.0 International](Editor/Schemas/VAO-STANDARD-CC-BY-4.0.txt). They are redistributed unmodified for offline validation and regression testing. The standard repository, not this plugin repository, is the authoritative source. Plugin code and original documentation remain under this repository's MIT License.
+
+The following unmodified candidate artifacts are copied from
+`modavis-project/vao-standard` commit
+`d17b3f188fdf7fadd01ba025383e4feca8def935`:
+
+- `Editor/Schemas/vao-manifest-0.5.0.schema.json`
+- `Editor/Schemas/vao-carrier-0.5.0.schema.json`
+- `Editor/Schemas/vao-materialization-receipt-0.5.0.schema.json`
+- `Tests/Editor/Fixtures/VAO-Standard-Minimal-0.5.0.vao`
+
+The snapshot is pinned by the normative-bundle SHA-256 recorded in
+`Editor/Schemas/VAO-STANDARD-0.5.0-CANDIDATE.txt`. These files use the same CC
+BY 4.0 license, but their presence does not imply that VAO 0.5.0 has already
+been published as a final standard.

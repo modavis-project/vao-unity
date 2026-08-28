@@ -1,0 +1,10 @@
+VAO Standard 0.5.0 candidate provenance
+
+Repository: https://github.com/modavis-project/vao-standard
+Commit: d17b3f188fdf7fadd01ba025383e4feca8def935
+Normative bundle SHA-256: 82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96
+Copied: 2026-08-28
+
+The schemas are vendored unmodified for offline validation. VAO 0.5.0 was a
+candidate, not a published standard, at the time of this snapshot. Its schema
+files are covered by the accompanying VAO Standard CC BY 4.0 license text.

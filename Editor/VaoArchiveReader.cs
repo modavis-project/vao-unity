@@ -26,6 +26,9 @@ namespace Modavis.Vao.Editor
         public List<string> Errors { get; } = new();
         public List<string> Warnings { get; } = new();
         public bool IsValid => Errors.Count == 0;
+        public string FormatVersion => Manifest?.Value<string>("formatVersion");
+        public string CarrierIdentifier => Carrier?.Value<string>("id");
+        public string CarrierMode => Carrier?.Value<string>("carrierMode");
         public string Identifier => Manifest?.Value<string>("id");
         public string Title => VaoJson.Localized(Manifest?["title"]);
     }
@@ -53,6 +56,7 @@ namespace Modavis.Vao.Editor
     public static class VaoArchiveReader
     {
         public const string FormatVersion = "0.4.0";
+        public const string CandidateFormatVersion = "0.5.0";
         public const string ManifestName = "vao-manifest.json";
         public const string CarrierName = "META-INF/vao-carrier.json";
         public const string MediaType = "application/vnd.modavis.vao+zip";
@@ -68,6 +72,13 @@ namespace Modavis.Vao.Editor
         public const string AcousticsProfile = "https://w3id.org/modavis/vao/profile/acoustics/0.4.0";
         public const string PlayableProfile = "https://w3id.org/modavis/vao/profile/playable/0.4.0";
         private const string CapabilityBase = "https://w3id.org/modavis/vao/vocab/capability/";
+
+        public static bool IsSupportedFormatVersion(string version) => version is FormatVersion or CandidateFormatVersion;
+
+        private static string ManifestSchemaFor(string version) => $"https://w3id.org/modavis/vao/{version}/schema/manifest.json";
+        private static string CarrierSchemaFor(string version) => $"https://w3id.org/modavis/vao/{version}/schema/carrier.json";
+        private static string ContextFor(string version) => $"https://w3id.org/modavis/vao/{version}/context.jsonld";
+        private static string ProfileFor(string version, string name) => $"https://w3id.org/modavis/vao/profile/{name}/{version}";
 
         private static readonly HashSet<string> RequiredRoot = new(StringComparer.Ordinal)
         {
@@ -337,61 +348,75 @@ namespace Modavis.Vao.Editor
         private static void ValidateManifest(VaoArchiveInspection result)
         {
             var manifest = result.Manifest;
+            var version = manifest.Value<string>("formatVersion");
+            if (!IsSupportedFormatVersion(version))
+            {
+                result.Errors.Add($"Manifest formatVersion {version ?? "<missing>"} is unsupported; expected exact 0.4.0 or 0.5.0.");
+                return;
+            }
             foreach (var name in RequiredRoot) if (manifest[name] == null) result.Errors.Add($"Manifest is missing required root property {name}.");
             foreach (var property in manifest.Properties()) if (!AllowedRoot.Contains(property.Name)) result.Errors.Add($"Manifest has unknown root property {property.Name}.");
-            if (manifest.Value<string>("$schema") != Schema) result.Errors.Add("Manifest does not use the immutable VAO 0.4.0 schema IRI.");
-            if (manifest.Value<string>("formatVersion") != FormatVersion) result.Errors.Add("Manifest formatVersion is not 0.4.0.");
+            if (manifest.Value<string>("$schema") != ManifestSchemaFor(version)) result.Errors.Add($"Manifest does not use the immutable VAO {version} schema IRI.");
             if (manifest.Value<string>("type") != "VirtualAcousticObject") result.Errors.Add("Manifest type is not VirtualAcousticObject.");
-            if (manifest["@context"] is not JArray contexts || !contexts.Values<string>().Contains(Context, StringComparer.Ordinal)) result.Errors.Add("Manifest does not contain the immutable VAO 0.4.0 context IRI.");
+            if (manifest["@context"] is not JArray contexts || !contexts.Values<string>().Contains(ContextFor(version), StringComparer.Ordinal)) result.Errors.Add($"Manifest does not contain the immutable VAO {version} context IRI.");
             var claims = manifest["conformsTo"]?.Values<string>().ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>();
             var profileRecords = (manifest["profiles"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
                 .Concat(manifest["materializableProfiles"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>()).ToList();
             var profiles = profileRecords.Select(item => item.Value<string>("id")).Where(item => !string.IsNullOrEmpty(item)).ToHashSet(StringComparer.Ordinal);
-            foreach (var required in new[] { CoreProfile, DynamicProfile })
+            foreach (var required in new[] { ProfileFor(version, "core"), ProfileFor(version, "dynamic-delivery") })
                 if (!claims.Contains(required) || !profiles.Contains(required)) result.Errors.Add($"Manifest must embed and claim {required}.");
             if (manifest["logicalAssets"] is not JArray { Count: > 0 }) result.Errors.Add("Manifest requires at least one logical asset.");
             if (manifest["realizations"] is not JArray { Count: > 0 }) result.Errors.Add("Manifest requires at least one realization.");
             ValidateIdentifiersAndReferences(manifest, result);
-            ValidateProfileTruth(manifest, claims, profileRecords, result.Errors);
+            ValidateProfileTruth(manifest, version, claims, profileRecords, result.Errors);
             ValidateRuntimeTraces(manifest, result.Errors);
             if (manifest.DescendantsAndSelf().OfType<JValue>().Any(item => item.Type == JTokenType.Float && item.Value is double number && (double.IsNaN(number) || double.IsInfinity(number)))) result.Errors.Add("Manifest contains a non-finite number.");
         }
 
-        private static void ValidateProfileTruth(JObject manifest, HashSet<string> claims, IReadOnlyCollection<JObject> profileRecords, ICollection<string> errors)
+        private static void ValidateProfileTruth(JObject manifest, string version, HashSet<string> claims, IReadOnlyCollection<JObject> profileRecords, ICollection<string> errors)
         {
             var profiles = profileRecords.Select(item => item.Value<string>("id")).Where(item => !string.IsNullOrEmpty(item)).ToHashSet(StringComparer.Ordinal);
             var acoustics = manifest["acoustics"] as JObject;
             var interaction = manifest["interactionModel"] as JObject;
+            var scientificProfile = ProfileFor(version, "scientific");
+            var multimodalProfile = ProfileFor(version, "multimodal");
+            var physicalProfile = ProfileFor(version, "physical-instrument");
+            var playableProfile = ProfileFor(version, "playable");
+            var spatialProfile = ProfileFor(version, "spatial");
+            var acousticsProfile = ProfileFor(version, "acoustics");
+            var runtimeProfile = ProfileFor(version, "deterministic-runtime");
+            var coreProfile = ProfileFor(version, "core");
+            var dynamicProfile = ProfileFor(version, "dynamic-delivery");
             var requirements = new Dictionary<string, bool>(StringComparer.Ordinal)
             {
-                [ScientificProfile] = RegistryHasItems(manifest["scientific"]),
-                [MultimodalProfile] = RegistryHasItems(manifest["multimodal"]),
-                [PhysicalProfile] = RegistryHasItems(manifest["physicalSystem"]),
-                [PlayableProfile] = manifest["playable"] is JObject || interaction != null || manifest["captureDocumentation"] is JObject,
-                [SpatialProfile] = acoustics != null && new[] { "coordinateFrames", "poses", "geometryBindings" }.Any(name => acoustics[name] is JArray { Count: > 0 })
+                [scientificProfile] = RegistryHasItems(manifest["scientific"]),
+                [multimodalProfile] = RegistryHasItems(manifest["multimodal"]),
+                [physicalProfile] = RegistryHasItems(manifest["physicalSystem"]),
+                [playableProfile] = manifest["playable"] is JObject || interaction != null || manifest["captureDocumentation"] is JObject,
+                [spatialProfile] = acoustics != null && new[] { "coordinateFrames", "poses", "geometryBindings" }.Any(name => acoustics[name] is JArray { Count: > 0 })
                     || (manifest.SelectToken("multimodal.tracks")?.OfType<JObject>() ?? Enumerable.Empty<JObject>()).Any(item => item["coordinateFrameId"] != null),
-                [AcousticsProfile] = acoustics != null && new[] { "materialModels", "measurements", "responseSets", "metricSets", "audioScenes", "renderConfigurations" }.Any(name => acoustics[name] is JArray { Count: > 0 }),
-                [RuntimeProfile] = manifest.SelectToken("runtime.conformanceTraces") is JArray { Count: > 0 }
+                [acousticsProfile] = acoustics != null && new[] { "materialModels", "measurements", "responseSets", "metricSets", "audioScenes", "renderConfigurations" }.Any(name => acoustics[name] is JArray { Count: > 0 }),
+                [runtimeProfile] = manifest.SelectToken("runtime.conformanceTraces") is JArray { Count: > 0 }
                     || manifest.SelectToken("runtime.randomSources") is JArray { Count: > 0 }
                     || manifest.SelectToken("runtime.renderers") is JArray { Count: > 0 }
                     || (interaction?["processModels"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>()).Any(item => item.Value<string>("processKind") == "stochastic")
             };
             foreach (var pair in requirements)
                 if (pair.Value && (!claims.Contains(pair.Key) || !profiles.Contains(pair.Key))) errors.Add($"Manifest content requires embedded and claimed profile {pair.Key}.");
-            if (profiles.Contains(AcousticsProfile) && !profiles.Contains(SpatialProfile)) errors.Add("The Acoustics profile requires the Spatial profile.");
+            if (profiles.Contains(acousticsProfile) && !profiles.Contains(spatialProfile)) errors.Add("The Acoustics profile requires the Spatial profile.");
             foreach (var claim in claims)
                 if (!profiles.Contains(claim)) errors.Add($"Claimed profile {claim} has no embedded profile record.");
 
             var requiredCapabilities = new Dictionary<string, string[]>(StringComparer.Ordinal)
             {
-                [CoreProfile] = new[] { CapabilityBase + "core-graph", CapabilityBase + "fixity" },
-                [DynamicProfile] = new[] { CapabilityBase + "immutable-release", CapabilityBase + "carrier-mapping" },
-                [PlayableProfile] = new[] { CapabilityBase + "interaction" },
-                [ScientificProfile] = new[] { CapabilityBase + "typed-scientific-provenance" },
-                [MultimodalProfile] = new[] { CapabilityBase + "multimodal-synchronization" },
-                [PhysicalProfile] = new[] { CapabilityBase + "physical-system-topology" },
-                [RuntimeProfile] = new[] { CapabilityBase + "deterministic-render-trace" },
-                [SpatialProfile] = new[] { CapabilityBase + "spatial" }
+                [coreProfile] = new[] { CapabilityBase + "core-graph", CapabilityBase + "fixity" },
+                [dynamicProfile] = new[] { CapabilityBase + "immutable-release", CapabilityBase + "carrier-mapping" },
+                [playableProfile] = new[] { CapabilityBase + "interaction" },
+                [scientificProfile] = new[] { CapabilityBase + "typed-scientific-provenance" },
+                [multimodalProfile] = new[] { CapabilityBase + "multimodal-synchronization" },
+                [physicalProfile] = new[] { CapabilityBase + "physical-system-topology" },
+                [runtimeProfile] = new[] { CapabilityBase + "deterministic-render-trace" },
+                [spatialProfile] = new[] { CapabilityBase + "spatial" }
             };
             foreach (var record in profileRecords)
             {
@@ -400,7 +425,7 @@ namespace Modavis.Vao.Editor
                 var declared = record["requiredCapabilities"]?.Values<string>().ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>(StringComparer.Ordinal);
                 foreach (var capability in required.Where(capability => !declared.Contains(capability))) errors.Add($"Profile {profile} omits mandatory capability {capability}.");
             }
-            if (profileRecords.FirstOrDefault(item => item.Value<string>("id") == AcousticsProfile) is { } acousticProfile)
+            if (profileRecords.FirstOrDefault(item => item.Value<string>("id") == acousticsProfile) is { } acousticProfile)
             {
                 var acousticCapabilities = acousticProfile["requiredCapabilities"]?.Values<string>() ?? Enumerable.Empty<string>();
                 var names = new HashSet<string>(new[] { "semantic-building-model", "measured-impulse-response", "simulated-impulse-response", "position-registered-acoustic-scene", "visual-acoustic-scene", "spatial-response-field", "spatial-audio-scene", "source-directivity", "room-acoustic-metrics", "building-acoustic-performance", "tracked-listener-convolution", "tracked-sources", "geometry-acoustic-rendering", "hybrid-acoustic-rendering", "learned-acoustic-field" }.Select(name => CapabilityBase + name), StringComparer.Ordinal);
@@ -432,6 +457,7 @@ namespace Modavis.Vao.Editor
             foreach (var property in manifest.DescendantsAndSelf().OfType<JProperty>())
             {
                 if (IsOpaqueExtension(property)) continue;
+                if (property.Name == "carrierId") continue;
                 if (property.Name.EndsWith("Id", StringComparison.Ordinal) && property.Value.Type == JTokenType.String) ValidateReference(property.Value.Value<string>(), property.Path, ids, result);
                 else if (property.Name.EndsWith("Ids", StringComparison.Ordinal) && property.Value is JArray array)
                     foreach (var value in array.Values<string>()) ValidateReference(value, property.Path, ids, result);
@@ -471,8 +497,10 @@ namespace Modavis.Vao.Editor
         private static void ValidateCarrier(ZipArchive archive, VaoValidationPolicy policy, VaoArchiveInspection result)
         {
             var carrier = result.Carrier;
-            if (carrier.Value<string>("$schema") != "https://w3id.org/modavis/vao/0.4.0/schema/carrier.json") result.Errors.Add("Carrier uses the wrong immutable schema IRI.");
-            if (carrier.Value<string>("formatVersion") != FormatVersion) result.Errors.Add("Carrier formatVersion is not 0.4.0.");
+            var version = result.Manifest.Value<string>("formatVersion");
+            if (!IsSupportedFormatVersion(version)) return;
+            if (carrier.Value<string>("$schema") != CarrierSchemaFor(version)) result.Errors.Add("Carrier uses the wrong immutable schema IRI.");
+            if (carrier.Value<string>("formatVersion") != version) result.Errors.Add("Carrier formatVersion does not match the manifest.");
             if (carrier.Value<string>("releaseId") != result.Manifest.SelectToken("release.id")?.Value<string>()) result.Errors.Add("Carrier releaseId does not match manifest release.id.");
             if (carrier.Value<long?>("manifestByteSize") != result.ManifestBytes.LongLength) result.Errors.Add("Carrier manifestByteSize does not match exact manifest bytes.");
             if (carrier.Value<string>("manifestSHA256") != HashBytes(result.ManifestBytes, SHA256.Create())) result.Errors.Add("Carrier manifestSHA256 does not match exact manifest bytes.");

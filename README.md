@@ -3,9 +3,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22134391.svg)](https://doi.org/10.5281/zenodo.22134391)
 [![VAO 0.4.0 persistent identifier](https://img.shields.io/badge/W3ID-VAO%200.4.0-2C5F73.svg)](https://w3id.org/modavis/vao/0.4.0/)
 
-Import, inspect, and run [Virtual Acoustic Object (VAO) 0.4.0](https://github.com/modavis-project/vao-standard) carriers in Unity. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
+Import, inspect, and run [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) 0.4.0 carriers and the pinned 0.5.0 candidate in Unity. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
 
-This is release candidate `0.6.0-rc.1`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
+This is release candidate `0.6.0-rc.2`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
 
 ## Install
 
@@ -17,14 +17,14 @@ For a local checkout:
 Once the repository is public, a tagged version can be installed with **Add package from git URL**:
 
 ```text
-https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.1
+https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.2
 ```
 
 Pin a tag in production projects; do not depend on the moving `main` branch.
 
 ## Import a VAO
 
-1. Open **Tools > MODAVIS > Import VAO 0.4.0…**.
+1. Open **Tools > MODAVIS > Import VAO 0.4.0 or 0.5.0…**.
 2. Select a `.vao` file. Review validation errors or warnings before continuing.
 3. Choose a destination below `Assets/` and a materialization mode.
 4. Click **Import**.
@@ -32,7 +32,7 @@ Pin a tag in production projects; do not depend on the moving `main` branch.
 
 Dropping a `.vao` directly into `Assets/` creates a lightweight `VaoArchiveAsset`. Its Inspector shows validation results and offers the same verified import workflow.
 
-The importer creates the source descriptors, a typed package asset, a standards-compliant materialization receipt, selected and digest-verified payload assets, and—when enabled—a prefab and runtime controls. Use **Window > MODAVIS > VAO Content Browser** or the package asset Inspector to explore logical assets, realizations, relationships, profiles, rights, controls, presentations, acoustics, and materialization state.
+The importer creates the source descriptors, a typed package asset, a contract-matching materialization receipt, selected and digest-verified payload assets, and—when enabled—a prefab and runtime controls. Use **Tools > MODAVIS > VAO Content Browser** or the package asset Inspector to explore logical assets, realizations, relationships, scientific observations, physical components, protocol bindings, signal-transfer functions, profiles, rights, controls, presentations, acoustics, and materialization state.
 
 For large carriers, choose **Runtime Required**, **Selected Asset Groups**, or **Metadata Only**. Dependencies of selected groups are included transitively. Unmaterialized realizations remain queryable and can later be acquired through the opt-in runtime materializer.
 
@@ -47,7 +47,7 @@ For large carriers, choose **Runtime Required**, **Selected Asset Groups**, or *
 - Position-aware partitioned convolution for Unity-decodable PCM impulse responses and supported AES69-SOFA FIR data.
 - Explicit-consent runtime acquisition with host-controlled URL resolution, rights display, size and SHA-256 checks, cancellation, and a bounded verified cache.
 
-The package preserves unsupported profile data as JSON and exposes host extension points. It does not reinterpret geometry acoustics, learned fields, MPEG-I scenes, non-FIR or multi-emitter SOFA data, specialized actuators, or application-specific hardware. See the [support matrix](Documentation~/VAO-0.4.0-support.md) and [conformance and limits](Documentation~/conformance-and-limits.md) for the precise boundary.
+The package preserves unsupported profile data as JSON and exposes host extension points. It does not reinterpret geometry acoustics, learned fields, MPEG-I scenes, non-FIR or multi-emitter SOFA data, specialized actuators, or application-specific hardware. See the [support matrix](Documentation~/VAO-support.md) and [conformance and limits](Documentation~/conformance-and-limits.md) for the precise boundary.
 
 ## Minimal runtime example
 
@@ -89,13 +89,13 @@ Open **Tools > MODAVIS > Optional Integrations…** to detect or explicitly inst
 
 ## Security model
 
-Validation and Editor import are offline. Package-supplied code is never executed and external identifiers are never dereferenced during import. Before extraction, the reader checks the final VAO 0.4.0 schemas and semantic/profile rules, exact manifest/carrier binding, preservation closure, hashes, deterministic trace digests, strict JSON and numeric constraints, ZIP metadata, UTF-8 paths, traversal and portable-name collisions, entry counts, expanded sizes, and compression ratios.
+Validation and Editor import are offline. Package-supplied code is never executed and external identifiers are never dereferenced during import. Before extraction, the reader checks the exact vendored schema set for VAO 0.4.0 or the pinned 0.5.0 candidate, semantic/profile rules, manifest/carrier binding, preservation closure, hashes, deterministic trace digests, strict JSON and numeric constraints, ZIP metadata, UTF-8 paths, traversal and portable-name collisions, entry counts, expanded sizes, and compression ratios.
 
 Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`, enables acquisition, presents rights and access information, and obtains approval bound to the exact plan. See [runtime materialization](Documentation~/runtime-materialization.md) and [SECURITY.md](SECURITY.md).
 
 ## Documentation
 
-- [VAO 0.4.0 support matrix](Documentation~/VAO-0.4.0-support.md)
+- [VAO 0.4.0 and 0.5.0 support matrix](Documentation~/VAO-support.md)
 - [Conformance roles and resource limits](Documentation~/conformance-and-limits.md)
 - [Deterministic execution](Documentation~/deterministic-execution.md)
 - [Position-aware acoustic rendering](Documentation~/acoustic-rendering.md)
@@ -104,6 +104,7 @@ Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`
 - [XR host integration](Documentation~/XR-host-integration.md)
 - [Optional integrations](Documentation~/optional-integrations.md)
 - [Runtime materialization](Documentation~/runtime-materialization.md)
+- [Kinoorgel VAO 0.5.0 acceptance procedure](Documentation~/kinoorgel-validation.md)
 
 ## Development and verification
 
@@ -115,7 +116,7 @@ Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`
 ./Scripts/verify-release.sh
 ```
 
-The test suite includes the published VAO 0.4.0 minimal carrier and profile descriptors, exact schema snapshot hashes, RFC 8785 trace canonicalization, specified PCG32/xoshiro sequences, archive-security cases, importer lifecycle tests, Play Mode behavior, and player-build checks.
+The test suite includes the published VAO 0.4.0 and pinned 0.5.0 minimal carriers, profile descriptors, exact schema snapshot hashes, RFC 8785 trace canonicalization, specified PCG32/xoshiro sequences, archive-security cases, importer lifecycle tests, Play Mode behavior, and player-build checks. The 0.5.0 Kinoorgel acceptance run validates its bootstrap carrier and performs a metadata-only import without inventing a 3D representation.
 
 ## Project context and acknowledgement
 
@@ -127,10 +128,11 @@ or scientific claims.
 
 ## Standard, citation, and license
 
-The normative format is maintained in the [VAO Standard repository](https://github.com/modavis-project/vao-standard), published as [VAO Standard 0.4.0 (DOI 10.5281/zenodo.22122774)](https://doi.org/10.5281/zenodo.22122774). This repository vendors the final 0.4.0 schemas and selected official fixtures for offline validation and regression testing under CC BY 4.0; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The normative format is maintained in the [VAO Standard repository](https://github.com/modavis-project/vao-standard). [VAO Standard 0.4.0 (DOI 10.5281/zenodo.22122774)](https://doi.org/10.5281/zenodo.22122774) is the published baseline. VAO 0.5.0 support is pinned to commit `d17b3f188fdf7fadd01ba025383e4feca8def935` and normative-bundle SHA-256 `82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96`; it is identified as a candidate until the standard is released. The vendored schemas and fixtures are under CC BY 4.0; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-This release candidate is archived as
-[10.5281/zenodo.22134391](https://doi.org/10.5281/zenodo.22134391).
+The Zenodo DOI [10.5281/zenodo.22134391](https://doi.org/10.5281/zenodo.22134391)
+is reserved for this release candidate and must not be described as published
+until the deposit has passed its separate publication gate.
 Citation metadata is provided in [CITATION.cff](CITATION.cff).
 
 Plugin code is licensed under the [MIT License](LICENSE).

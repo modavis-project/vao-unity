@@ -7,17 +7,18 @@ authors:
     given-names: Dominik
     orcid: "https://orcid.org/0000-0002-7904-3892"
     affiliation: "Digital Humanities (Image/Object), Friedrich Schiller University Jena; Research Group DIGITAL ORGANOLOGY, Leipzig University"
-version: "0.6.0-rc.1"
+version: "0.6.0-rc.2"
 date-released: "2026-08-28"
 doi: "10.5281/zenodo.22134391"
 license: MIT
 repository-code: "https://github.com/modavis-project/vao-unity"
 url: "https://doi.org/10.5281/zenodo.22134391"
 abstract: >-
-  A Unity Package Manager plugin for offline VAO 0.4.0 validation,
-  transactional and selective import, rights-aware runtime materialization,
-  deterministic execution, Playables animation, optional MIDI and XR bridges,
-  and position-aware RIR/SOFA rendering.
+  A Unity Package Manager plugin for offline VAO 0.4.0 and pinned 0.5.0
+  validation, typed scientific and physical signal inspection, transactional
+  and selective import, rights-aware runtime materialization, deterministic
+  execution, Playables animation, optional MIDI and XR bridges, and
+  position-aware RIR/SOFA rendering.
 keywords:
   - virtual acoustic object
   - Unity
@@ -30,4 +31,8 @@ references:
     title: "Virtual Acoustic Object (VAO) Standard"
     version: "0.4.0"
     doi: "10.5281/zenodo.22122774"
+    repository-code: "https://github.com/modavis-project/vao-standard"
+  - type: software
+    title: "Virtual Acoustic Object (VAO) Standard 0.5.0 candidate"
+    version: "0.5.0-candidate+d17b3f1"
     repository-code: "https://github.com/modavis-project/vao-standard"

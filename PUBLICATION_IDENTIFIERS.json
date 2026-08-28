@@ -2,7 +2,7 @@
   "metadataVersion": 1,
   "software": {
     "package": "org.modavis.vao-unity",
-    "version": "0.6.0-rc.1",
+    "version": "0.6.0-rc.2",
     "releaseDoi": "10.5281/zenodo.22134391",
     "releaseDoiStatus": "reserved",
     "conceptDoi": null,
@@ -24,5 +24,12 @@
       "https://doi.org/10.5281/zenodo.22122774",
       "https://modavis-project.github.io/vao-standard/"
     ]
+  },
+  "vaoStandardCandidate": {
+    "version": "0.5.0",
+    "publicationStatus": "candidate",
+    "commit": "d17b3f188fdf7fadd01ba025383e4feca8def935",
+    "normativeBundleSha256": "82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96",
+    "canonicalUrl": "https://github.com/modavis-project/vao-standard"
   }
 }

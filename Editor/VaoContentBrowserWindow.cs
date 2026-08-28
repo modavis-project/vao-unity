@@ -24,7 +24,7 @@ namespace Modavis.Vao.Editor
 
     public sealed class VaoContentBrowserWindow : EditorWindow
     {
-        private static readonly string[] Tabs = { "Summary", "Assets", "Presentations", "Entities", "Controls", "Relations", "Execution", "Acoustics", "Rights", "Capabilities" };
+        private static readonly string[] Tabs = { "Summary", "Assets", "Presentations", "Entities", "Controls", "Relations", "Execution", "Acoustics", "Science", "Signals", "Rights", "Capabilities" };
         [SerializeField] private VaoPackageAsset package;
         [SerializeField] private int tab;
         [SerializeField] private string search;
@@ -61,8 +61,10 @@ namespace Modavis.Vao.Editor
                 case 5: DrawRelations(); break;
                 case 6: DrawExecution(); break;
                 case 7: DrawAcoustics(); break;
-                case 8: DrawRights(); break;
-                case 9: DrawCapabilities(); break;
+                case 8: DrawScience(); break;
+                case 9: DrawSignals(); break;
+                case 10: DrawRights(); break;
+                case 11: DrawCapabilities(); break;
             }
             EditorGUILayout.EndScrollView();
         }
@@ -86,6 +88,10 @@ namespace Modavis.Vao.Editor
             EditorGUILayout.LabelField("Acoustic scenes", package.AcousticScenes.Count.ToString());
             EditorGUILayout.LabelField("Process models", package.ProcessModels.Count.ToString());
             EditorGUILayout.LabelField("Synchronization mappings", package.SynchronizationMappings.Count.ToString());
+            EditorGUILayout.LabelField("Scientific observations", package.ScientificObservations.Count.ToString());
+            EditorGUILayout.LabelField("Protocol bindings", package.ProtocolBindings.Count.ToString());
+            EditorGUILayout.LabelField("Transfer functions", package.TransferFunctions.Count.ToString());
+            EditorGUILayout.LabelField("Physical components", package.PhysicalComponents.Count.ToString());
             EditorGUILayout.LabelField("Required capabilities", package.Capabilities.Count.ToString());
             EditorGUILayout.Space();
             using (new EditorGUI.DisabledScope(state == VaoSourceState.Missing)) if (GUILayout.Button("Preview source update…")) VaoReimportWindow.Open(package);
@@ -261,6 +267,54 @@ namespace Modavis.Vao.Editor
             }
         }
 
+        private void DrawScience()
+        {
+            foreach (var observation in package.ScientificObservations.Where(item => Matches(item.Identifier, item.ObservedProperty, item.FeatureOfInterestIdentifier, item.ProtocolIdentifier, item.Status, string.Join(" ", item.QualityFlags))))
+            {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                EditorGUILayout.LabelField(Short(observation.ObservedProperty), EditorStyles.boldLabel);
+                EditorGUILayout.SelectableLabel(observation.Identifier, GUILayout.Height(EditorGUIUtility.singleLineHeight));
+                EditorGUILayout.LabelField("Feature", Short(observation.FeatureOfInterestIdentifier));
+                EditorGUILayout.LabelField("Result", observation.HasNumericValue ? $"{observation.NumericValue} {Short(observation.Unit)}" : observation.ResultJson ?? "—");
+                EditorGUILayout.LabelField("Status / time", $"{observation.Status} / {observation.ResultTime}");
+                if (observation.QualityFlags.Length > 0) EditorGUILayout.LabelField("Quality", string.Join(", ", observation.QualityFlags));
+                EditorGUILayout.EndVertical();
+            }
+        }
+
+        private void DrawSignals()
+        {
+            EditorGUILayout.LabelField("Physical components", EditorStyles.boldLabel);
+            foreach (var component in package.PhysicalComponents.Where(item => Matches(item.Identifier, item.EntityIdentifier, item.ComponentKind, item.ParentComponentIdentifier)))
+            {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                EditorGUILayout.LabelField(Short(component.Identifier), EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Kind", Short(component.ComponentKind));
+                EditorGUILayout.LabelField("Entity", Short(component.EntityIdentifier));
+                EditorGUILayout.EndVertical();
+            }
+            EditorGUILayout.LabelField("Signal transfer functions", EditorStyles.boldLabel);
+            foreach (var transfer in package.TransferFunctions.Where(item => Matches(item.Identifier, item.InputUnit, item.OutputUnit, item.SourceLocator, item.Notes)))
+            {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                EditorGUILayout.LabelField(Short(transfer.Identifier), EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Transform", $"{transfer.InputUnit} → {transfer.OutputUnit}");
+                EditorGUILayout.LabelField("Model", $"{transfer.DynamicModel} / {transfer.Interpolation}");
+                EditorGUILayout.LabelField("Evidence", $"{transfer.Status} · {transfer.Source} · {transfer.SourceLocator}");
+                EditorGUILayout.EndVertical();
+            }
+            EditorGUILayout.LabelField("Protocol bindings", EditorStyles.boldLabel);
+            foreach (var binding in package.ProtocolBindings.Where(item => Matches(item.Identifier, item.Protocol, item.Address, item.SourceLocator, item.Status)))
+            {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                EditorGUILayout.LabelField(Short(binding.Identifier), EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Protocol / direction", $"{binding.Protocol} / {binding.Direction}");
+                EditorGUILayout.LabelField("Message", string.IsNullOrWhiteSpace(binding.Address) ? $"{binding.MessageType} · channel {binding.Channel} · number {binding.Number}" : $"{binding.MessageType} · {binding.Address}");
+                EditorGUILayout.LabelField("Evidence", $"{binding.Status} · {binding.Source} · {binding.SourceLocator}");
+                EditorGUILayout.EndVertical();
+            }
+        }
+
         private void DrawCapabilities()
         {
             foreach (var capability in package.Capabilities.Where(item => Matches(item)))
@@ -273,6 +327,7 @@ namespace Modavis.Vao.Editor
         }
 
         private bool Matches(params string[] values) => string.IsNullOrWhiteSpace(search) || values.Any(value => value?.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+
         private static string Short(string value) { if (string.IsNullOrEmpty(value)) return "Unnamed"; var split = Math.Max(value.LastIndexOf(':'), value.LastIndexOf('/')); return split >= 0 && split + 1 < value.Length ? value[(split + 1)..] : value; }
 
         internal static void AddControlSurface(VaoPackageAsset package)

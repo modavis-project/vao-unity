@@ -12,7 +12,7 @@ namespace Modavis.Vao.Editor
 {
     /// <summary>
     /// Offline JSON Schema 2020-12 evaluator for every assertion keyword used by
-    /// the immutable VAO 0.4.0 manifest, carrier, and materialization-receipt
+    /// the immutable VAO 0.4.0 and pinned VAO 0.5.0 manifest, carrier, and materialization-receipt
     /// schemas. The schemas themselves are vendored byte-for-byte under Editor/Schemas.
     /// </summary>
     internal sealed class VaoJsonSchemaValidator
@@ -23,9 +23,16 @@ namespace Modavis.Vao.Editor
 
         private VaoJsonSchemaValidator(JToken rootSchema) => this.rootSchema = rootSchema;
 
-        public static IReadOnlyList<string> ValidateManifest(JToken instance) => Validate(instance, "vao-manifest-0.4.0.schema.json");
-        public static IReadOnlyList<string> ValidateCarrier(JToken instance) => Validate(instance, "vao-carrier-0.4.0.schema.json");
-        public static IReadOnlyList<string> ValidateMaterializationReceipt(JToken instance) => Validate(instance, "vao-materialization-receipt-0.4.0.schema.json");
+        public static IReadOnlyList<string> ValidateManifest(JToken instance) => ValidateVersioned(instance, "manifest");
+        public static IReadOnlyList<string> ValidateCarrier(JToken instance) => ValidateVersioned(instance, "carrier");
+        public static IReadOnlyList<string> ValidateMaterializationReceipt(JToken instance) => ValidateVersioned(instance, "materialization-receipt");
+
+        private static IReadOnlyList<string> ValidateVersioned(JToken instance, string kind)
+        {
+            var version = instance?.Value<string>("formatVersion");
+            if (version is not ("0.4.0" or "0.5.0")) return new[] { $"Unsupported VAO formatVersion {version ?? "<missing>"}." };
+            return Validate(instance, $"vao-{kind}-{version}.schema.json");
+        }
 
         private static IReadOnlyList<string> Validate(JToken instance, string schemaFile)
         {
