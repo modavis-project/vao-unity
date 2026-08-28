@@ -1,5 +1,8 @@
 # MODAVIS VAO Importer for Unity
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22134391.svg)](https://doi.org/10.5281/zenodo.22134391)
+[![VAO 0.4.0 persistent identifier](https://img.shields.io/badge/W3ID-VAO%200.4.0-2C5F73.svg)](https://w3id.org/modavis/vao/0.4.0/)
+
 Import, inspect, and run [Virtual Acoustic Object (VAO) 0.4.0](https://github.com/modavis-project/vao-standard) carriers in Unity. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
 
 This is release candidate `0.6.0-rc.1`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
@@ -114,10 +117,20 @@ Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`
 
 The test suite includes the published VAO 0.4.0 minimal carrier and profile descriptors, exact schema snapshot hashes, RFC 8785 trace canonicalization, specified PCG32/xoshiro sequences, archive-security cases, importer lifecycle tests, Play Mode behavior, and player-build checks.
 
+## Project context and acknowledgement
+
+This work was developed as part of the **MODAVIS** doctoral research project
+(2022–2026). Dominik Ukolov's doctoral research was supported by the German
+Academic Scholarship Foundation (*Studienstiftung des deutschen Volkes*).
+Funding and affiliations do not imply endorsement of the project's technical
+or scientific claims.
+
 ## Standard, citation, and license
 
 The normative format is maintained in the [VAO Standard repository](https://github.com/modavis-project/vao-standard), published as [VAO Standard 0.4.0 (DOI 10.5281/zenodo.22122774)](https://doi.org/10.5281/zenodo.22122774). This repository vendors the final 0.4.0 schemas and selected official fixtures for offline validation and regression testing under CC BY 4.0; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-The reserved DOI for this software release is [10.5281/zenodo.22134391](https://doi.org/10.5281/zenodo.22134391). Until the Zenodo record is published, use the repository and version when citing it. Citation metadata is provided in [CITATION.cff](CITATION.cff).
+This release candidate is archived as
+[10.5281/zenodo.22134391](https://doi.org/10.5281/zenodo.22134391).
+Citation metadata is provided in [CITATION.cff](CITATION.cff).
 
 Plugin code is licensed under the [MIT License](LICENSE).
