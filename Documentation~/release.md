@@ -1,6 +1,6 @@
 # Release procedure
 
-This repository contains release candidate `0.6.0-rc.2`. Repository visibility and Zenodo publication are separate maintainer decisions: a pushed tag can be tested and released while the repository and reserved deposit remain private or unpublished.
+This repository contains release candidate `0.6.0-rc.3`. Repository visibility and Zenodo publication are separate maintainer decisions: a pushed tag can be tested and released while the repository and reserved deposit remain private or unpublished.
 
 ## Local release gate
 
@@ -8,7 +8,7 @@ This repository contains release candidate `0.6.0-rc.2`. Repository visibility a
 2. Run Editor and Play Mode tests. Run the standalone and IL2CPP checks for the target platform.
 3. Run `./Scripts/verify-release.sh` and inspect the generated `.tgz` and `.sha256` files under `dist/`.
 4. Inspect `npm pack --dry-run --json` and confirm that tests, development scripts, CI files, generated output, credentials, and machine-local files are absent from the UPM package.
-5. Verify that `package.json`, `CHANGELOG.md`, `CITATION.cff`, `codemeta.json`, `.zenodo.json`, `PUBLICATION_IDENTIFIERS.json`, and `.github/release-notes-0.6.0-rc.2.md` describe the same version and date.
+5. Verify that `package.json`, `CHANGELOG.md`, `CITATION.cff`, `codemeta.json`, `.zenodo.json`, `PUBLICATION_IDENTIFIERS.json`, and `.github/release-notes-0.6.0-rc.3.md` describe the same version and date.
 
 ## Publication gate
 

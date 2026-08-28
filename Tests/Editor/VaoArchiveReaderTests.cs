@@ -105,6 +105,50 @@ namespace Modavis.Vao.Editor.Tests
         }
 
         [Test]
+        public void IntervalScientificResultCompilesWithoutScalarCoercion()
+        {
+            var package = ScriptableObject.CreateInstance<VaoPackageAsset>();
+            var manifest = new JObject
+            {
+                ["scientific"] = new JObject
+                {
+                    ["observations"] = new JArray(new JObject
+                    {
+                        ["id"] = "urn:vao:test:observation:interval",
+                        ["observedProperty"] = "https://example.org/diameter",
+                        ["featureOfInterestId"] = "urn:vao:test:pipe",
+                        ["result"] = new JObject
+                        {
+                            ["value"] = new JArray(10.5, 11.0),
+                            ["unit"] = "http://qudt.org/vocab/unit/MilliM",
+                            ["quantityKind"] = "https://example.org/Length",
+                            ["censoring"] = "interval"
+                        },
+                        ["activityId"] = "urn:vao:test:activity",
+                        ["protocolId"] = "urn:vao:test:protocol",
+                        ["resultTime"] = "2026-08-29T00:00:00Z",
+                        ["status"] = "asserted"
+                    })
+                },
+                ["physicalSystem"] = EmptyRegistry("components", "stateBindings")
+            };
+            try
+            {
+                Assert.DoesNotThrow(() => VaoImporter.CompileScientificAndPhysical(manifest, package));
+                Assert.That(package.ScientificObservations, Has.Count.EqualTo(1));
+                var observation = package.ScientificObservations[0];
+                Assert.That(observation.HasNumericValue, Is.False);
+                Assert.That(observation.NumericValue, Is.Zero);
+                Assert.That(observation.ResultJson, Does.Contain("\"censoring\":\"interval\""));
+                Assert.That(observation.ResultJson, Does.Contain("[10.5,11.0]"));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(package);
+            }
+        }
+
+        [Test]
         public void Rfc8785CanonicalizationMatchesThePublishedRuntimeTrace()
         {
             var tuple = new JObject

@@ -7,8 +7,8 @@ authors:
     given-names: Dominik
     orcid: "https://orcid.org/0000-0002-7904-3892"
     affiliation: "Digital Humanities (Image/Object), Friedrich Schiller University Jena; Research Group DIGITAL ORGANOLOGY, Leipzig University"
-version: "0.6.0-rc.2"
-date-released: "2026-08-28"
+version: "0.6.0-rc.3"
+date-released: "2026-08-29"
 doi: "10.5281/zenodo.22134391"
 license: MIT
 repository-code: "https://github.com/modavis-project/vao-unity"

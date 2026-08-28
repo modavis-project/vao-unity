@@ -5,7 +5,7 @@
 
 Import, inspect, and run [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) 0.4.0 carriers and the pinned 0.5.0 candidate in Unity. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
 
-This is release candidate `0.6.0-rc.2`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
+This is release candidate `0.6.0-rc.3`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
 
 ## Install
 
@@ -17,7 +17,7 @@ For a local checkout:
 Once the repository is public, a tagged version can be installed with **Add package from git URL**:
 
 ```text
-https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.2
+https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.3
 ```
 
 Pin a tag in production projects; do not depend on the moving `main` branch.

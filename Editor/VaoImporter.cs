@@ -490,13 +490,15 @@ namespace Modavis.Vao.Editor
             foreach (var observation in manifest.SelectToken("scientific.observations")?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
             {
                 var result = observation["result"] as JObject;
+                var value = result?["value"];
+                var hasNumericValue = value?.Type is JTokenType.Integer or JTokenType.Float;
                 package.ScientificObservations.Add(new VaoScientificObservationRecord
                 {
                     Identifier = observation.Value<string>("id"), ObservedProperty = observation.Value<string>("observedProperty"),
                     FeatureOfInterestIdentifier = observation.Value<string>("featureOfInterestId"), ActivityIdentifier = observation.Value<string>("activityId"), ProtocolIdentifier = observation.Value<string>("protocolId"),
                     SensorIdentifier = observation.Value<string>("sensorId"), RawResultRealizationIdentifier = observation.Value<string>("rawResultRealizationId"), ProcessedResultRealizationIdentifier = observation.Value<string>("processedResultRealizationId"),
                     ResultTime = observation.Value<string>("resultTime"), Status = observation.Value<string>("status"), QuantityKind = result?.Value<string>("quantityKind"), Unit = result?.Value<string>("unit"),
-                    HasNumericValue = result?["value"]?.Type is JTokenType.Integer or JTokenType.Float, NumericValue = result?.Value<double?>("value") ?? 0d,
+                    HasNumericValue = hasNumericValue, NumericValue = hasNumericValue ? value.Value<double>() : 0d,
                     QualityFlags = observation["qualityFlags"]?.Values<string>().ToArray() ?? Array.Empty<string>(), ResultJson = result?.ToString(Formatting.None)
                 });
             }

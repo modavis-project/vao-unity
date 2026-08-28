@@ -4,7 +4,7 @@ The release candidate records two distinct identifiers:
 
 | Work | Identifier | State |
 | --- | --- | --- |
-| MODAVIS VAO Importer for Unity `0.6.0-rc.2` | `10.5281/zenodo.22134391` | Reserved; publish only after the GitHub release artifact has been verified |
+| MODAVIS VAO Importer for Unity `0.6.0-rc.3` | `10.5281/zenodo.22134391` | Reserved; publish only after the GitHub release artifact has been verified |
 | Virtual Acoustic Object Standard `0.4.0` | `10.5281/zenodo.22122774` | Published |
 | Virtual Acoustic Object Standard `0.5.0` candidate | commit `d17b3f188fdf7fadd01ba025383e4feca8def935` | Pinned source snapshot; no publication DOI is claimed |
 

@@ -2,7 +2,7 @@
   "metadataVersion": 1,
   "software": {
     "package": "org.modavis.vao-unity",
-    "version": "0.6.0-rc.2",
+    "version": "0.6.0-rc.3",
     "releaseDoi": "10.5281/zenodo.22134391",
     "releaseDoiStatus": "reserved",
     "conceptDoi": null,

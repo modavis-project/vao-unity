@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0-rc.3 — 2026-08-29
+
+- Preserves interval-valued scientific observation results during import without attempting scalar coercion.
+- Adds regression coverage from the complete Cuntz Positiv measurement profile.
+
 ## 0.6.0-rc.2 — 2026-08-28
 
 - Adds exact, offline support for the VAO 0.5.0 candidate pinned to standard commit `d17b3f188fdf7fadd01ba025383e4feca8def935` while retaining VAO 0.4.0 support.
