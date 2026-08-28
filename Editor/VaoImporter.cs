@@ -102,14 +102,17 @@ namespace Modavis.Vao.Editor
             if (options.MaterializationMode == VaoMaterializationMode.MetadataOnly) return new HashSet<string>(StringComparer.Ordinal);
             var manifest = inspection.Manifest;
             var selected = new HashSet<string>(StringComparer.Ordinal);
-            var realizationIdsByLogical = manifest["realizations"]?.OfType<JObject>().GroupBy(item => item.Value<string>("assetId")).ToDictionary(group => group.Key, group => group.Select(item => item.Value<string>("id")).ToArray(), StringComparer.Ordinal) ?? new Dictionary<string, string[]>();
-            var sampleRealizations = manifest.SelectToken("playable.sampleVariants")?.OfType<JObject>().Select(item => item.Value<string>("realizationId")).Where(id => id != null).ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>(StringComparer.Ordinal);
-            var essentialLogical = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var binding in manifest.SelectToken("acoustics.geometryBindings")?.OfType<JObject>().Where(item => item.Value<string>("role") == "runtime-visual") ?? Enumerable.Empty<JObject>()) essentialLogical.Add(binding.Value<string>("logicalAssetId"));
-            foreach (var response in manifest.SelectToken("acoustics.responseSets")?.OfType<JObject>() ?? Enumerable.Empty<JObject>()) essentialLogical.Add(response.Value<string>("logicalAssetId"));
-            foreach (var scene in manifest.SelectToken("acoustics.audioScenes")?.OfType<JObject>() ?? Enumerable.Empty<JObject>()) foreach (var id in scene["mediaAssetIds"]?.Values<string>() ?? Enumerable.Empty<string>()) essentialLogical.Add(id);
-            foreach (var relation in manifest["relations"]?.OfType<JObject>().Where(item => item.Value<string>("predicate")?.EndsWith("drivesAnimation", StringComparison.Ordinal) == true) ?? Enumerable.Empty<JObject>()) { essentialLogical.Add(relation.Value<string>("subjectId")); essentialLogical.Add(relation.Value<string>("objectId")); }
-            foreach (var logical in essentialLogical.Where(id => id != null)) if (realizationIdsByLogical.TryGetValue(logical, out var ids)) foreach (var id in ids) if (!sampleRealizations.Contains(id)) selected.Add(id);
+            if (options.MaterializationMode == VaoMaterializationMode.RuntimeRequired)
+            {
+                var realizationIdsByLogical = manifest["realizations"]?.OfType<JObject>().GroupBy(item => item.Value<string>("assetId")).ToDictionary(group => group.Key, group => group.Select(item => item.Value<string>("id")).ToArray(), StringComparer.Ordinal) ?? new Dictionary<string, string[]>();
+                var sampleRealizations = manifest.SelectToken("playable.sampleVariants")?.OfType<JObject>().Select(item => item.Value<string>("realizationId")).Where(id => id != null).ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>(StringComparer.Ordinal);
+                var essentialLogical = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var binding in manifest.SelectToken("acoustics.geometryBindings")?.OfType<JObject>().Where(item => item.Value<string>("role") == "runtime-visual") ?? Enumerable.Empty<JObject>()) essentialLogical.Add(binding.Value<string>("logicalAssetId"));
+                foreach (var response in manifest.SelectToken("acoustics.responseSets")?.OfType<JObject>() ?? Enumerable.Empty<JObject>()) essentialLogical.Add(response.Value<string>("logicalAssetId"));
+                foreach (var scene in manifest.SelectToken("acoustics.audioScenes")?.OfType<JObject>() ?? Enumerable.Empty<JObject>()) foreach (var id in scene["mediaAssetIds"]?.Values<string>() ?? Enumerable.Empty<string>()) essentialLogical.Add(id);
+                foreach (var relation in manifest["relations"]?.OfType<JObject>().Where(item => item.Value<string>("predicate")?.EndsWith("drivesAnimation", StringComparison.Ordinal) == true) ?? Enumerable.Empty<JObject>()) { essentialLogical.Add(relation.Value<string>("subjectId")); essentialLogical.Add(relation.Value<string>("objectId")); }
+                foreach (var logical in essentialLogical.Where(id => id != null)) if (realizationIdsByLogical.TryGetValue(logical, out var ids)) foreach (var id in ids) if (!sampleRealizations.Contains(id)) selected.Add(id);
+            }
             var selectedGroups = BuildMaterializationGroupSelection(inspection, options);
             var groups = manifest["assetGroups"]?.OfType<JObject>().Where(item => item.Value<string>("id") != null).ToDictionary(item => item.Value<string>("id"), StringComparer.Ordinal) ?? new Dictionary<string, JObject>(StringComparer.Ordinal);
             foreach (var groupId in selectedGroups)
@@ -118,7 +121,7 @@ namespace Modavis.Vao.Editor
             // retain the minimum declared visual/acoustic/animation closure needed
             // to construct a truthful runtime prefab.
             if (options.MaterializationMode == VaoMaterializationMode.RuntimeRequired && groups.Count == 0)
-                foreach (var id in sampleRealizations) selected.Add(id);
+                foreach (var id in manifest.SelectToken("playable.sampleVariants")?.OfType<JObject>().Select(item => item.Value<string>("realizationId")).Where(id => id != null) ?? Enumerable.Empty<string>()) selected.Add(id);
             selected.IntersectWith(all);
             return selected;
         }

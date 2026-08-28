@@ -267,6 +267,17 @@ namespace Modavis.Vao.Editor.Tests
             var inspection = VaoArchiveReader.Inspect(BuildArchive());
             Assert.That(inspection.IsValid, Is.True, string.Join("; ", inspection.Errors));
             var metadata = VaoImporter.BuildMaterializationSelection(inspection, new VaoImportOptions { MaterializationMode = VaoMaterializationMode.MetadataOnly });
+            inspection.Manifest["acoustics"] = new JObject
+            {
+                ["geometryBindings"] = new JArray(new JObject
+                {
+                    ["id"] = "urn:vao:test:unity:minimal:geometry-binding",
+                    ["subjectId"] = "urn:vao:test:unity:minimal:entity",
+                    ["logicalAssetId"] = "urn:vao:test:unity:minimal:asset",
+                    ["role"] = "runtime-visual"
+                })
+            };
+            var explicitEmpty = VaoImporter.BuildMaterializationSelection(inspection, new VaoImportOptions { MaterializationMode = VaoMaterializationMode.SelectedAssetGroups });
             var primary = (JObject)inspection.Manifest["assetGroups"][0];
             primary["realizationIds"] = new JArray();
             primary["dependsOnGroupIds"] = new JArray("urn:vao:test:unity:minimal:dependency");
@@ -280,6 +291,7 @@ namespace Modavis.Vao.Editor.Tests
             var groups = VaoImporter.BuildMaterializationGroupSelection(inspection, options);
             var selected = VaoImporter.BuildMaterializationSelection(inspection, options);
             Assert.That(metadata, Is.Empty);
+            Assert.That(explicitEmpty, Is.Empty, "Explicit group selection must not add unrelated runtime visuals.");
             Assert.That(groups, Is.EquivalentTo(new[] { "urn:vao:test:unity:minimal:group", "urn:vao:test:unity:minimal:dependency" }));
             Assert.That(selected, Is.EquivalentTo(new[] { "urn:vao:test:unity:minimal:realization" }), "Dependencies must be included transitively and cycles must terminate.");
         }

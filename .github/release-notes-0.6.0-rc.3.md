@@ -2,6 +2,8 @@
 
 This release candidate fixes scientific observation import for valid VAO results whose `value` is an interval rather than a scalar. Unity keeps the complete structured result in `ResultJson`, exposes `NumericValue` only for scalar numbers, and no longer rejects complete pipe-measurement datasets such as the Cuntz Positiv VAO.
 
+Explicit asset-group materialization now remains exact. Selecting a mobile audio profile no longer pulls unrelated spatial-model alternatives; the broader compatibility closure remains available through `RuntimeRequired`.
+
 The release retains the pinned VAO 0.5.0 candidate contract and the published VAO 0.4.0 reader introduced in the preceding candidates.
 
 Install in Unity Package Manager with:
