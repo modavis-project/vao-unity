@@ -19,7 +19,7 @@ VAO_ARCHIVE=/path/to/Kinoorgel-4013925-bootstrap-0.5.0-rc.1.vao \
 The DOI-bound release candidate is expected to report:
 
 - format `0.5.0`, carrier mode `bootstrap`;
-- 36 embedded realizations and 7,663,150 verified payload bytes;
+- 36 embedded realizations and 7,664,464 verified payload bytes;
 - 1,462 logical assets and 4,584 exact realizations;
 - 5,766 scientific observations;
 - 543 protocol bindings and three signal-transfer functions;
