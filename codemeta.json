@@ -2,12 +2,12 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "name": "MODAVIS VAO Importer for Unity",
-  "description": "Unity Package Manager plugin for secure VAO 0.4.0 and pinned 0.5.0 import, typed scientific and physical signal inspection, deterministic execution, MIDI/XR integration, runtime materialization, and position-aware acoustics.",
-  "version": "0.6.0-rc.3",
-  "identifier": "https://doi.org/10.5281/zenodo.22134391",
-  "url": "https://doi.org/10.5281/zenodo.22134391",
-  "datePublished": "2026-08-29",
-  "dateModified": "2026-08-29",
+  "description": "Unity Package Manager plugin for importing VAO carriers. This package reads VAO 0.6.0, 0.4.0, and the pinned 0.5.0 snapshot. It imports MMIC 1.0.0 records as metadata.",
+  "version": "0.6.0-rc.4",
+  "identifier": "https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.4",
+  "url": "https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.4",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
   "developmentStatus": "https://www.repostatus.org/#active",
   "programmingLanguage": "C#",
   "runtimePlatform": "Unity 6000.0 or later",
@@ -26,6 +26,12 @@
       "name": "Virtual Acoustic Object (VAO) Standard 0.5.0 candidate",
       "identifier": "https://github.com/modavis-project/vao-standard/tree/d17b3f188fdf7fadd01ba025383e4feca8def935",
       "url": "https://github.com/modavis-project/vao-standard"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Virtual Acoustic Object (VAO) Standard 0.6.0",
+      "identifier": "https://doi.org/10.5281/zenodo.23287792",
+      "url": "https://github.com/modavis-project/vao-standard/releases/tag/v0.6.0"
     }
   ],
   "author": [

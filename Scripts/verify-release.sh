@@ -32,15 +32,18 @@ if (!releaseNotes.includes(pkg.version)) throw new Error('GitHub release notes d
 if (pkg.license !== 'MIT' || !fs.existsSync(path.join(root, 'LICENSE'))) throw new Error('MIT package license metadata is incomplete.');
 if (pkg.documentationUrl !== 'https://github.com/modavis-project/vao-unity#readme') throw new Error('Unexpected package documentation URL.');
 
-const softwareDoi = '10.5281/zenodo.22134391';
+const softwareRelease = `https://github.com/modavis-project/vao-unity/releases/tag/v${pkg.version}`;
 const standardDoi = '10.5281/zenodo.22122774';
 const standardRepository = 'https://github.com/modavis-project/vao-standard';
 const candidateCommit = 'd17b3f188fdf7fadd01ba025383e4feca8def935';
 const candidateBundle = '82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96';
-if (publications.software.releaseDoi !== softwareDoi || publications.software.releaseDoiStatus !== 'reserved')
-  throw new Error('Reserved software DOI metadata is incomplete.');
-if (!citation.includes(`doi: "${softwareDoi}"`) || codemeta.identifier !== `https://doi.org/${softwareDoi}`)
-  throw new Error('Software DOI is inconsistent across citation metadata.');
+if (publications.software.releaseUrl !== softwareRelease
+    || !citation.includes(`url: "${softwareRelease}"`) || codemeta.identifier !== softwareRelease
+    || codemeta.url !== softwareRelease)
+  throw new Error('GitHub release URL is inconsistent across citation metadata.');
+if (publications.software.releaseDoi !== null || publications.software.releaseDoiStatus !== 'unassigned'
+    || /^doi:/m.test(citation))
+  throw new Error('GitHub citation metadata must not reuse an earlier version DOI.');
 const standard = publications.vaoStandard;
 if (standard.version !== '0.4.0' || standard.publicationStatus !== 'published' || standard.doi !== standardDoi || standard.canonicalUrl !== standardRepository)
   throw new Error('Published VAO Standard metadata is incomplete.');
@@ -51,8 +54,21 @@ if (candidate.version !== '0.5.0' || candidate.publicationStatus !== 'candidate'
   throw new Error('Pinned VAO Standard candidate metadata is incomplete.');
 if (!codemeta.isBasedOn?.some(item => item.identifier === `${standardRepository}/tree/${candidateCommit}`))
   throw new Error('CodeMeta does not identify the pinned standard candidate.');
+const standard060Doi = '10.5281/zenodo.23287792';
+const standard060Release = `${standardRepository}/releases/tag/v0.6.0`;
+const standard060 = publications.vaoStandard060;
+if (standard060.version !== '0.6.0' || standard060.publicationStatus !== 'published'
+    || standard060.doi !== standard060Doi || standard060.canonicalUrl !== standard060Release
+    || standard060.commit !== '9d477213eab90defa75bef0f44e0d292a83e68d9'
+    || standard060.normativeBundleSha256 !== '13362f26fcd38132920198ccb85d992d2c1d40911af9b50aec343887d2ec3068')
+  throw new Error('Published VAO 0.6.0 contract metadata is incomplete.');
+if (!codemeta.isBasedOn?.some(item => item.identifier === `https://doi.org/${standard060Doi}` && item.url === standard060Release))
+  throw new Error('CodeMeta does not identify VAO 0.6.0.');
 if (!zenodo.related_identifiers.some(item => item.identifier === `https://doi.org/${standardDoi}` && item.relation === 'isSupplementTo'))
   throw new Error('Zenodo metadata does not relate the software to the published standard.');
+if (!zenodo.related_identifiers.some(item => item.identifier === softwareRelease && item.relation === 'isIdenticalTo')
+    || !zenodo.related_identifiers.some(item => item.identifier === `https://doi.org/${standard060Doi}` && item.relation === 'isSupplementTo'))
+  throw new Error('Archive metadata is missing the release or VAO 0.6.0 relation.');
 
 const expectedHashes = {
   'Editor/Schemas/vao-manifest-0.4.0.schema.json': '3b8fba703654b8f5e42101e2ecc9fca769bf19115d01ae13d044a36c10fcbc83',
@@ -66,7 +82,14 @@ const expectedHashes = {
   'Tests/Editor/Fixtures/VAO-Standard-Minimal-0.4.0.vao': '1cb8e10c3da1013aacf0e310bfcf60a34959c99ad20e01ece64e3687fa8fe336',
   'Tests/Editor/Fixtures/VAO-Standard-Cuntz-Positiv-0.4.0.json': 'f494397d2c297a59b61f5a09b42b79e641d697ed820014a46f64968e429f5ea1',
   'Tests/Editor/Fixtures/VAO-Standard-Kinoorgel-0.4.0.json': '597e6d4d4055e765b94c269f847054cee43cba79b6090f104f4c075653d93add',
-  'Tests/Editor/Fixtures/VAO-Standard-Minimal-0.5.0.vao': '9bc7ff7eb06cd50a66ab5bfeabdecaef68c8b24a15f5b47bc0013811a241403e'
+  'Tests/Editor/Fixtures/VAO-Standard-Minimal-0.5.0.vao': '9bc7ff7eb06cd50a66ab5bfeabdecaef68c8b24a15f5b47bc0013811a241403e',
+  'Editor/Schemas/vao-manifest-0.6.0.schema.json': '4b350fc3e58407338905d72f6a47191747b16899039fd254f387ee0f2fc5e2c5',
+  'Editor/Schemas/vao-carrier-0.6.0.schema.json': '8d0805efd35b1b0d6ec802761cac5cbc21a4c7211b35f4444b09170d350190ed',
+  'Editor/Schemas/vao-materialization-receipt-0.6.0.schema.json': 'c1e2094e88c6325cfa8ab156ffd49b1e5b4d450ab4bf8613f80ffa75dbb23edc',
+  'Editor/Schemas/VAO-STANDARD-0.6.0.txt': 'da02755e70be5efb11e5ea91ef9f32309460a801ab2fb843ee397dde828fc404',
+  'Editor/Schemas/VAO-MMIC-CC0-1.0.txt': 'a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499',
+  'Tests/Editor/Fixtures/VAO-Standard-Minimal-0.6.0.vao': 'a7aa1be8eecd3e820b28be6a6b9e3a8c757dcf5a7713beac839d417d44316a65',
+  'Tests/Editor/Fixtures/VAO-MMIC-Design-1.0.0.vao': '4275f93ab51e2b509a69ce8930832f868290dc61ad61eda9af87b7aad37e660e'
 };
 for (const [name, expected] of Object.entries(expectedHashes)) {
   const actual = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, name))).digest('hex');
@@ -108,6 +131,8 @@ const required = [
   'Editor/Schemas/vao-materialization-receipt-0.4.0.schema.json', 'Editor/Schemas/VAO-STANDARD-CC-BY-4.0.txt',
   'Editor/Schemas/vao-manifest-0.5.0.schema.json', 'Editor/Schemas/vao-carrier-0.5.0.schema.json',
   'Editor/Schemas/vao-materialization-receipt-0.5.0.schema.json', 'Editor/Schemas/VAO-STANDARD-0.5.0-CANDIDATE.txt',
+  'Editor/Schemas/vao-manifest-0.6.0.schema.json', 'Editor/Schemas/vao-carrier-0.6.0.schema.json',
+  'Editor/Schemas/vao-materialization-receipt-0.6.0.schema.json', 'Editor/Schemas/VAO-STANDARD-0.6.0.txt',
   'Samples~/OptionalIntegrations/VaoOptionalIntegrationBootstrap.cs',
   'Samples~/DeterministicAcoustics/VaoDeterministicAcousticsDemo.cs',
   'Documentation~/conformance-and-limits.md', 'Documentation~/deterministic-execution.md',

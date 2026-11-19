@@ -1,6 +1,6 @@
 # Changelog
 
-## Development
+## 0.6.0-rc.4 — 2026-11-19
 
 - Inspect and import released VAO 0.6.0 carriers with the pinned schemas.
 - Keep MMIC profile and extension records in metadata-only imports.

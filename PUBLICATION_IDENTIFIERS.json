@@ -2,18 +2,13 @@
   "metadataVersion": 1,
   "software": {
     "package": "org.modavis.vao-unity",
-    "version": "0.6.0-rc.3",
-    "releaseDoi": "10.5281/zenodo.22134391",
-    "releaseDoiStatus": "reserved",
+    "version": "0.6.0-rc.4",
+    "releaseDoi": null,
+    "releaseDoiStatus": "unassigned",
     "conceptDoi": null,
     "repositoryUrl": "https://github.com/modavis-project/vao-unity",
-    "archiveRecords": [
-      {
-        "platform": "Zenodo",
-        "identifier": "10.5281/zenodo.22134391",
-        "status": "reserved"
-      }
-    ]
+    "archiveRecords": [],
+    "releaseUrl": "https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.4"
   },
   "vaoStandard": {
     "version": "0.4.0",
@@ -31,5 +26,13 @@
     "commit": "d17b3f188fdf7fadd01ba025383e4feca8def935",
     "normativeBundleSha256": "82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96",
     "canonicalUrl": "https://github.com/modavis-project/vao-standard"
+  },
+  "vaoStandard060": {
+    "version": "0.6.0",
+    "publicationStatus": "published",
+    "doi": "10.5281/zenodo.23287792",
+    "commit": "9d477213eab90defa75bef0f44e0d292a83e68d9",
+    "normativeBundleSha256": "13362f26fcd38132920198ccb85d992d2c1d40911af9b50aec343887d2ec3068",
+    "canonicalUrl": "https://github.com/modavis-project/vao-standard/releases/tag/v0.6.0"
   }
 }

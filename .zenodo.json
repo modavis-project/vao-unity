@@ -1,11 +1,11 @@
 {
   "title": "MODAVIS VAO Importer for Unity",
-  "description": "Unity Package Manager plugin for offline validation and selective import of Virtual Acoustic Object 0.4.0 carriers and a pinned 0.5.0 candidate, including typed scientific observations, physical signal mappings, deterministic execution, MIDI/XR integration, and position-aware RIR/SOFA rendering.",
+  "description": "Unity Package Manager plugin for importing VAO carriers. This package reads VAO 0.6.0, 0.4.0, and the pinned 0.5.0 snapshot. It imports MMIC 1.0.0 records as metadata.",
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",
-  "version": "0.6.0-rc.3",
-  "publication_date": "2026-08-29",
+  "version": "0.6.0-rc.4",
+  "publication_date": "2026-11-19",
   "creators": [
     {
       "name": "Ukolov, Dominik",
@@ -23,7 +23,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.3",
+      "identifier": "https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.4",
       "relation": "isIdenticalTo",
       "resource_type": "software"
     },
@@ -36,6 +36,11 @@
       "identifier": "https://github.com/modavis-project/vao-standard/tree/d17b3f188fdf7fadd01ba025383e4feca8def935",
       "relation": "isSupplementTo",
       "resource_type": "software"
+    },
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.23287792",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-other"
     }
   ]
 }

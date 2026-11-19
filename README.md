@@ -1,11 +1,11 @@
 # MODAVIS VAO Importer for Unity
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22134391.svg)](https://doi.org/10.5281/zenodo.22134391)
+[GitHub prerelease](https://github.com/modavis-project/vao-unity/releases/tag/v0.6.0-rc.4)
 [![VAO 0.4.0 persistent identifier](https://img.shields.io/badge/W3ID-VAO%200.4.0-2C5F73.svg)](https://w3id.org/modavis/vao/0.4.0/)
 
-Import [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) carriers into Unity. This checkout adds VAO 0.6.0 inspection and import alongside the existing 0.4.0 and pinned 0.5.0 readers. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
+Import [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) carriers into Unity. This release supports VAO 0.6.0 inspection and import alongside the existing 0.4.0 and pinned 0.5.0 readers. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
 
-This is release candidate `0.6.0-rc.3`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
+This is release candidate `0.6.0-rc.4`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
 
 ## Install
 
@@ -14,10 +14,10 @@ For a local checkout:
 1. Open **Window > Package Management > Package Manager** in Unity.
 2. Click **+**, choose **Install package from disk**, and select this repository's `package.json`.
 
-Once the repository is public, a tagged version can be installed with **Add package from git URL**:
+In **Package Manager**, choose **Add package from git URL** and enter:
 
 ```text
-https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.3
+https://github.com/modavis-project/vao-unity.git#v0.6.0-rc.4
 ```
 
 Pin a tag in production projects; do not depend on the moving `main` branch.
@@ -140,11 +140,6 @@ or scientific claims.
 
 ## Standard, citation, and license
 
-The normative format is maintained in the [VAO Standard repository](https://github.com/modavis-project/vao-standard). [VAO Standard 0.4.0 (DOI 10.5281/zenodo.22122774)](https://doi.org/10.5281/zenodo.22122774) is the published baseline. VAO 0.5.0 support is pinned to commit `d17b3f188fdf7fadd01ba025383e4feca8def935` and normative-bundle SHA-256 `82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96`; it is identified as a candidate until the standard is released. The vendored schemas and fixtures are under CC BY 4.0; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
-The Zenodo DOI [10.5281/zenodo.22134391](https://doi.org/10.5281/zenodo.22134391)
-is reserved for this release candidate and must not be described as published
-until the deposit has passed its separate publication gate.
-Citation metadata is provided in [CITATION.cff](CITATION.cff).
+See the [VAO 0.6.0 release](https://github.com/modavis-project/vao-standard/releases/tag/v0.6.0) for the current standard. The 0.5.0 reader keeps its earlier, independently pinned contract described in the [support matrix](Documentation~/VAO-support.md). Cite this version with [CITATION.cff](CITATION.cff).
 
 Plugin code is licensed under the [MIT License](LICENSE).
