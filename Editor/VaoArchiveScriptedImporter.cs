@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Modavis.Vao.Editor
 {
-    [ScriptedImporter(1, "vao")]
+    [ScriptedImporter(2, "vao")]
     public sealed class VaoArchiveScriptedImporter : ScriptedImporter
     {
         [SerializeField] private bool verifyPayloadDigests = true;
@@ -21,6 +21,7 @@ namespace Modavis.Vao.Editor
             asset.ArchiveSha256 = inspection.ArchiveSha256;
             asset.VerifiedPayloadBytes = inspection.VerifiedPayloadBytes;
             asset.Valid = inspection.IsValid;
+            asset.HasMechanicalMusicProfile = inspection.IsValid && inspection.HasMechanicalMusicProfile;
             asset.Errors = inspection.Errors.ToArray();
             asset.Warnings = inspection.Warnings.ToArray();
             context.AddObjectToAsset("VAO", asset);

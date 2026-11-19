@@ -49,6 +49,10 @@ namespace Modavis.Vao.Editor
             options ??= new VaoImportOptions();
             var inspection = VaoArchiveReader.Inspect(archivePath, new VaoValidationPolicy { VerifyPayloadDigests = options.VerifyPayloadDigests });
             if (!inspection.IsValid) throw new InvalidDataException("VAO validation failed:\n" + string.Join("\n", inspection.Errors));
+            if (inspection.FormatVersion == VaoArchiveReader.CurrentFormatVersion && !options.VerifyPayloadDigests)
+                throw new InvalidOperationException("VAO 0.6.0 import requires verified payload digests.");
+            if (inspection.HasMechanicalMusicProfile && options.MaterializationMode != VaoMaterializationMode.MetadataOnly)
+                throw new InvalidOperationException("Select MetadataOnly to import MMIC profile records without materializing or executing their payload.");
             var root = NormalizeDestination(options.DestinationAssetPath, inspection.Title, inspection.ArchiveSha256);
             if (AssetDatabase.IsValidFolder(root) || Directory.Exists(Absolute(root))) throw new IOException($"Import destination already exists: {root}");
             var result = new VaoImportResult { Inspection = inspection };
@@ -158,23 +162,51 @@ namespace Modavis.Vao.Editor
             {
                 if (EditorUtility.DisplayCancelableProgressBar("Materializing VAO", embedded.CarrierPath, totalBytes == 0 ? 1f : completed / (float)totalBytes)) throw new OperationCanceledException("VAO materialization was cancelled.");
                 var relative = embedded.CarrierPath.StartsWith("payload/", StringComparison.Ordinal) ? embedded.CarrierPath[8..] : embedded.CarrierPath;
+                var currentFormat = inspection.FormatVersion == VaoArchiveReader.CurrentFormatVersion;
+                if (currentFormat)
+                    relative = GetSafePayloadName(relative, embedded.ManifestRecord.Value<string>("mediaType"));
                 var assetPath = root + "/Payload/" + relative;
                 var absolute = Absolute(assetPath);
                 Directory.CreateDirectory(Path.GetDirectoryName(absolute) ?? Absolute(root));
-                using var input = archive.GetEntry(embedded.CarrierPath)?.Open() ?? throw new InvalidDataException($"Missing payload entry {embedded.CarrierPath}.");
+                var entryName = currentFormat ? embedded.Entry.FullName : embedded.CarrierPath;
+                using var input = archive.GetEntry(entryName)?.Open() ?? throw new InvalidDataException($"Missing payload entry {embedded.CarrierPath}.");
                 using var output = new FileStream(absolute, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                using var digest = currentFormat ? IncrementalHash.CreateHash(HashAlgorithmName.SHA256) : null;
+                var bytesWritten = 0L;
                 var buffer = new byte[1024 * 1024];
                 while (true)
                 {
                     var read = input.Read(buffer, 0, buffer.Length);
                     if (read <= 0) break;
+                    bytesWritten += read;
+                    if (currentFormat && bytesWritten > embedded.ManifestRecord.Value<long>("byteSize"))
+                        throw new InvalidDataException($"Payload size changed after inspection: {embedded.CarrierPath}");
+                    digest?.AppendData(buffer, 0, read);
                     output.Write(buffer, 0, read);
                     completed += read;
                     if (EditorUtility.DisplayCancelableProgressBar("Materializing VAO", embedded.CarrierPath, totalBytes == 0 ? 1f : completed / (float)totalBytes)) throw new OperationCanceledException("VAO materialization was cancelled.");
                 }
+                if (currentFormat && (bytesWritten != embedded.ManifestRecord.Value<long>("byteSize")
+                    || Hex(digest.GetHashAndReset()) != embedded.ManifestRecord.Value<string>("sha256")))
+                    throw new InvalidDataException($"Payload bytes changed after inspection: {embedded.CarrierPath}");
                 extracted[embedded.Identifier] = assetPath;
             }
             return extracted;
+        }
+
+        // Use Unity's native asset importer only for explicitly understood file types.
+        // Everything else remains inert while still retaining the verified asset bytes.
+        private static string GetSafePayloadName(string path, string mediaType)
+        {
+            var extension = Path.GetExtension(path).ToLowerInvariant();
+            var nativeMedia = (mediaType, extension) is
+                ("model/gltf-binary", ".glb") or ("audio/wav" or "audio/wave" or "audio/x-wav", ".wav")
+                or ("audio/ogg", ".ogg") or ("audio/flac", ".flac") or ("audio/mpeg", ".mp3")
+                or ("audio/midi" or "audio/x-midi", ".mid" or ".midi")
+                or ("image/png", ".png") or ("image/jpeg", ".jpeg" or ".jpg")
+                or ("application/json", ".json") or ("text/plain", ".txt")
+                or ("application/x-hdf5" or "application/sofa", ".sofa");
+            return nativeMedia ? path : path + ".bytes";
         }
 
         private static string WriteMaterializationReceipt(VaoArchiveInspection inspection, string root, VaoImportOptions options)
@@ -212,7 +244,10 @@ namespace Modavis.Vao.Editor
                 {
                     var groups = item["groupIds"]?.Values<string>().ToArray();
                     var state = groups == null ? "embedded-valid" : groups.All(selectedGroups.Contains) ? "materialized-valid" : groups.All(completeGroups.Contains) ? "embedded-valid" : "incomplete";
-                    return new JObject { ["profileId"] = item.Value<string>("id"), ["state"] = state };
+                    var identifier = item.Value<string>("id");
+                    if (inspection.HasMechanicalMusicProfile && VaoArchiveReader.IsMechanicalMusicProfile(identifier))
+                        state = "incomplete";
+                    return new JObject { ["profileId"] = identifier, ["state"] = state };
                 }))
             };
             var receiptErrors = VaoJsonSchemaValidator.ValidateMaterializationReceipt(receipt);
@@ -287,13 +322,13 @@ namespace Modavis.Vao.Editor
             package.ImportSettings.MaterializationMode = options.MaterializationMode.ToString();
             package.ImportSettings.SelectedAssetGroupIdentifiers = options.SelectedAssetGroupIdentifiers?.ToArray() ?? Array.Empty<string>();
             package.ImportSettings.MaximumMaterializedBytes = options.MaximumMaterializedBytes;
-            package.ImportSettings.CreatePrefab = options.CreatePrefab;
+            package.ImportSettings.CreatePrefab = options.CreatePrefab && !inspection.HasMechanicalMusicProfile;
             package.ImportSettings.CreateRuntimeControlSurface = options.CreateRuntimeControlSurface;
             package.ImportSettings.GenerateMidiAnimationClips = options.GenerateMidiAnimationClips;
             package.ImportSettings.CopyGlbToStreamingAssets = options.CopyGlbToStreamingAssets;
             package.ImportSettings.VerifyPayloadDigests = options.VerifyPayloadDigests;
             package.RawManifestJson = manifest.ToString(Formatting.None);
-            foreach (var name in new[] { "profiles", "scientific", "multimodal", "physicalSystem", "playable", "interactionModel", "runtime", "acoustics", "discovery", "rights", "distributions", "repositoryBindings", "assetGroups" })
+            foreach (var name in new[] { "profiles", "materializableProfiles", "extensions", "scientific", "multimodal", "physicalSystem", "playable", "interactionModel", "runtime", "acoustics", "discovery", "rights", "distributions", "repositoryBindings", "assetGroups" })
                 if (manifest[name] != null) package.ProfileSections.Add(new VaoJsonSectionRecord { Name = name, Json = manifest[name].ToString(Formatting.None) });
             package.Capabilities.AddRange(manifest.SelectTokens("$..requiredCapabilities[*]").Values<string>().Where(value => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
 
@@ -371,9 +406,11 @@ namespace Modavis.Vao.Editor
                     TotalByteSize = group.Value<long?>("totalByteSize") ?? 0L, Evictable = group.SelectToken("cachePolicy.evictable")?.Value<bool>() ?? true, CachePriority = group.SelectToken("cachePolicy.priority")?.Value<int>() ?? 0
                 });
 
+            CompileScientificAndPhysical(manifest, package);
+            if (inspection.HasMechanicalMusicProfile) return;
+
             var sequencesByLogical = ImportMidiSequences(package, root, logicalByRealization, options, result);
             CompileControls(manifest, package);
-            CompileScientificAndPhysical(manifest, package);
             CompileExecution(manifest, package);
             CompileSamples(manifest, package);
             CompileAnimations(manifest, package, sequencesByLogical, root, options, result);

@@ -13,16 +13,17 @@ namespace Modavis.Vao.Editor
         private VaoArchiveInspection inspection;
         private Vector2 scroll;
 
-        [MenuItem("Tools/MODAVIS/Import VAO 0.4.0 or 0.5.0…")]
+        [MenuItem("Tools/MODAVIS/Import VAO…")]
         public static void Open() => GetWindow<VaoImportWindow>(true, "Import VAO").minSize = new Vector2(620, 420);
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("Virtual Acoustic Object 0.4.0 / 0.5.0", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Virtual Acoustic Object 0.4.0 / 0.5.0 / 0.6.0", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The archive is parsed as inert data. Nothing package-supplied is executed or fetched, and payload bytes are imported only after carrier and fixity validation.", MessageType.Info);
             using (new EditorGUILayout.HorizontalScope())
             {
-                archivePath = EditorGUILayout.TextField("VAO archive", archivePath);
+                var enteredPath = EditorGUILayout.TextField("VAO archive", archivePath);
+                if (enteredPath != archivePath) { archivePath = enteredPath; inspection = null; }
                 if (GUILayout.Button("Browse…", GUILayout.Width(90)))
                 {
                     var selected = EditorUtility.OpenFilePanel("Select VAO carrier", string.Empty, "vao");
@@ -56,14 +57,27 @@ namespace Modavis.Vao.Editor
             using (new EditorGUILayout.HorizontalScope())
             {
                 using (new EditorGUI.DisabledScope(string.IsNullOrWhiteSpace(archivePath)))
-                    if (GUILayout.Button("Validate")) inspection = VaoArchiveReader.Inspect(archivePath, new VaoValidationPolicy { VerifyPayloadDigests = options.VerifyPayloadDigests });
+                    if (GUILayout.Button("Validate"))
+                    {
+                        inspection = VaoArchiveReader.Inspect(archivePath, new VaoValidationPolicy { VerifyPayloadDigests = options.VerifyPayloadDigests });
+                        if (inspection.IsValid && inspection.FormatVersion == VaoArchiveReader.CurrentFormatVersion)
+                            options.VerifyPayloadDigests = true;
+                        if (inspection.IsValid && inspection.HasMechanicalMusicProfile)
+                        {
+                            options.MaterializationMode = VaoMaterializationMode.MetadataOnly;
+                            options.CreatePrefab = false;
+                        }
+                    }
                 using (new EditorGUI.DisabledScope(inspection?.IsValid != true))
                     if (GUILayout.Button("Import")) Import();
             }
 
             if (inspection == null) return;
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField(inspection.IsValid ? "VALID" : "INVALID", inspection.IsValid ? EditorStyles.boldLabel : EditorStyles.whiteLargeLabel);
+            var validLabel = inspection.FormatVersion == VaoArchiveReader.CurrentFormatVersion
+                ? "Unity inspection passed"
+                : "VALID";
+            EditorGUILayout.LabelField(inspection.IsValid ? validLabel : "INVALID", inspection.IsValid ? EditorStyles.boldLabel : EditorStyles.whiteLargeLabel);
             EditorGUILayout.LabelField("Title", inspection.Title);
             EditorGUILayout.LabelField("Identifier", inspection.Identifier);
             EditorGUILayout.LabelField("Verified payload", EditorUtility.FormatBytes(inspection.VerifiedPayloadBytes));

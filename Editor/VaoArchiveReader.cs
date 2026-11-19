@@ -27,6 +27,14 @@ namespace Modavis.Vao.Editor
         public List<string> Warnings { get; } = new();
         public bool IsValid => Errors.Count == 0;
         public string FormatVersion => Manifest?.Value<string>("formatVersion");
+        public bool HasMechanicalMusicProfile =>
+            FormatVersion == VaoArchiveReader.CurrentFormatVersion &&
+            ((Manifest["conformsTo"]?.Values<string>().Any(VaoArchiveReader.IsMechanicalMusicProfile) ?? false)
+             || ((Manifest["extensions"] as JObject)?.Properties()
+                 .Any(item => VaoArchiveReader.IsMechanicalMusicProfile(item.Name)) ?? false)
+             || new[] { "profiles", "materializableProfiles" }.Any(registry =>
+                 (Manifest[registry] as JArray)?.OfType<JObject>()
+                     .Any(record => VaoArchiveReader.IsMechanicalMusicProfile(record.Value<string>("id"))) == true));
         public string CarrierIdentifier => Carrier?.Value<string>("id");
         public string CarrierMode => Carrier?.Value<string>("carrierMode");
         public string Identifier => Manifest?.Value<string>("id");
@@ -57,6 +65,7 @@ namespace Modavis.Vao.Editor
     {
         public const string FormatVersion = "0.4.0";
         public const string CandidateFormatVersion = "0.5.0";
+        public const string CurrentFormatVersion = "0.6.0";
         public const string ManifestName = "vao-manifest.json";
         public const string CarrierName = "META-INF/vao-carrier.json";
         public const string MediaType = "application/vnd.modavis.vao+zip";
@@ -73,7 +82,14 @@ namespace Modavis.Vao.Editor
         public const string PlayableProfile = "https://w3id.org/modavis/vao/profile/playable/0.4.0";
         private const string CapabilityBase = "https://w3id.org/modavis/vao/vocab/capability/";
 
-        public static bool IsSupportedFormatVersion(string version) => version is FormatVersion or CandidateFormatVersion;
+        private const string MechanicalMusicProfileBase = "https://w3id.org/modavis/vao/profile/mmic/";
+        private const string MechanicalMusicProfile = MechanicalMusicProfileBase + "1.0.0";
+
+        public static bool IsSupportedFormatVersion(string version) =>
+            version is FormatVersion or CandidateFormatVersion or CurrentFormatVersion;
+
+        internal static bool IsMechanicalMusicProfile(string id) =>
+            id?.StartsWith(MechanicalMusicProfileBase, StringComparison.Ordinal) == true;
 
         private static string ManifestSchemaFor(string version) => $"https://w3id.org/modavis/vao/{version}/schema/manifest.json";
         private static string CarrierSchemaFor(string version) => $"https://w3id.org/modavis/vao/{version}/schema/carrier.json";
@@ -115,8 +131,13 @@ namespace Modavis.Vao.Editor
                 result.Carrier = ParseStrict(carrierBytes, CarrierName, policy.MaximumJsonDepth);
                 result.Errors.AddRange(VaoJsonSchemaValidator.ValidateManifest(result.Manifest));
                 result.Errors.AddRange(VaoJsonSchemaValidator.ValidateCarrier(result.Carrier));
-                ValidateManifest(result);
-                ValidateCarrier(archive, policy, result);
+                // Schema-invalid input cannot enter the 0.6 semantic or carrier checks.
+                if (result.FormatVersion != CurrentFormatVersion || result.Errors.Count == 0)
+                {
+                    ValidateManifest(result);
+                    if (result.FormatVersion != CurrentFormatVersion || result.Errors.Count == 0)
+                        ValidateCarrier(archive, policy, result);
+                }
             }
             catch (Exception exception) when (exception is IOException or InvalidDataException or JsonException or CryptographicException or UnauthorizedAccessException or OverflowException)
             {
@@ -130,6 +151,7 @@ namespace Modavis.Vao.Editor
         public static void ExtractVerified(VaoArchiveInspection inspection, string destinationDirectory)
         {
             if (inspection == null || !inspection.IsValid) throw new InvalidOperationException("Only a valid, verified VAO can be extracted.");
+            if (inspection.HasMechanicalMusicProfile) throw new InvalidOperationException("MMIC carriers are available for metadata-only import in Unity.");
             var root = Path.GetFullPath(destinationDirectory);
             Directory.CreateDirectory(root);
             using var archive = ZipFile.OpenRead(inspection.ArchivePath);
@@ -351,7 +373,7 @@ namespace Modavis.Vao.Editor
             var version = manifest.Value<string>("formatVersion");
             if (!IsSupportedFormatVersion(version))
             {
-                result.Errors.Add($"Manifest formatVersion {version ?? "<missing>"} is unsupported; expected exact 0.4.0 or 0.5.0.");
+                result.Errors.Add($"Manifest formatVersion {version ?? "<missing>"} is unsupported; expected exact 0.4.0, 0.5.0, or 0.6.0.");
                 return;
             }
             foreach (var name in RequiredRoot) if (manifest[name] == null) result.Errors.Add($"Manifest is missing required root property {name}.");
@@ -369,8 +391,35 @@ namespace Modavis.Vao.Editor
             if (manifest["realizations"] is not JArray { Count: > 0 }) result.Errors.Add("Manifest requires at least one realization.");
             ValidateIdentifiersAndReferences(manifest, result);
             ValidateProfileTruth(manifest, version, claims, profileRecords, result.Errors);
+            if (version == CurrentFormatVersion)
+            {
+                ValidateMechanicalMusicDeclarations(result, profileRecords);
+                if (!result.Errors.Any())
+                    result.Warnings.Add("VAO 0.6.0 inspection checks the released schemas and Unity's supported core/carrier subset. Use the standard reference tools for complete conformance.");
+            }
             ValidateRuntimeTraces(manifest, result.Errors);
             if (manifest.DescendantsAndSelf().OfType<JValue>().Any(item => item.Type == JTokenType.Float && item.Value is double number && (double.IsNaN(number) || double.IsInfinity(number)))) result.Errors.Add("Manifest contains a non-finite number.");
+        }
+
+        private static void ValidateMechanicalMusicDeclarations(
+            VaoArchiveInspection result, IReadOnlyCollection<JObject> profiles)
+        {
+            var manifest = result.Manifest;
+            var declaration = manifest["extensions"]?[MechanicalMusicProfile];
+            var matching = profiles.Where(record => record.Value<string>("id") == MechanicalMusicProfile).ToArray();
+            var claimsProfile = manifest["conformsTo"]?.Values<string>().Contains(MechanicalMusicProfile) == true;
+            if (matching.Length > 0 || declaration != null || claimsProfile)
+            {
+                if (!claimsProfile || matching.Length != 1 || declaration is not JObject descriptor
+                    || matching[0].Value<string>("specificationVersion") != "1.0.0"
+                    || descriptor.Value<string>("profileVersion") != "1.0.0"
+                    || descriptor.Value<string>("ontologyVersionIRI") != MechanicalMusicProfile + "/ontology")
+                {
+                    result.Errors.Add("MMIC 1.0.0 profile, extension and ontology declarations must agree.");
+                }
+            }
+            if (result.HasMechanicalMusicProfile)
+                result.Warnings.Add("MMIC domain validation and execution are unavailable. Select a metadata-only import to retain its records.");
         }
 
         private static void ValidateProfileTruth(JObject manifest, string version, HashSet<string> claims, IReadOnlyCollection<JObject> profileRecords, ICollection<string> errors)

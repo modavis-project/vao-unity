@@ -105,6 +105,84 @@ namespace Modavis.Vao.Editor.Tests
         }
 
         [Test]
+        public void PublishedVao06CarrierImportsTheExactPayloadAndReceipt()
+        {
+            var path = GetPackageFixture("VAO-Standard-Minimal-0.6.0.vao");
+            var inspection = VaoArchiveReader.Inspect(path);
+            Assert.That(inspection.IsValid, Is.True, string.Join("; ", inspection.Errors));
+            Assert.That(inspection.HasMechanicalMusicProfile, Is.False);
+            Assert.That(inspection.ArchiveSha256, Is.EqualTo("a7aa1be8eecd3e820b28be6a6b9e3a8c757dcf5a7713beac839d417d44316a65"));
+            Assert.That(inspection.VerifiedPayloadBytes, Is.EqualTo(69));
+            var destination = "Assets/QA/Published Standard 06 " + Guid.NewGuid().ToString("N");
+            try
+            {
+                var result = VaoImporter.Import(path, new VaoImportOptions
+                {
+                    DestinationAssetPath = destination, CreatePrefab = false
+                });
+                Assert.That(result.Package.FormatVersion, Is.EqualTo("0.6.0"));
+                Assert.That(result.MaterializedBytes, Is.EqualTo(69));
+                var receipt = LoadMaterializationReceipt(result);
+                Assert.That(receipt.Value<string>("formatVersion"), Is.EqualTo("0.6.0"));
+                Assert.That(receipt.SelectToken("sourceCarrier.packedCarrierSHA256")?.Value<string>(), Is.EqualTo(inspection.ArchiveSha256));
+                Assert.That(VaoJsonSchemaValidator.ValidateMaterializationReceipt(receipt), Is.Empty);
+            }
+            finally
+            {
+                AssetDatabase.DeleteAsset(destination);
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            }
+        }
+
+        [Test]
+        public void PublishedMmicCarrierRetainsMetadataWithoutMaterializingOrClaimingConformance()
+        {
+            var path = GetPackageFixture("VAO-MMIC-Design-1.0.0.vao");
+            const string profile = "https://w3id.org/modavis/vao/profile/mmic/1.0.0";
+            var inspection = VaoArchiveReader.Inspect(path);
+            Assert.That(inspection.IsValid, Is.True, string.Join("; ", inspection.Errors));
+            Assert.That(inspection.HasMechanicalMusicProfile, Is.True);
+            Assert.That(inspection.VerifiedPayloadBytes, Is.EqualTo(140001));
+            Assert.That(inspection.Manifest["extensions"]?[profile]?.Value<string>("profileVersion"), Is.EqualTo("1.0.0"));
+            Assert.Throws<InvalidOperationException>(() => VaoImporter.Import(path));
+            var destination = "Assets/QA/MMIC Metadata " + Guid.NewGuid().ToString("N");
+            try
+            {
+                var result = VaoImporter.Import(path, new VaoImportOptions
+                {
+                    DestinationAssetPath = destination,
+                    MaterializationMode = VaoMaterializationMode.MetadataOnly,
+                });
+                Assert.That(result.MaterializedBytes, Is.Zero);
+                Assert.That(result.PrefabAssetPath, Is.Null.Or.Empty);
+                Assert.That(result.Package.ProfileSections.Any(item => item.Name == "extensions" && item.Json.Contains(profile)), Is.True);
+                var receipt = LoadMaterializationReceipt(result);
+                Assert.That(VaoJsonSchemaValidator.ValidateMaterializationReceipt(receipt), Is.Empty);
+                var state = receipt["profileStates"].OfType<JObject>().Single(item => item.Value<string>("profileId") == profile);
+                Assert.That(state.Value<string>("state"), Is.EqualTo("incomplete"));
+            }
+            finally
+            {
+                AssetDatabase.DeleteAsset(destination);
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            }
+        }
+
+        private static string GetPackageFixture(string name)
+        {
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(VaoArchiveReader).Assembly);
+            return Path.Combine(packageInfo.resolvedPath, "Tests", "Editor", "Fixtures", name);
+        }
+
+        private static JObject LoadMaterializationReceipt(VaoImportResult result)
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(result.MaterializationReceiptPath);
+            Assert.That(asset, Is.Not.Null);
+            using var reader = new JsonTextReader(new StringReader(asset.text)) { DateParseHandling = DateParseHandling.None };
+            return JObject.Load(reader);
+        }
+
+        [Test]
         public void IntervalScientificResultCompilesWithoutScalarCoercion()
         {
             var package = ScriptableObject.CreateInstance<VaoPackageAsset>();

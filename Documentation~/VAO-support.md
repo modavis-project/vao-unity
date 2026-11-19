@@ -1,11 +1,15 @@
-# VAO 0.4.0 and 0.5.0 support matrix
+# VAO format support matrix
 
-This matrix describes support for the final [VAO Standard 0.4.0](https://github.com/modavis-project/vao-standard) and the VAO 0.5.0 candidate pinned to standard commit `d17b3f188fdf7fadd01ba025383e4feca8def935`. “Preserved” means the source data remains available in the imported package but requires a host implementation to execute.
+The importer uses exact [VAO 0.4.0](https://github.com/modavis-project/vao-standard/releases/tag/v0.4.0)
+and [0.6.0](https://github.com/modavis-project/vao-standard/releases/tag/v0.6.0)
+schemas and retains the 0.5.0 candidate pin
+`d17b3f188fdf7fadd01ba025383e4feca8def935`. Native validation covers the Unity
+import subset. Use the reference tools for full conformance.
 
 | Area | Import result | Runtime behavior |
 | --- | --- | --- |
 | Core graph, profiles, rights, discovery | Typed core records plus lossless JSON section snapshots | Query through `VaoPackageAsset`; no network dereferencing |
-| Schema, carrier, preservation | Version-dispatched offline validation against the vendored 0.4.0 or pinned 0.5.0 schemas; strict JSON/numeric/path/ZIP checks; exact binding, closure, hashes, chunks, and Merkle verification | Source archive identity and contract-matching materialization receipt retained |
+| Schema, carrier, preservation | Version-dispatched offline validation against the vendored versioned schemas; strict JSON/numeric/path/ZIP checks; exact binding, closure, hashes, chunks, and Merkle verification | Source archive identity and contract-matching materialization receipt retained |
 | Large carriers | All, runtime-required, selected asset-group, or metadata-only materialization with exact byte preflight | Every realization remains queryable; `IsMaterialized` distinguishes available bytes |
 | Safe updates | Source path/GUID, archive digest, import recipe, managed paths, and verified per-realization change preview | Transactional replacement and rollback preserve stable GUIDs, matching prefab-local IDs, scene overrides, generated controls, and unmanaged host files |
 | Repository distributions | Typed distribution, repository-binding, rights, access, attribution, cache-policy, pack-member, and 0.5.0 carrier-member records | Disabled-by-default host resolution; explicit consent and restricted-rights confirmation; scoped transport, byte/SHA-256 verification, cancellation, quota, pinning, and priority/LRU eviction |
@@ -29,3 +33,10 @@ This matrix describes support for the final [VAO Standard 0.4.0](https://github.
 VAO is broader than a single engine's renderer. The importer preserves every declared profile section and compiles engine-neutral records where Unity can act without changing meaning. Its built-in renderer handles materialized PCM RIR `AudioClip`s and single-emitter AES69-SOFA FIR responses. Non-FIR/multi-emitter SOFA, geometry acoustics, MPEG-I, learned fields, specialized physical actuators, and application hardware require a compatible host implementation. It does not pretend that a generic Unity reverb preset is equivalent, execute embedded scripts, automatically derive repository URLs, or guess target-device semantics. External acquisition occurs only through an explicitly configured host resolver and user approval.
 
 `VaoDeterministicExecutor` performs the generic semantics and exposes emitted/routed events, process lifecycle, render selection, handled actions, and unhandled actions. `VaoSamplePlayer.ActionRequested` remains the host bridge for a target that cannot be performed without a particular XR input, actuator, transport, or specialized renderer.
+
+## MMIC 1.0.0
+
+An MMIC import creates a package asset in metadata-only mode. The manifest,
+carrier descriptor, asset inventory and extension JSON remain available in
+Unity. The receipt records the MMIC profile as incomplete. Use the official
+VAO reference tools for MMIC domain checks, decoding, comparison and generation.

@@ -12,6 +12,7 @@ namespace Modavis.Vao.Editor
         [SerializeField] private string archiveSha256;
         [SerializeField] private long verifiedPayloadBytes;
         [SerializeField] private bool valid;
+        [SerializeField] private bool hasMechanicalMusicProfile;
         [SerializeField] private string[] errors = Array.Empty<string>();
         [SerializeField] private string[] warnings = Array.Empty<string>();
 
@@ -21,6 +22,7 @@ namespace Modavis.Vao.Editor
         public string FormatVersion { get => formatVersion; internal set => formatVersion = value; }
         public string ArchiveSha256 { get => archiveSha256; internal set => archiveSha256 = value; }
         public long VerifiedPayloadBytes { get => verifiedPayloadBytes; internal set => verifiedPayloadBytes = value; }
+        public bool HasMechanicalMusicProfile { get => hasMechanicalMusicProfile; internal set => hasMechanicalMusicProfile = value; }
         public bool Valid { get => valid; internal set => valid = value; }
         public string[] Errors { get => errors; internal set => errors = value ?? Array.Empty<string>(); }
         public string[] Warnings { get => warnings; internal set => warnings = value ?? Array.Empty<string>(); }

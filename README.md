@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22134391.svg)](https://doi.org/10.5281/zenodo.22134391)
 [![VAO 0.4.0 persistent identifier](https://img.shields.io/badge/W3ID-VAO%200.4.0-2C5F73.svg)](https://w3id.org/modavis/vao/0.4.0/)
 
-Import, inspect, and run [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) 0.4.0 carriers and the pinned 0.5.0 candidate in Unity. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
+Import [Virtual Acoustic Object (VAO)](https://github.com/modavis-project/vao-standard) carriers into Unity. This checkout adds VAO 0.6.0 inspection and import alongside the existing 0.4.0 and pinned 0.5.0 readers. The package validates a `.vao` before extraction, creates a typed `VaoPackageAsset`, imports supported media, builds linked MIDI animations, and can generate a runtime prefab for desktop, mobile, and XR applications.
 
 This is release candidate `0.6.0-rc.3`. It targets Unity 6 (`6000.0` or newer) and is tested with Unity `6000.5.9f1`.
 
@@ -24,7 +24,7 @@ Pin a tag in production projects; do not depend on the moving `main` branch.
 
 ## Import a VAO
 
-1. Open **Tools > MODAVIS > Import VAO 0.4.0 or 0.5.0…**.
+1. Open **Tools > MODAVIS > Import VAO…**.
 2. Select a `.vao` file. Review validation errors or warnings before continuing.
 3. Choose a destination below `Assets/` and a materialization mode.
 4. Click **Import**.
@@ -89,13 +89,25 @@ Open **Tools > MODAVIS > Optional Integrations…** to detect or explicitly inst
 
 ## Security model
 
-Validation and Editor import are offline. Package-supplied code is never executed and external identifiers are never dereferenced during import. Before extraction, the reader checks the exact vendored schema set for VAO 0.4.0 or the pinned 0.5.0 candidate, semantic/profile rules, manifest/carrier binding, preservation closure, hashes, deterministic trace digests, strict JSON and numeric constraints, ZIP metadata, UTF-8 paths, traversal and portable-name collisions, entry counts, expanded sizes, and compression ratios.
+Validation and Editor import are offline. Package-supplied code is never executed and external identifiers are never dereferenced during import. Before extraction, the reader checks the exact vendored schema set for the declared VAO format, semantic/profile rules, manifest/carrier binding, preservation closure, hashes, deterministic trace digests, strict JSON and numeric constraints, ZIP metadata, UTF-8 paths, traversal and portable-name collisions, entry counts, expanded sizes, and compression ratios.
 
 Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`, enables acquisition, presents rights and access information, and obtains approval bound to the exact plan. See [runtime materialization](Documentation~/runtime-materialization.md) and [SECURITY.md](SECURITY.md).
 
+## VAO 0.6.0 and MMIC
+
+Unity verifies the released manifest and carrier schemas, the supported
+core records, and embedded payload hashes. The published VAO tools cover
+full profile conformance. Generic 0.6.0 imports recheck materialized bytes
+and retain unrecognized payload types as inert TextAssets.
+
+When the inspector finds an MMIC profile, it offers a metadata-only import.
+The imported asset retains the exact source descriptors, profile declaration,
+asset inventory and extension JSON. MMIC domain validation, decoding,
+comparison, generation and playback belong to tools that implement that profile.
+
 ## Documentation
 
-- [VAO 0.4.0 and 0.5.0 support matrix](Documentation~/VAO-support.md)
+- [VAO format support matrix](Documentation~/VAO-support.md)
 - [Conformance roles and resource limits](Documentation~/conformance-and-limits.md)
 - [Deterministic execution](Documentation~/deterministic-execution.md)
 - [Position-aware acoustic rendering](Documentation~/acoustic-rendering.md)
@@ -116,7 +128,7 @@ Runtime downloads are disabled until a host provides an `IVaoRepositoryResolver`
 ./Scripts/verify-release.sh
 ```
 
-The test suite includes the published VAO 0.4.0 and pinned 0.5.0 minimal carriers, profile descriptors, exact schema snapshot hashes, RFC 8785 trace canonicalization, specified PCG32/xoshiro sequences, archive-security cases, importer lifecycle tests, Play Mode behavior, and player-build checks. The 0.5.0 Kinoorgel acceptance run validates its bootstrap carrier and performs a metadata-only import without inventing a 3D representation.
+The test suite includes the published VAO 0.4.0 and pinned 0.5.0 minimal carriers, a migrated 0.6.0 carrier and an official synthetic MMIC carrier, profile descriptors, exact schema snapshot hashes, RFC 8785 trace canonicalization, specified PCG32/xoshiro sequences, archive-security cases, importer lifecycle tests, Play Mode behavior, and player-build checks. The 0.5.0 Kinoorgel acceptance run validates its bootstrap carrier and performs a metadata-only import without inventing a 3D representation.
 
 ## Project context and acknowledgement
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## Development
+
+- Inspect and import released VAO 0.6.0 carriers with the pinned schemas.
+- Keep MMIC profile and extension records in metadata-only imports.
+
 ## 0.6.0-rc.3 — 2026-08-29
 
 - Preserves interval-valued scientific observation results during import without attempting scalar coercion.

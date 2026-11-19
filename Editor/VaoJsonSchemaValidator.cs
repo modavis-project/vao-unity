@@ -4,6 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using UnityEditor.PackageManager;
@@ -12,13 +14,18 @@ namespace Modavis.Vao.Editor
 {
     /// <summary>
     /// Offline JSON Schema 2020-12 evaluator for every assertion keyword used by
-    /// the immutable VAO 0.4.0 and pinned VAO 0.5.0 manifest, carrier, and materialization-receipt
-    /// schemas. The schemas themselves are vendored byte-for-byte under Editor/Schemas.
+    /// the vendored VAO manifest, carrier and materialization receipt schemas. The schemas themselves are vendored byte-for-byte under Editor/Schemas.
     /// </summary>
     internal sealed class VaoJsonSchemaValidator
     {
         private const int MaximumErrors = 256;
         private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
+        private static readonly IReadOnlyDictionary<string, string> Published06Digests = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["vao-manifest-0.6.0.schema.json"] = "4b350fc3e58407338905d72f6a47191747b16899039fd254f387ee0f2fc5e2c5",
+            ["vao-carrier-0.6.0.schema.json"] = "8d0805efd35b1b0d6ec802761cac5cbc21a4c7211b35f4444b09170d350190ed",
+            ["vao-materialization-receipt-0.6.0.schema.json"] = "c1e2094e88c6325cfa8ab156ffd49b1e5b4d450ab4bf8613f80ffa75dbb23edc"
+        };
         private readonly JToken rootSchema;
 
         private VaoJsonSchemaValidator(JToken rootSchema) => this.rootSchema = rootSchema;
@@ -30,7 +37,7 @@ namespace Modavis.Vao.Editor
         private static IReadOnlyList<string> ValidateVersioned(JToken instance, string kind)
         {
             var version = instance?.Value<string>("formatVersion");
-            if (version is not ("0.4.0" or "0.5.0")) return new[] { $"Unsupported VAO formatVersion {version ?? "<missing>"}." };
+            if (!VaoArchiveReader.IsSupportedFormatVersion(version)) return new[] { $"Unsupported VAO formatVersion {version ?? "<missing>"}." };
             return Validate(instance, $"vao-{kind}-{version}.schema.json");
         }
 
@@ -40,7 +47,14 @@ namespace Modavis.Vao.Editor
             if (package == null) return new[] { $"Normative schema package location could not be resolved for {schemaFile}." };
             var path = Path.Combine(package.resolvedPath, "Editor", "Schemas", schemaFile);
             if (!File.Exists(path)) return new[] { $"Vendored normative schema is missing: {schemaFile}." };
-            var schema = JToken.Parse(File.ReadAllText(path));
+            var bytes = File.ReadAllBytes(path);
+            if (Published06Digests.TryGetValue(schemaFile, out var expected))
+            {
+                using var digest = SHA256.Create();
+                var actual = BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-", "").ToLowerInvariant();
+                if (actual != expected) return new[] { $"Vendored schema differs from the published VAO 0.6.0 artifact: {schemaFile}." };
+            }
+            var schema = JToken.Parse(Encoding.UTF8.GetString(bytes));
             var errors = new List<string>();
             new VaoJsonSchemaValidator(schema).Evaluate(instance, schema, "$", errors);
             return errors;

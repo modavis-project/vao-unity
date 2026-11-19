@@ -1,6 +1,6 @@
 # Conformance roles and limits
 
-This package implements the published VAO 0.4.0 contract and a pinned VAO 0.5.0 candidate for Unity; it is not the normative standard. The [VAO Standard repository](https://github.com/modavis-project/vao-standard) and its [0.4.0 publication](https://doi.org/10.5281/zenodo.22122774) define the published baseline. Candidate 0.5.0 validation is bound to commit `d17b3f188fdf7fadd01ba025383e4feca8def935` and normative-bundle SHA-256 `82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96`.
+This package reads released VAO 0.4.0 and 0.6.0 carriers and the pinned VAO 0.5.0 candidate; it is not the normative standard. The [VAO Standard repository](https://github.com/modavis-project/vao-standard) and its [0.4.0 publication](https://doi.org/10.5281/zenodo.22122774) define the published baseline. Candidate 0.5.0 validation is bound to commit `d17b3f188fdf7fadd01ba025383e4feca8def935` and normative-bundle SHA-256 `82efb6ee31353e72c81671e2c6500c51dc223d7f21af4983705933ea6caa5c96`.
 
 ## Implemented roles
 
@@ -36,3 +36,10 @@ Only Stored and Deflate ZIP entries are accepted. Encryption, multi-disk archive
 The runtime implements the specified `pcg32` and `xoshiro256-star-star` initialization and word sequences, uniform and integer-weight categorical selection with high-tail rejection, RFC 8785 trace canonicalization, exact rational timebase retention, event ordering, snapshot transition evaluation, grouped action order, and declared microstep/voice limits. Host-defined render policies and operations that require a device, specialized renderer, or actuator are surfaced as typed events; they are not silently simulated.
 
 Every generated receipt identifies this package version and hashes the importer source file used by the Editor assembly with identity scope `source-file`. Embedded payload bytes are recorded as source-carrier evidence rather than repository acquisitions.
+
+## VAO 0.6.0
+
+The Editor checks three schemas from the signed standard release. Generic
+imports verify selected payload bytes during extraction. Unrecognized file
+types become inert TextAssets. MMIC carriers support metadata-only import
+and retain their exact descriptors; the reference tools validate MMIC data.

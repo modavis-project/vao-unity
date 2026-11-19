@@ -12,10 +12,14 @@ namespace Modavis.Vao.Editor
             var archive = (VaoArchiveAsset)target;
             using (new EditorGUI.DisabledScope(!archive.Valid))
             {
-                if (GUILayout.Button("Import verified VAO payload…"))
+                var metadataOnly = archive.HasMechanicalMusicProfile;
+                if (GUILayout.Button(metadataOnly ? "Import VAO metadata…" : "Import verified VAO payload…"))
                 {
                     var path = AssetDatabase.GetAssetPath(target);
-                    var result = VaoImporter.Import(path);
+                    var options = metadataOnly
+                        ? new VaoImportOptions { MaterializationMode = VaoMaterializationMode.MetadataOnly, CreatePrefab = false }
+                        : null;
+                    var result = VaoImporter.Import(path, options);
                     EditorGUIUtility.PingObject(result.Package);
                 }
             }
